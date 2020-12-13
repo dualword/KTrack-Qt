@@ -1,0 +1,435 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2003-01-18 14:31+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ktrack.cpp:59
+msgid "&Satellite"
+msgstr ""
+
+#: ktrack.cpp:63
+msgid "Rig control"
+msgstr ""
+
+#: ktrack.cpp:65
+msgid "XPlanet parameters"
+msgstr ""
+
+#: ktrack.cpp:67 groundstationsettingsbase.cpp:101
+msgid "Groundstation Data"
+msgstr ""
+
+#: ktrack.cpp:70
+msgid "&Selection"
+msgstr ""
+
+#: ktrack.cpp:72
+msgid "&Predict"
+msgstr ""
+
+#: ktrack.cpp:74
+msgid "Transponder definition"
+msgstr ""
+
+#: ktrack.cpp:76
+msgid "Squint calculations"
+msgstr ""
+
+#: ktrack.cpp:373
+msgid "Unable to Initialize rig control!"
+msgstr ""
+
+#: main.cpp:25 ktrack.moc.cpp:34 ktrack.moc.cpp:42
+msgid "Ktrack"
+msgstr ""
+
+#: main.cpp:38
+msgid "KTrack"
+msgstr ""
+
+#: xplanetconfigbase.cpp:113
+msgid "XPlanet Configuration"
+msgstr ""
+
+#: xplanetconfigbase.cpp:114
+msgid "msec"
+msgstr ""
+
+#: xplanetconfigbase.cpp:115
+msgid "Map update Interval:"
+msgstr ""
+
+#: xplanetconfigbase.cpp:116
+msgid "Additional Parameters:"
+msgstr ""
+
+#: xplanetconfigbase.cpp:117
+msgid "Display map as desktop background"
+msgstr ""
+
+#: xplanetconfigbase.cpp:119
+msgid "Disable XPlanet map display"
+msgstr ""
+
+#: xplanetconfigbase.cpp:120 groundstationsettingsbase.cpp:106
+#: rigConfigBase.cpp:298 transponderdefinitionbase.cpp:129
+msgid "&Ok"
+msgstr ""
+
+#: predictionlist.cpp:29
+msgid "Date"
+msgstr ""
+
+#: predictionlist.cpp:30 satellitelistview.cpp:31
+msgid "Longitude"
+msgstr ""
+
+#: predictionlist.cpp:31 satellitelistview.cpp:32
+msgid "Latitude"
+msgstr ""
+
+#: predictionlist.cpp:32 satellitelistview.cpp:33
+msgid "El"
+msgstr ""
+
+#: predictionlist.cpp:33 satellitelistview.cpp:34
+msgid "Az"
+msgstr ""
+
+#: predictionlist.cpp:34 satellitelistview.cpp:36
+msgid "Range"
+msgstr ""
+
+#: predictionlist.cpp:35 satellitelistview.cpp:37
+msgid "Velocity"
+msgstr ""
+
+#: predictionlist.cpp:36 satellitelistview.cpp:38
+msgid "Orbit Number"
+msgstr ""
+
+#: predictionlist.cpp:37 satellitelistview.cpp:39
+msgid "MA"
+msgstr ""
+
+#: predictionlist.cpp:38 satellitelistview.cpp:40
+msgid "Squint"
+msgstr ""
+
+#: squintcalculationsbase.cpp:117
+msgid "Squint Calculations Config"
+msgstr ""
+
+#: squintcalculationsbase.cpp:118
+msgid "Satellite:"
+msgstr ""
+
+#: squintcalculationsbase.cpp:120
+msgid "Enable squint calculations"
+msgstr ""
+
+#: squintcalculationsbase.cpp:121
+msgid "Satellite always pointed to the earth centrum"
+msgstr ""
+
+#: squintcalculationsbase.cpp:122
+msgid "ALON:"
+msgstr ""
+
+#: squintcalculationsbase.cpp:123
+msgid "ALAT:"
+msgstr ""
+
+#: predictionlistbase.cpp:108
+msgid "Predict satellite pass"
+msgstr ""
+
+#: predictionlistbase.cpp:109
+msgid "From:"
+msgstr ""
+
+#: predictionlistbase.cpp:110
+msgid "To:"
+msgstr ""
+
+#: predictionlistbase.cpp:111
+msgid "Interval:"
+msgstr ""
+
+#: predictionlistbase.cpp:112
+msgid "Minutes"
+msgstr ""
+
+#: predictionlistbase.cpp:113
+msgid "Calculate"
+msgstr ""
+
+#: predictionlistbase.cpp:114
+msgid "Dismiss"
+msgstr ""
+
+#: groundstationsettingsbase.cpp:102
+msgid "Longitude (East):"
+msgstr ""
+
+#: groundstationsettingsbase.cpp:103
+msgid "Latitude (North):"
+msgstr ""
+
+#: groundstationsettingsbase.cpp:104
+msgid "Height:"
+msgstr ""
+
+#: groundstationsettingsbase.cpp:105
+msgid "Callsign:"
+msgstr ""
+
+#: trxwidgetbase.cpp:123
+msgid "Form1"
+msgstr ""
+
+#: trxwidgetbase.cpp:124
+msgid "Transponder"
+msgstr ""
+
+#: trxwidgetbase.cpp:125
+msgid "Correction:"
+msgstr ""
+
+#: trxwidgetbase.cpp:126
+msgid "&Pause Rig Control"
+msgstr ""
+
+#: trxwidgetbase.cpp:127
+msgid "Correct &Downlink"
+msgstr ""
+
+#: trxwidgetbase.cpp:128 rigConfigBase.cpp:267 transponderdefinition.cpp:34
+msgid "Uplink"
+msgstr ""
+
+#: trxwidgetbase.cpp:129 rigConfigBase.cpp:284 transponderdefinition.cpp:35
+msgid "Downlink"
+msgstr ""
+
+#: rigConfigBase.cpp:247
+msgid "Device Configuration"
+msgstr ""
+
+#: rigConfigBase.cpp:248
+msgid "Rotor"
+msgstr ""
+
+#: rigConfigBase.cpp:249
+msgid "Interface:"
+msgstr ""
+
+#: rigConfigBase.cpp:250 rigConfigBase.cpp:269 rigConfigBase.cpp:286
+msgid "Port:"
+msgstr ""
+
+#: rigConfigBase.cpp:252
+msgid "/dev/parport0"
+msgstr ""
+
+#: rigConfigBase.cpp:253
+msgid "/dev/parport1"
+msgstr ""
+
+#: rigConfigBase.cpp:254 rigConfigBase.cpp:271 rigConfigBase.cpp:288
+msgid "/dev/ttyS0"
+msgstr ""
+
+#: rigConfigBase.cpp:255 rigConfigBase.cpp:272 rigConfigBase.cpp:289
+msgid "/dev/ttyS1"
+msgstr ""
+
+#: rigConfigBase.cpp:256
+msgid "Interface Speed:"
+msgstr ""
+
+#: rigConfigBase.cpp:258 rigConfigBase.cpp:277
+msgid "300"
+msgstr ""
+
+#: rigConfigBase.cpp:259 rigConfigBase.cpp:278
+msgid "1200"
+msgstr ""
+
+#: rigConfigBase.cpp:260
+msgid "2400"
+msgstr ""
+
+#: rigConfigBase.cpp:261 rigConfigBase.cpp:279 rigConfigBase.cpp:294
+msgid "4800"
+msgstr ""
+
+#: rigConfigBase.cpp:262 rigConfigBase.cpp:280 rigConfigBase.cpp:295
+msgid "9600"
+msgstr ""
+
+#: rigConfigBase.cpp:263 rigConfigBase.cpp:281 rigConfigBase.cpp:296
+msgid "19200"
+msgstr ""
+
+#: rigConfigBase.cpp:264
+msgid "Elevation Correction:"
+msgstr ""
+
+#: rigConfigBase.cpp:265
+msgid "450 Rotor"
+msgstr ""
+
+#: rigConfigBase.cpp:266
+msgid "Azimuth Correction:"
+msgstr ""
+
+#: rigConfigBase.cpp:268 rigConfigBase.cpp:285
+msgid "Transceiver:"
+msgstr ""
+
+#: rigConfigBase.cpp:273 rigConfigBase.cpp:290
+msgid "/dev/ttyS2"
+msgstr ""
+
+#: rigConfigBase.cpp:274 rigConfigBase.cpp:291
+msgid "/dev/ttyS3"
+msgstr ""
+
+#: rigConfigBase.cpp:275 rigConfigBase.cpp:292
+msgid "Speed:"
+msgstr ""
+
+#: rigConfigBase.cpp:282 rigConfigBase.cpp:297
+msgid "38400"
+msgstr ""
+
+#: rigConfigBase.cpp:283
+msgid "Seperate downlink receiver"
+msgstr ""
+
+#: satellitelistview.cpp:30 transponderdefinition.cpp:33
+msgid "Satellite"
+msgstr ""
+
+#: satellitelistview.cpp:35
+msgid "Next AOS/LOS (Local)"
+msgstr ""
+
+#: transponderdefinitionbase.cpp:127
+msgid "Edit Transponder definitions"
+msgstr ""
+
+#: rigctrl.moc.cpp:34 rigctrl.moc.cpp:42
+msgid "rigctrl"
+msgstr ""
+
+#: satelliteSelectionBase.cpp:226
+msgid "Satellite selection"
+msgstr ""
+
+#: satelliteSelectionBase.cpp:227
+msgid "Selected Satellites"
+msgstr ""
+
+#: satelliteSelectionBase.cpp:229
+msgid "Available Satellites"
+msgstr ""
+
+#: xplanetwrapper.moc.cpp:34 xplanetwrapper.moc.cpp:42
+msgid "xplanetWrapper"
+msgstr ""
+
+#: xplanetconfig.moc.cpp:34 xplanetconfig.moc.cpp:42
+msgid "xplanetConfig"
+msgstr ""
+
+#: trxwidget.moc.cpp:34 trxwidget.moc.cpp:42
+msgid "trxWidget"
+msgstr ""
+
+#: satelliteselection.moc.cpp:34 satelliteselection.moc.cpp:42
+msgid "satelliteSelection"
+msgstr ""
+
+#: transponderdefinition.cpp:36
+msgid "Uplink offset"
+msgstr ""
+
+#: transponderdefinition.cpp:37
+msgid "Downlink offset"
+msgstr ""
+
+#: transponderdefinition.cpp:38
+msgid "Mode"
+msgstr ""
+
+#: transponderdefinition.cpp:60
+msgid "none"
+msgstr ""
+
+#: transponderdefinition.cpp:67
+msgid "Reverse"
+msgstr ""
+
+#: transponderdefinition.cpp:68
+msgid "Pre Amp"
+msgstr ""
+
+#: groundstationsettings.moc.cpp:34 groundstationsettings.moc.cpp:42
+msgid "groundstationSettings"
+msgstr ""
+
+#: calculator.moc.cpp:34 calculator.moc.cpp:42
+msgid "calculator"
+msgstr ""
+
+#: rigconfig.moc.cpp:34 rigconfig.moc.cpp:42
+msgid "rigConfig"
+msgstr ""
+
+#: predictionlist.moc.cpp:34 predictionlist.moc.cpp:42
+msgid "predictionList"
+msgstr ""
+
+#: transponderdefinition.moc.cpp:34 transponderdefinition.moc.cpp:42
+msgid "transponderDefinition"
+msgstr ""
+
+#: squintcalculations.moc.cpp:34 squintcalculations.moc.cpp:42
+msgid "squintCalculations"
+msgstr ""
+
+#: satellitelistview.moc.cpp:34 satellitelistview.moc.cpp:42
+msgid "satelliteListView"
+msgstr ""
+
+#: xplanetwrapper.cpp:296
+msgid ""
+"Error while calling xplanet\n"
+"\n"
+msgstr ""
+
+#: _translatorinfo.cpp:1
+msgid ""
+"_: NAME OF TRANSLATORS\n"
+"Your names"
+msgstr ""
+
+#: _translatorinfo.cpp:3
+msgid ""
+"_: EMAIL OF TRANSLATORS\n"
+"Your emails"
+msgstr ""

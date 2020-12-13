@@ -1,0 +1,15 @@
+In this list, I keep everything that I do plan for the next version. If
+you have additional item you want to see on this list, please mail them
+to lx2gt@users.sourceforge.net
+
+- Much more functions in the prediction window, especially mutal windows!
+- A lot of code cleanups
+- make it configurable, if we use local or UTC time
+- Better transponder definition dialog.
+    
+Documentation! --> DL2OLK
+
+There is a bug in the new code. If the transponder definitions table is re-read the
+correction Values in the transponder definitions are not as they should be. Ill fix
+that as soon as possible
+

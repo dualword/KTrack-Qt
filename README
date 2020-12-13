@@ -1,0 +1,73 @@
+README for KTRACK
+
+Thanks you for trying out ktrack. Please be informed that this software is
+still considered as UNSTABLE - it runs fine on my system, but that doesn't mean
+that it does so on your system. If you have a problem - feature request,
+simply send me a mail about your issue. There mails will encourage me to
+work on the package. Without feedback it could just die ;-)
+
+Requisites
+
+The Program needs at least QT3 and kdelibs-3.x.x Installed. It would be
+fine if you have also kdebase-3.x.x installed, but it _should_ run without
+that. You also need to have an recent version of hamlib. Hamlib is used to
+controll your hardware such as Rotator controllers or Transceivers
+
+Installing
+
+1. Get hamlib. You will need at least an 1.1.4 Release. You can get it at
+   http://hamlib.sourceforge.net
+
+2. Install ktrack
+
+   ./configure --prefix=`kde-config --prefix` && make && make install
+   
+Usage:
+
+First get a recent set of Kepler elements, and put them into ~/.kde/share/apps/ktrack or
+<KDEPREFIX>/share/apps/ktrack - the latter is for all users, the first one only for the
+current user. I suggest downloading them from http://www.celestrak.com/NORAD/elements,
+as they do work without modification. Please note, the elements file must be renamed to
+nasa.tle.
+
+Configure your devices --> open Options - Rig control, put in the values you need
+Configure your location -->     Options - Groundstation data
+
+Select the satellites you will be able to track --> Satellite - Selection
+
+Define the transponders on the satellite --> Satellite - Transponder definition
+  IMPORTANT: All frequencies have to be entered in Hz!
+
+General operating:
+
+In the main screen you will see the Transceiver panel, the map and the list of satellites.
+To track a satellite klick on it on the list. The first transponder definition will be
+transferred to the Transceiver. From now on, the frequencies will be corrected for doppler
+shift. You can pause this correction by activiating 'Pause Correction' If you only want
+to update the uplink, deactivate 'Correct Downlink'
+
+You can use the 'correction Box' to compensate drifts.
+
+Note: Use your transceiver to tune on the transponder - it is the best interface you can get
+
+
+Infos for application developers:
+
+
+DCOP Interface:
+---------------
+
+
+Object: DCOPInterface
+
+  double getUplinkFrequency()
+  double getDownlinkFrequency()
+  QString getMode()
+  QString getSatellite()
+
+  // retrieves data from the transceiver status
+
+
+Luc
+luc@lx2gt.lu
+

@@ -1,0 +1,199 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2002-05-12 22:48+0200\n"
+"PO-Revision-Date: 2003-01-18 07:37CET\n"
+"Last-Translator: Jacques Chion <jacques.chion@wanadoo.fr>\n"
+"Language-Team: français <fr@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 0.9.6\n"
+
+#: ktrack.cpp:49
+msgid "&Satellites selection"
+msgstr "&Sélection des satellites"
+
+#: ktrack.cpp:51
+msgid "Rig control"
+msgstr "Contrôle du matériel"
+
+#: ktrack.cpp:53
+msgid "XPlanet parameters"
+msgstr "Paramètres de Xplanet"
+
+#: ktrack.cpp:211
+msgid "Unable to open port for the fodtrack device!"
+msgstr "Impossible d'ouvrir le port du dispositif de poursuite"
+
+#: ktrack.cpp:219
+msgid "Unable to open serial for for ICOM910!"
+msgstr "Impossible d'ouvrir le port série de l'IC910 !"
+
+#: ktrack.cpp:243
+msgid "Please enter additional XPlanet parameters"
+msgstr "Entrez les paramètres supllémentaires de XPlanet"
+
+#: satellitelistview.cpp:28
+msgid "Satellite"
+msgstr "Satellite"
+
+#: satellitelistview.cpp:29
+msgid "Longitude"
+msgstr "Longitude"
+
+#: satellitelistview.cpp:30
+msgid "Latitude"
+msgstr ""
+
+#: satellitelistview.cpp:31
+msgid "Elevation"
+msgstr ""
+
+#: satellitelistview.cpp:32
+msgid "Azimuth"
+msgstr ""
+
+#: satellitelistview.cpp:33
+msgid "Next AOS/LOS"
+msgstr "Prochain AOS/LOS"
+
+#: satellitelistview.cpp:34
+msgid "Range"
+msgstr "Etendue"
+
+#: satellitelistview.cpp:35
+msgid "Velocity"
+msgstr "Vitesse"
+
+#: satellitelistview.cpp:36
+msgid "Orbit Number"
+msgstr "N° d'orbite"
+
+#: rigconfig.moc.cpp:34 rigconfig.moc.cpp:42
+msgid "rigConfig"
+msgstr "Configuration du matériel"
+
+#: rigConfigBase.cpp:87
+msgid "Device Configuration"
+msgstr "Configuration du périphérique"
+
+#: rigConfigBase.cpp:92
+msgid "Fodtrack"
+msgstr ""
+
+#: rigConfigBase.cpp:100 rigConfigBase.cpp:122
+msgid "Port:"
+msgstr ""
+
+#: rigConfigBase.cpp:104 rigConfigBase.cpp:126
+msgid "none"
+msgstr "rien"
+
+#: rigConfigBase.cpp:105
+msgid "/dev/parport0"
+msgstr ""
+
+#: rigConfigBase.cpp:106
+msgid "/dev/parport1"
+msgstr ""
+
+#: rigConfigBase.cpp:107
+msgid "/dev/parport2"
+msgstr ""
+
+#: rigConfigBase.cpp:114
+msgid "IC-910H"
+msgstr ""
+
+#: rigConfigBase.cpp:127
+msgid "/dev/ttyS0"
+msgstr ""
+
+#: rigConfigBase.cpp:128
+msgid "/dev/ttyS1"
+msgstr ""
+
+#: rigConfigBase.cpp:129
+msgid "/dev/ttyS2"
+msgstr ""
+
+#: rigConfigBase.cpp:130
+msgid "/dev/ttyS3"
+msgstr ""
+
+#: rigConfigBase.cpp:135
+msgid "Speed:"
+msgstr "Vitesse :"
+
+#: rigConfigBase.cpp:139
+msgid "4800"
+msgstr ""
+
+#: rigConfigBase.cpp:140
+msgid "9600"
+msgstr ""
+
+#: rigConfigBase.cpp:141
+msgid "19200"
+msgstr ""
+
+#: rigConfigBase.cpp:153
+msgid "&Ok"
+msgstr ""
+
+#: _translatorinfo.cpp:1
+msgid ""
+"_: NAME OF TRANSLATORS\n"
+"Your names"
+msgstr "Jacques Chion"
+
+#: _translatorinfo.cpp:3
+msgid ""
+"_: EMAIL OF TRANSLATORS\n"
+"Your emails"
+msgstr "jacques.chion@wanadoo.fr"
+
+#: ktrack.moc.cpp:34 ktrack.moc.cpp:42 main.cpp:25 main.cpp:38
+msgid "Ktrack"
+msgstr ""
+
+#: xplanetwrapper.moc.cpp:34 xplanetwrapper.moc.cpp:42
+msgid "xplanetWrapper"
+msgstr ""
+
+#: xplanetwrapper.cpp:253
+msgid "Error while calling xplanet - see standart error for details"
+msgstr "Probléme pour ouvrir xplanet : voir la console d'erreurs"
+
+#: satelliteSelectionBase.cpp:142
+msgid "Satellite selection"
+msgstr "Sélection du satellite"
+
+#: satelliteSelectionBase.cpp:149
+msgid "Selected Satellites"
+msgstr "Satellites choisis"
+
+#: satelliteSelectionBase.cpp:174
+msgid "Available Satellites"
+msgstr "Satellites disponibles"
+
+#: satellitelistview.moc.cpp:34 satellitelistview.moc.cpp:42
+msgid "satelliteListView"
+msgstr "Liste des satellites"
+
+#: icom910ctrl.moc.cpp:34 icom910ctrl.moc.cpp:42
+msgid "icom910ctrl"
+msgstr ""
+
+#: predictclient.moc.cpp:34 predictclient.moc.cpp:42
+msgid "predictClient"
+msgstr ""
+
+#: satelliteselection.moc.cpp:34 satelliteselection.moc.cpp:42
+msgid "satelliteSelection"
+msgstr ""

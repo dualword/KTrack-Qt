@@ -1,0 +1,12 @@
+# KDE Config File  
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Exec=ktrack -caption "%c" %i %m  
+Icon=ktrack.png
+DocPath=ktrack/index.html
+Comment=
+Comment[de]=
+Terminal=0
+Name=Ktrack
+Name[de]=Ktrack

@@ -1,0 +1,25 @@
+<!DOCTYPE DCOP-IDL><DCOP-IDL>
+<SOURCE>./ktrack.h</SOURCE>
+<INCLUDE>trxwidget.h</INCLUDE>
+<INCLUDE>icom910ctrl.h</INCLUDE>
+<INCLUDE>fodtrack.h</INCLUDE>
+<INCLUDE>satellitelistview.h</INCLUDE>
+<INCLUDE>xplanetwrapper.h</INCLUDE>
+<INCLUDE>calculator.h</INCLUDE>
+<INCLUDE>dcopobject.h</INCLUDE>
+<INCLUDE>dcopclient.h</INCLUDE>
+<INCLUDE>kmainwindow.h</INCLUDE>
+<INCLUDE>qsplitter.h</INCLUDE>
+<INCLUDE>qwidget.h</INCLUDE>
+<INCLUDE>kapp.h</INCLUDE>
+<INCLUDE>config.h</INCLUDE>
+<CLASS>
+    <NAME>Ktrack</NAME>
+    <SUPER>KMainWindow</SUPER>
+    <SUPER>DCOPObject</SUPER>
+    <FUNC>
+        <TYPE>ASYNC</TYPE>
+        <NAME>testMethod</NAME>
+     </FUNC>
+</CLASS>
+</DCOP-IDL>

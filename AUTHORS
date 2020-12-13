@@ -1,0 +1,9 @@
+Luc Langehegermann <lx2gt@users.sourceforge.net>
+
+Thanks to N1VTN and KD2BD for calculation routines and a lot of Ideas.
+Their code was used in the 0.1 Version.
+
+Many Many thanks to Neoklis Kyriazis for the porting of the SGP4/SDP4 routines
+to C. Without them K-Track woudn't even exist in the current form!
+
+Thanks to Jacques Chion <Jacques.Chion@wanadoo.fr> for the french message translations!

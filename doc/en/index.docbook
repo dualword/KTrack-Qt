@@ -1,0 +1,317 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.1-Based Variant V1.0//EN" "dtd/kdex.dtd" [
+   <!ENTITY kappname "ktrack">
+   <!ENTITY % addindex "IGNORE">
+   <!ENTITY % English "INCLUDE">
+  ]>
+
+<book lang="en">
+
+<bookinfo>
+<title>The KTrack Handbook</title>
+
+<authorgroup>
+<author>
+<firstname>Luc</firstname>
+<surname>Langehegermann  (Author)</surname>
+<affiliation>
+<address><email>luc@lx2gt.lu</email></address>
+</affiliation>
+</author>
+<author>
+<firstname>Lars</firstname>
+<surname>Komm  (Documentation)</surname>
+<affiliation>
+<address><email>dl2olk@users.sourceforge.net</email></address>
+</affiliation>
+</author>
+</authorgroup>
+
+<copyright>
+<year>2002</year>
+<year>2003</year>
+<year>2004</year>
+<holder>Luc Langehegermann (Program), Lars Komm (Documentation)</holder>
+</copyright>
+
+<date>18/01/2003</date>
+<releaseinfo>0.3-1.0</releaseinfo>
+
+<abstract>
+<para>
+KTrack is a satellite tracking program for KDE3, especially suited for ham radio operators.
+</para>
+</abstract>
+
+<keywordset>
+<keyword>KDE</keyword>
+<keyword>AMSAT</keyword>
+<keyword>Satellite</keyword>
+<keyword>Tracking</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="Introduction">
+<title>Introduction</title>
+
+<para>KTrack is a satellite tracking and prediction program for KDE3 that is especially suited for amateur radio operators. It uses
+hamlib for Tranceiver- and Rotorcontrol and features a nice map for graphical visualisation of satellite positions. It has been
+written and maintained by Luc, LX2GT, who is also a member of several other ham radio related development groups. KTrack is an easy-to-use piece of Software and is still being developed. Suggestions and bug-reports are welcome.</para>
+
+<sect1>
+<title>Features</title>
+
+<para>As mentioned before, KTrack is an easy-to-use program. However, it contains a lot of useful features you'll never want to miss,
+once you are familiar with it. First of all KTrack has a great 'outfit' Luc has done great work designing the application that has an intuitive design.</para>
+
+<sect2>
+<title>Easy satellite selection</title>
+<para>KTrack offers an easy 'satellite selection'-dialog, that lists all available sats found in <emphasis>''prefix'/share/apps/Ktrack/nasa.tle'</emphasis> .
+This file contains 2line-keplerian-elements in NASA-format.</para>
+</sect2>
+
+<sect2>
+<title>All satellites at one glance</title>
+<para>All important sat-data for all selected sats are displayed in the "current-position"-section of the window. This makes all important
+information like 'current position', 'azimuth and elevation', 'squint'(if enabled) or 'next AOS/LOS' available at one glance.</para>
+</sect2>
+
+<sect2>
+<title>Rig and Rotor control</title>
+<para>KTrack is capable of controlling Rigs and Rotors as long as they are supported by Hamlib. Today, most of the common popular rotors and
+radios are supported. </para>
+</sect2>
+
+<sect2>
+<title>Prediction table</title>
+<para>KTrack offers a prediction table for all availile satellites. This enables you to predict the pass of a particular sat at any
+given time. Please note, that the prediction table will always display entire satellite passes</para>
+</sect2>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="Installing">
+<title>How to obtain and install KTrack</title>
+
+<sect1>
+<title>Downloading and installing KTrack</title>
+
+<sect2>
+<title>Where can I get KTrack?</title>
+<para>Simply download it from the net using <ulink url="http://www.qsl.net/lx2gt/ktrack">UPDATETHIS</ulink> !</para>
+</sect2>
+
+<sect2>
+<title>Requirements</title>
+<para>Make sure that you have installed KDE3.x.x, QT3.x, QT-Libraries, Hamlib, and the according development packages!
+In this case you're fit to compile KTrack.</para>
+</sect2>
+
+<sect2>
+<title>'Making' KTrack</title>
+<para>After downloading KTrack, unpack it into any directory you want. Usually the files should be extracted in your 'home'-directory.
+Log in as 'root' and change to the directory where the KTrack-files are located. Now run './configure'. In most cases you have to
+specify a 'prefix'-directory, where KDE3 is installed. On my system this prefix is <emphasis>'/opt/kde3/'</emphasis>. Do this by running
+'./configure --prefix='prefix-directory''. Configuring takes a while, so feel free to get a cup of coffee. When the configure-script has
+finished, run 'make'. Now it's time for a try on Majongg or Freecell. When 'make' once has finished, run 'make install'. Now you're in
+business and ready to launch KTrack. HAVE FUN!</para>
+</sect2>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="Using">
+<title>Setting up and using KTrack</title>
+
+<sect1>
+<title>Using KTrack</title>
+
+
+<sect2>
+<title>Configure KTrack for YOUR location</title>
+<para>The first thing you should do is to setup your location. To do this choose 'Groundstation Data' from the 'Options'-Menu. A dialog
+appears, where you can enter the latitude and longitude for your QTH. Note that these values must NOT be entered in the traditional way
+(degrees, minutes, seconds) but in decimals of degrees (i.e. 10.35). Latitude must be -90 to 90 degrees, where -90 deg is the Southpole. 
+The height is meter above Main Sea Level (MSL). I think everybody knows what 'Callsign' means ;-)</para>
+</sect2>
+
+<sect2>
+<title>Setting up Rig and Rotor control</title>
+<para>If you intend to let the application do the 'work' to tune your TRX and rotate your antennas, the next thing to do is setting up rig
+and rotor. Choose 'Rig control' from the 'Options'-Menu. In the rotor-section of the dialog you should choose the rotor interface you are
+using, the physical port it is connected to and the speed it is using. If you need azimuth or elevation correction, fill the fields right
+under 'interface' with the values that work for you. If you own a rotor whitch is capable of rotating more than 360 degrees check the box 
+next to 'Azimuth Correction'.</para>
+<para>Now let's configure your TRX for automatic tuning...  Take a look at the uplink-section. You see almost the same stuff as in the
+rotor-section. Choose your TRX from the Transceiver-List, configure port and speed and you're in business. If you use a second TRX for
+the downlink, check the 'Second downlink receiver'-box and configure it like you did for the uplink.</para>
+<para>Until now, only the control of an TS2000 has been properly tested. Reports of how other transceivers work with KTrack are requested!
+Please feel free to send a report to Luc, because it's important to know how they work and to continue bugfixing!!!</para>
+</sect2>
+
+<sect2>
+<title>Selecting satellites for tracking</title>
+<para>Once KTrack is configured properly, you might want to use it ;-)  In this case selecting a satellite for tracking is a good idea.
+Choose 'Selection' from the 'Satellite'-Menu. You'll see two lists: 'available Satellites' and 'Selected Satellites'. In the 
+'available Satellites'-List you can find all Sats that KTrack has found in <emphasis>''prefix'/share/apps/Ktrack/nasa.tle'</emphasis>.
+This file contains keplerian elements in NASA-2line-format. For more information about keplerian elements check out the AMSAT-Website under
+<ulink url="http://www.amsat.org">http://www.amsat.org</ulink>! Note that these elements are only up-to-date on release time of the
+latest version of KTrack. Updating and maintaining is, like in all other tracking software, up to you! Good sources are AMSAT (see above) or
+the CelesTrak database under <ulink url="http://www.celestrak.com">http://www.celestrak.com</ulink></para>
+<para>Now select your favorite satellite from the 'available Satellites'-List and press the 'Add'-Button. You may notice that it has
+disappeared but shows up in the 'Selected Satellites'-List. You can add one or more sats to this list. To remove a sat from tracking, select
+it in the 'Selected Satellites'-List and press the 'Remove'-Button. Confirm your choice with a click on 'OK'!</para>
+</sect2>
+
+<sect2>
+<title>Squint calculations</title>
+<para>You may want to enable squint angle calculations for satellites to estimate if a particular Sat is useable or not even AOS has been
+reached. The Squint is the angle between the z-axis of the satellite and the observer. Is Squint 0 degrees, the sat points directly at the
+groundstation, while in the worst case, Squint will be 180 degrees, the observer will look right on the back of the satellite.</para>
+<para>To enable squint calculation choose 'Squint Calculations' from the 'Satellites'-Menu. A dialog will appear where you can choose the
+sat calculations should be enabled for. When you have chosen one, enter ALON and ALAT. These values are also called Longitude of Attitude
+(ALON) and Latitude of Attitude (ALAT). ALON/ALAT is 0/0 if the satellite points directly at the earth's center when in apogee.
+If the satellite always pointed at the earth center check the related check-box. ALON/ALAT will be disabled. Now click 'Save' to complete.
+You may repeat this procedure for as many sats as you want. You'll notice, that the Squint angle will be displayed for each sat it is 
+enabled for.</para>
+</sect2>
+
+<sect2>
+<title>Transponder definition</title>
+<para>In order to let KTrack tune your transceiver, it must know the frequencies it should use. Therefore a transponder definition table
+exists and is available from the 'Satellite'-Menu. Note that every transponder or TX-RX combination that is aboard a satellite must be defined
+seperately if you want to use it. That means that if you want to operate the ISS on FM-voice AND APRS/PACKET you must use two rows of the
+table to define this. One for voice operation and one for APRS/PACKET operation, even the downlink frequency is the same! You'll be able to
+choose the desired frequencies later from a list in the main window.</para>
+<para>First you should select a sat from the list in the Satellite column. After that, enter the uplink and downlink QRGs. They MUST be
+entered in 'Hz', neither in 'kHz' nor in 'MHz'! Enter the uplink and downlink offset. In the next column choose the Mode of this
+particular transponder or frequency pair. 'FM', 'SSB' and 'CW' are available. Next to the mode selection is the 'Invert'-checkbox. Check it
+if the transponder works as an 'Inverted Transponder'. That is the case if signals sent on the upper end of the uplink passband
+will appear on the lower end of the downlink passband and vice versa. Check the 'PreAmp'-checkbox, if you want your receiver-preamp to be
+activated for this pair of frequencies.</para>
+<para> Repeat this procedure for all satellites you intent to work on.</para>
+</sect2>
+
+<sect2>
+<title>Predicting satellite passes</title>
+<para>For operators who often work satellites it's important to predict a satellites pass. To know when a desired satellite passes over
+an operator's QTH is a great advantage in satellite operation. It enables you to plan your operation during the rare free time before the
+family claims its rights. Pass prediction is available for all SELECTED satellites, just by choosing 'Predict' from the 'Satellites'-Menu.
+</para>
+<para>After selecting the satellite whose pass should be predicted, specify a period of time, for which the passes should be predicted.
+For this use the date and time boxes labeled with 'from' and 'to' right beside the sat selection. Now give an interval in minutes. This
+interval is used to calculate the satellite's position starting at the 'from' time, stepping by that interval until reaching the 'to'-time.
+After calculating KTrack will show all positions and times where the elevation is positive, and you'll be theoretically able to work this sat.
+Note that the latest time will be shown first.</para>
+</sect2>
+
+
+</sect1>
+</chapter>
+
+
+
+<chapter id="mainwindow">
+<title>KTrack's main window</title>
+
+<sect1>
+<title>How to operate KTrack's main window</title>
+
+<para>This chapter describes, how to work with KTrack. There are only a few control elements in the main window, so that even a new user
+will be able to operate it without a great amount of learning. As mentioned in the Introduction KTrack's 'face' has a very intuitive design.
+Right beneath the menu bar you see four frames. 'Uplink', 'TRX Frequencies', 'Downlink', 'Transponder' and the 'Current Positions'-Frame. Every one of them will 
+be described below.</para>
+
+
+
+<sect2>
+<title>The Uplink-Frame</title>
+<para>This frame shows the frequency of the uplink for the transponder you have chosen (described in the 'Transponder frame section). Note,
+that you HAVE TO SET a transponder definition in order to have the frequency to be displayed and set to your TRX. It indicates which QRG
+will be set to your TRX if you have rig control enabled, or have to be set by you if rig control is paused or you haven't enabled it.</para>
+</sect2>
+
+<sect2>
+<title>The TRX Frequencies-Frame</title>
+<para>This frame shows the same frequencies, as the frequencies on your Transceiver. If you do not use automatic doppler correction, This can be used to find your downlink signal using manuel tuning on the transceiver.</para>
+</sect2>
+
+<sect2>
+<title>The Downlink-Frame</title>
+<para>This frame has the same function as the Uplink-Frame but for the downlink.</para>
+</sect2>
+
+<sect2>
+<title>The Transponder-Frame</title>
+<para>The Transponder-Frame contains all control elements to operate the main window. The transponder listbox lets you choose the transponder
+for the satellite selected in the 'Current Positions'-Frame. If you choose a transponder and the rig control is enabled and not paused, your
+transceiver will be set to this pair of frequencies corrected by doppler-shift. The corrected QRG's will be displayed in the Uplink- and
+Downlink-Frame. If you check the 'Pause rig control'-box, your TRX will no longer be set or polled by KTrack. This reduces the CPU usage 
+while you are not operating a satellite. You can also set a additional correction using the Correction-box. It allows you to set additional
+uplink correction in steps of 25Hz up or down.</para>
+</sect2>
+
+<sect2>
+<title>The Current-Positions-Frame</title>
+<para>In this frame all important data about the selected satellites are displayed. As a special feature, all visible sats will be displayed
+in red colour. The columns are described below.</para>
+
+<sect3>
+<title>Satellite</title>
+<para>As the name says, this shows the name of the satellite ;-)</para>
+</sect3>
+
+<sect3>
+<title>Longitude and Latitude</title>
+<para>These columns show the current position of the sat over the earth's surface. Note that these values are indicated in the way you
+entered your groundstation data. That means that a satellite with a Longitude of over 180 degrees is over the western hemisphere.</para>
+</sect3>
+
+<sect3>
+<title>El and Az</title>
+<para>'El' and 'Az' are synonyms for elevation and azimuth. Elevation indicates the vertical angle between horizon and the satellite at the
+observer's location. Satellites with a positive elevation are above the horizon and therefore visible. Azimuth indicates the horizontal
+direction from the observer where direct north is 0 degrees and increases counting clockwise until reaching 360 degrees in north again.
+These values will be used to control your rotors if those are configured.</para>
+</sect3>
+
+<sect3>
+<title>Next AOS/LOS (Local)</title>
+<para>This indicates when the next AOS (Acquirery Of Sight) or LOS (Loss Of Sight), or in other words, the next rise or set occurs. If the
+satellite is visible the next LOS will be displayed, if it's not visible the next AOS will be displayed.</para>
+</sect3>
+
+<sect3>
+<title>Range, Velocity and Orbit Number</title>
+<para>These columns indicate the current DIRECT range between satellite and observer, the current speed the sat is traveling at through space 
+and the number of orbits it has completed in the past since lauch. These values have informational character and are not primary important for
+operation. The range could be used to estimate how much power you'll have to use and the velocity may be used to estimate the duration of 
+the pass.</para>
+</sect3>
+
+<sect3>
+<title>MA and Squint</title>
+<para>MA is a synonym for 'Mean Anomaly'. A satellite's orbit is an ellipse. Therefore there is a point on the orbit where the satellite is
+nearest to the earth. This point is called 'perigee'. The opposite of perigee is 'apogee'. MA indicates a particular point on
+the ellipse. It is divided into 256 parts so that MA 1 is the 256th part of one orbit. MA 0 is declared as to be in the perigee, therefore
+MA 128 is in the apogee. MA indicates the current position of the satellite on it's orbit.</para>
+<para>The Squint is, as mentioned before, the angle between the satellites main axis and the observer. Note that the squint can only be
+calculated properly if ALON/ALAT is entered correctly or if the satellite always points to the earth's center and this is indicated in the
+'Squint calculations'-dialog.</para>
+</sect3>
+
+</sect2>
+
+
+</sect1>
+
+</chapter>
+
+
+</book>

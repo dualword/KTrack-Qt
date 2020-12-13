@@ -1,0 +1,299 @@
+<!DOCTYPE UI><UI version="3.1" stdsetdef="1">
+<class>satelliteSelectionBase</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>satelliteSelectionBase</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>427</width>
+            <height>245</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Satellite selection</string>
+    </property>
+    <property name="sizeGripEnabled">
+        <bool>false</bool>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <property name="margin">
+            <number>11</number>
+        </property>
+        <property name="spacing">
+            <number>6</number>
+        </property>
+        <widget class="QLayoutWidget" row="2" column="0">
+            <property name="name">
+                <cstring>Layout1</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <property name="margin">
+                    <number>0</number>
+                </property>
+                <property name="spacing">
+                    <number>6</number>
+                </property>
+                <spacer>
+                    <property name="name">
+                        <cstring>Horizontal Spacing2</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>20</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>buttonOk</cstring>
+                    </property>
+                    <property name="text">
+                        <string>&amp;OK</string>
+                    </property>
+                    <property name="autoDefault">
+                        <bool>true</bool>
+                    </property>
+                    <property name="default">
+                        <bool>true</bool>
+                    </property>
+                    <property name="iconSet">
+                        <iconset>image0</iconset>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>buttonCancel</cstring>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Cancel</string>
+                    </property>
+                    <property name="autoDefault">
+                        <bool>true</bool>
+                    </property>
+                    <property name="iconSet">
+                        <iconset>image1</iconset>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget class="Line" row="1" column="0">
+            <property name="name">
+                <cstring>Line1</cstring>
+            </property>
+            <property name="frameShape">
+                <enum>HLine</enum>
+            </property>
+            <property name="frameShadow">
+                <enum>Sunken</enum>
+            </property>
+            <property name="orientation">
+                <enum>Horizontal</enum>
+            </property>
+        </widget>
+        <widget class="QLayoutWidget" row="0" column="0">
+            <property name="name">
+                <cstring>layout5</cstring>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <spacer row="5" column="1">
+                    <property name="name">
+                        <cstring>Spacer3</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Vertical</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>20</width>
+                            <height>27</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QListBox" row="1" column="0" rowspan="5" colspan="1">
+                    <property name="name">
+                        <cstring>availableListBox</cstring>
+                    </property>
+                    <property name="selectionMode">
+                        <enum>Multi</enum>
+                    </property>
+                </widget>
+                <widget class="QLayoutWidget" row="0" column="0">
+                    <property name="name">
+                        <cstring>layout3</cstring>
+                    </property>
+                    <hbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QLabel">
+                            <property name="name">
+                                <cstring>TextLabel1</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Available Satellites:</string>
+                            </property>
+                        </widget>
+                        <spacer>
+                            <property name="name">
+                                <cstring>spacer5</cstring>
+                            </property>
+                            <property name="orientation">
+                                <enum>Horizontal</enum>
+                            </property>
+                            <property name="sizeType">
+                                <enum>Expanding</enum>
+                            </property>
+                            <property name="sizeHint">
+                                <size>
+                                    <width>40</width>
+                                    <height>20</height>
+                                </size>
+                            </property>
+                        </spacer>
+                    </hbox>
+                </widget>
+                <spacer row="1" column="1">
+                    <property name="name">
+                        <cstring>Spacer4</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Vertical</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>20</width>
+                            <height>27</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QListBox" row="1" column="2" rowspan="5" colspan="1">
+                    <property name="name">
+                        <cstring>selectedListBox</cstring>
+                    </property>
+                    <property name="selectionMode">
+                        <enum>Multi</enum>
+                    </property>
+                </widget>
+                <widget class="QPushButton" row="4" column="1">
+                    <property name="name">
+                        <cstring>buttonRemove</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Remove</string>
+                    </property>
+                    <property name="iconSet">
+                        <iconset>image2</iconset>
+                    </property>
+                </widget>
+                <spacer row="3" column="1">
+                    <property name="name">
+                        <cstring>Spacer5</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Vertical</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>20</width>
+                            <height>28</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QLayoutWidget" row="0" column="2">
+                    <property name="name">
+                        <cstring>layout4</cstring>
+                    </property>
+                    <hbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QLabel">
+                            <property name="name">
+                                <cstring>TextLabel2</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Selected Satellites:</string>
+                            </property>
+                        </widget>
+                        <spacer>
+                            <property name="name">
+                                <cstring>spacer6</cstring>
+                            </property>
+                            <property name="orientation">
+                                <enum>Horizontal</enum>
+                            </property>
+                            <property name="sizeType">
+                                <enum>Expanding</enum>
+                            </property>
+                            <property name="sizeHint">
+                                <size>
+                                    <width>40</width>
+                                    <height>20</height>
+                                </size>
+                            </property>
+                        </spacer>
+                    </hbox>
+                </widget>
+                <widget class="QPushButton" row="2" column="1">
+                    <property name="name">
+                        <cstring>buttonAdd</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Add</string>
+                    </property>
+                    <property name="iconSet">
+                        <iconset>image3</iconset>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+    </grid>
+</widget>
+<images>
+    <image name="image0">
+        <data format="XPM.GZ" length="429">789c6dd0bd0ac23010c0f13d4f71345b91ab915605f1111447411c924b8a0e55d03a88f8ee36b9c48fd64cf7ff7121902287ed66057921aead6e8f0474d017c8edad69eebbfdf22132350555c20c5436121902c1fa7c727eb6dd2cc7e1f824ce32a6e19c2b4ecd49134ee7b354e9aef449555d53155ef93d7268520f4c6ad3b78ea8679e2c9b345f84c1a4d62691c360964c40de6243c6b8150d9dc744d1c2265ffc98c7446f43eb12e19f3fc0ecb9102f1ec65d0e</data>
+    </image>
+    <image name="image1">
+        <data format="XPM.GZ" length="439">789c75d0c10a02211006e0bb4f31ecdc24dc8c8a207a84a263101d740aeab005b51d227af7c6d14a77e9670ffe1feab0d61a36eb25e85add5ad79e08e8e8aea0f7f7a6796c778ba7aaec14f89b80ad06aa3240b0ba9c0f618dbcc6a124548a759caa8f75666375b1d22856d34966c8290dd17144656ea0209e83c9bc1077a480624e289c63fd98509a44f835fc4dff6b5e525a4a32d3fd37ec9bec2e2c5d905bef0df2b77acdd51b4d8d56fc</data>
+    </image>
+    <image name="image2">
+        <data format="XPM.GZ" length="484">789c6dd04d0ac2301086e17d4f31747645faa3ad14c423282e0571914e12745105ad0b11ef6e26696a6dfce822ef43a1a45902fbdd06922cba77a23b13d049dc20918fb67d1e8eeb5714174b304f0d453c8be21408b6d78be2339a33e6769cda659997f64de5b22eea05a7744973aa38c9a536e3149c54f96c38b5f6994e3632c4c05004860d4dcd909c1893443b6f96240921c89b233bd51b8a81064b51abc07a543cfc7e97f1f7bb0ec37b68f5e7be3ab4d17f79afa20f0cec69ea</data>
+    </image>
+    <image name="image3">
+        <data format="XPM.GZ" length="484">789c6dd04d0ac2301086e17d4e3134bb22b6d5560ae211149782b8482709baa882d685887737934ca4adfde8a2ef43a03f590a87fd16d24c3c3ad55d10f0acee90ea67dbbe8ea7cd5b24c50adc554391cc44320784dded6ae85eba7b99fb51da90655efa9326645dd44b4a0c890bac289b90d68d5251621553535a1b733e5acfa49c3025ffad61ec1b3206937ec8c8a6b5560d3246431e219b8a86c6cab1398ae7d0b8318d9eeb69f87e8106c634303bf1bdbffff2598b2fd9b369bd</data>
+    </image>
+</images>
+<layoutdefaults spacing="6" margin="11"/>
+<includehints>
+    <includehint>qlistbox.h</includehint>
+    <includehint>qlistbox.h</includehint>
+</includehints>
+</UI>

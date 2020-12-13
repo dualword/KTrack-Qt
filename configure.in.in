@@ -1,0 +1,18 @@
+#MIN_CONFIG(3.0)
+
+AM_INIT_AUTOMAKE(ktrack,0.3.0-rc1)
+
+dnl CXXFLAGS="$NOOPT_CXXFLAGS" dnl __kdevelop[noopt]__
+dnl CFLAGS="$NOOPT_CFLAGS" dnl __kdevelop[noopt]__
+dnl CXXFLAGS="$CXXFLAGS $USE_EXCEPTIONS" dnl __kdevelop[exc]__
+
+dnl KDE_NEED_FLEX dnl __kdevelop__
+dnl AC_PROG_YACC dnl __kdevelop__
+
+PKG_CHECK_MODULES(HAMLIB, hamlib, [
+        CFLAGS="$CFLAGS $HAMLIB_CFLAGS";
+        LIBS="$LIBS $HAMLIB_LIBS";
+        ], [
+        AC_CHECK_LIB(hamlib,main,,AC_MSG_ERROR([Hamradio control libraries not found...]))
+        AC_CHECK_HEADERS(hamlib/rig.h,,AC_MSG_ERROR([Hamlib headers not found...]))
+  ])

@@ -1,0 +1,67 @@
+0.1 to 0.1.1
+
+- More straightforward entering of longitude and latitude
+- The xplanet error is now only reported once
+- Added DCOP Interface
+- Changed tracking routines to sgp4sdp4 - nothing of predict left
+- Squint calculations
+- A lot of bug fixes in the trx control
+
+0.1.1 to 0.2
+
+- Hamlibized - transceiver control is now 100% hamlib - no code
+  left from my own control of the IC910
+- Supports different uplink / downlink rig
+- completly rewrite of some areas
+
+0.2 to 0.2.1
+
+- Fodtrack driver removed - rotor control is now also completly done
+  by hamlib
+- some bug fixes
+- better xplanet handling
+
+0.2.1 to 0.2.2
+
+- Fixed an bug, where the unable to init rig message appears, if the user
+  has selected 'none' in the rig control
+- Fixed the bug that caused ktrack to crash, if one of the selected rigs are
+  'none'
+- The rigs in the rigconfig comboboxes are now sorted alphabetically
+- Only satellites that are displayed are now calculated. The previous version
+  calculated them all, even if not displayed
+- Much faster AOS / LOS calculation routines
+- Only calculate AOS for satellites that actually can reach our position
+- Removed the possibility to not correct the downlink... now the real way of
+  doppler correction is always used!
+- Removed every reference to the obsolete fodtrack driver that was still in
+  the source tree from ktrack
+
+0.2.2 to 0.3.0-alpha1
+
+- Every satellite, that as an positive elevation will be in red color in the
+  satellite list at the bottom of the ktrack main window.
+- On the map, every satellite that is not in the observers range is now
+  displayed in the gray.
+- Changed the code, so that we don't get most of the warnings we had before.
+- Macros for the xplanetmap... %slon and %slat for the coordinates of the
+  tracked satellite. Additionally an radius to supply with the -radius option
+  to xplanet is calculated, using the footprint to give an optimal zoom.
+  (%radius)
+- Instead of the message box if an xplanet error occurs, an logfile of the
+  messages is written to the ktrack files directory. The problem with the
+  message box is related with the data we get from KProcess.
+- The last used correction value is now saved for each used transponder
+  during the last session. On exit, the corrected downlink is saved, so that
+  with 0 offset the user sees the frequency on the next startup as if he had
+  Manually entered is last offset again
+- New easier to use transponder definition dialogues.
+- Now, only one Instance of the application can be used / user
+- Ported to XPlanet 1.0.1 Will not work with earlier versions
+
+0.3.0-alpha1 to 0.3.0-beta1
+
+- Rewrote completly how the satellites get calculated internally
+- Major update of the Radio Control interface
+- Removed completly the xplanet wrapper code. Now we have our own Map implematation
+
