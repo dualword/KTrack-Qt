@@ -1,3 +1,4 @@
+/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           satellitelistview.h  -  description
                              -------------------
@@ -18,35 +19,39 @@
 #ifndef SATELLITELISTVIEW_H
 #define SATELLITELISTVIEW_H
 
-#include <qwidget.h>
-#include <qlistview.h>
-#include <qlist.h>
-
 #include "globals.h"
 #include "satellite.h"
+
+#include <Q3ListView>
+#include <Q3ListViewItem>
+#include <Q3ListViewItemIterator>
 
 /**This widget displays a list of all polled widgets
   *@author Luc Langehegermann
   */
 
-class satelliteListView : public QListView  {
+class satelliteListView : public Q3ListView  {
    Q_OBJECT
 public: 
-	satelliteListView(QWidget *parent=0, const char *name=0);
+	satelliteListView(QWidget *parent=0, const char *name=0); //, const char *name=0
 	~satelliteListView();
   /** Sets a list we use to display */
-  void setSatList(QList<satellite> s);
+  void setSatList(QList<satellite*>* s);
+
 private:
-  QList<satellite> satlist;
+  QList<satellite*>* satlist;
+
 public slots: // Public slots
   /** updates the listview */
   void updateListView();
+
 signals: // Signals
   /** Emitted, when the user wants to track an satellirte */
   void newTrackingSatellite(satellite* sat);
+
 private slots: // Private slots
   /** No descriptions */
-  void newSelection(QListViewItem*);
+  void newSelection(Q3ListViewItem*);
 };
 
 #endif

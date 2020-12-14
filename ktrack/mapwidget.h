@@ -1,3 +1,4 @@
+/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           mapwidget.h  -  description
                              -------------------
@@ -45,33 +46,31 @@
 
 #define PROJINT  (60 * 10)	   /* Frequency of seasonal recalculation */
 
-
-
-
-
-
-
 /**
   *@author Luc Langehegermann
   */
 
 class mapWidget : public QWidget  {
    Q_OBJECT
+
 public:
   mapWidget(QWidget *parent=0, const char *name=0);
   ~mapWidget();
   void setObsQth(obsQTH* q);
-  void setSatList(QList<satellite> s);
+  void setSatList(QList<satellite*>* s);
   void setTrackingSatellite(satellite* sat);
+
 public slots:
   void processSatList();
+
 private:
   QImage dayimage, nightimage;
   QPixmap unpaintedmap, daypixmap, nightpixmap;
   QPixmap buffer;
   obsQTH* qth;
   satellite* trackingSatellite;
-  QList<satellite> satlist;
+  QList<satellite*>* satlist;
+
   void paintEvent(QPaintEvent*);
   void resizeEvent(QResizeEvent*);
   void paintMarker(QString str, QColor color, double lon, double lat);
@@ -84,6 +83,7 @@ private:
   void projillum(short *wtab, int xdots, int ydots, double dec);
 	long jdate(struct tm *t);
 	double gmst(double jd);
+
 private slots: // Private slots
   void updateBackgroundMap();
 };

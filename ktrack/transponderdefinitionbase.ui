@@ -1,106 +1,104 @@
-<!DOCTYPE UI><UI version="3.0" stdsetdef="1">
-<class>transponderDefinitionBase</class>
-<widget class="QDialog">
-    <property name="name">
-        <cstring>transponderDefinitionBase</cstring>
-    </property>
-    <property name="geometry">
-        <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>980</width>
-            <height>400</height>
-        </rect>
-    </property>
-    <property name="caption">
-        <string>Edit Transponder definitions</string>
-    </property>
-    <grid>
-        <property name="name">
-            <cstring>unnamed</cstring>
-        </property>
-        <property name="margin">
-            <number>11</number>
-        </property>
-        <property name="spacing">
-            <number>6</number>
-        </property>
-        <widget class="QTable" row="0" column="0" rowspan="1" colspan="3">
-            <property name="name">
-                <cstring>transponderTable</cstring>
-            </property>
-            <property name="sizePolicy">
-                <sizepolicy>
-                    <hsizetype>5</hsizetype>
-                    <vsizetype>7</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                </sizepolicy>
-            </property>
-            <property name="numRows">
-                <number>0</number>
-            </property>
-            <property name="numCols">
-                <number>0</number>
-            </property>
-            <property name="sorting">
-                <bool>true</bool>
-            </property>
-            <property name="selectionMode">
-                <enum>Single</enum>
-            </property>
-            <property name="focusStyle">
-                <enum>FollowStyle</enum>
-            </property>
-        </widget>
-        <spacer row="1" column="0">
-            <property name="name" stdset="0">
-                <cstring>Spacer1</cstring>
-            </property>
-            <property name="orientation">
-                <enum>Horizontal</enum>
-            </property>
-            <property name="sizeType">
-                <enum>Expanding</enum>
-            </property>
-            <property name="sizeHint">
-                <size>
-                    <width>20</width>
-                    <height>20</height>
-                </size>
-            </property>
-        </spacer>
-        <widget class="QPushButton" row="1" column="1">
-            <property name="name">
-                <cstring>buttonCancel</cstring>
-            </property>
-            <property name="text">
-                <string>&amp;Cancel</string>
-            </property>
-            <property name="iconSet">
-                <iconset>image0</iconset>
-            </property>
-        </widget>
-        <widget class="QPushButton" row="1" column="2">
-            <property name="name">
-                <cstring>buttonOk</cstring>
-            </property>
-            <property name="text">
-                <string>&amp;Ok</string>
-            </property>
-            <property name="iconSet">
-                <iconset>image1</iconset>
-            </property>
-        </widget>
-    </grid>
-</widget>
-<images>
-    <image name="image0">
-        <data format="XPM.GZ" length="429">789c6dd0bd0ac23010c0f13d4f71345b91ab915605f1111447411c924b8a0e55d03a88f8ee36b9c48fd64cf7ff7121902287ed66057921aead6e8f0474d017c8edad69eebbfdf22132350555c20c5436121902c1fa7c727eb6dd2cc7e1f824ce32a6e19c2b4ecd49134ee7b354e9aef449555d53155ef93d7268520f4c6ad3b78ea8679e2c9b345f84c1a4d62691c360964c40de6243c6b8150d9dc744d1c2265ffc98c7446f43eb12e19f3fc0ecb9102f1ec65d0e</data>
-    </image>
-    <image name="image1">
-        <data format="XPM.GZ" length="439">789c8dd0b10ac2301006e03d4f71f4b620ad1115417c04c5511087cb29e85005ad8388ef6e923b43aa8b3f1df27fe592b48d85cd7a09b631b78eba13031fe90a767f6fdbc776b7789aca4d213c1370d5c0543530ac2ee7435c6358e3302556963ad6eaa5ce9c5492ca23a9f557b26148df102944552c49d2f83e199267442fe8d5384e89a21892ee9e502d9f88ff994fd133305f3b46ed335cdeb987f9db0a2dffc18f95b3afb97903231756f8</data>
-    </image>
-</images>
-<layoutdefaults spacing="6" margin="11"/>
-</UI>
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>transponderDefinitionBase</class>
+ <widget class="QDialog" name="transponderDefinitionBase">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>980</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Edit Transponder definitions</string>
+  </property>
+  <layout class="QGridLayout">
+   <property name="margin">
+    <number>11</number>
+   </property>
+   <property name="spacing">
+    <number>6</number>
+   </property>
+   <item row="0" column="0" colspan="3">
+    <widget class="Q3Table" name="transponderTable">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="numRows">
+      <number>0</number>
+     </property>
+     <property name="numCols">
+      <number>0</number>
+     </property>
+     <property name="sorting">
+      <bool>true</bool>
+     </property>
+     <property name="selectionMode">
+      <enum>Q3Table::Single</enum>
+     </property>
+     <property name="focusStyle">
+      <enum>Q3Table::FollowStyle</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <spacer name="Spacer1">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Expanding</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="1">
+    <widget class="QPushButton" name="buttonCancel">
+     <property name="text">
+      <string>&amp;Cancel</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>image0</normaloff>image0</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <widget class="QPushButton" name="buttonOk">
+     <property name="text">
+      <string>&amp;Ok</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>image1</normaloff>image1</iconset>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>Q3Frame</class>
+   <extends>QFrame</extends>
+   <header>Qt3Support/Q3Frame</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Q3Table</class>
+   <extends>Q3Frame</extends>
+   <header>q3table.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

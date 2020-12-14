@@ -1,3 +1,4 @@
+/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           satelliteselection.cpp  -  description
                              -------------------
@@ -16,15 +17,15 @@
  ***************************************************************************/
 
 #include <stdio.h>
-#include <klistbox.h>
 #include <qpushbutton.h>
 
 #include "satelliteselection.h"
 
 
-satelliteSelection::satelliteSelection(QWidget *parent, const char *name, bool modal, WFlags fl ) : satelliteSelectionBase(parent,name,modal,fl)
+satelliteSelection::satelliteSelection(QWidget *parent, const char *name, bool modal,
+		Qt::WFlags fl ) : QDialog(parent,name,modal,fl)
 {
-  // connect the buttons
+	setupUi(this);
   QObject::connect(buttonAdd, SIGNAL(clicked()), this, SLOT(slotAdd()));
   QObject::connect(buttonRemove, SIGNAL(clicked()), this, SLOT(slotRemove()));
   QObject::connect(buttonOk, SIGNAL(clicked()), this, SLOT(slotOk()));
@@ -34,11 +35,10 @@ satelliteSelection::~satelliteSelection()
 {
 }
 /** sets the satellite list of the dialog */
-void satelliteSelection::setSatList(QList<satellite> s){
-  satellite* sat;
-  satlist=s;
+void satelliteSelection::setSatList(QList<satellite*>* s){
+  satlist = s;
   // display the satellites in the listboxes
-  for(sat=satlist.first(); sat!=0; sat=satlist.next()) {
+  for(satellite* sat : *s) {
     if (sat->polled())
       selectedListBox->insertItem(sat->name());
     else
@@ -84,13 +84,17 @@ void satelliteSelection::slotOk(){
   QString str;
   // clear the polled flag of the sat list
 
-  for(sat=satlist.first(); sat!=0; sat=satlist.next())
-    sat->setPolled(false);
+  for(satellite* sat: *satlist){
+	    sat->setPolled(false);
+  }
+
   for(i=0; i<selectedListBox->count(); ++i) {
-    str=selectedListBox->text(i);
-    for(sat=satlist.first(); sat!=0; sat=satlist.next())
-      if(sat->name() == str)
-        sat->setPolled(true);
+    str = selectedListBox->text(i);
+
+    for(satellite* sat: *satlist){
+        if(sat->name() == str)
+          sat->setPolled(true);
+    }
   }
   emit polledChanged();
   accept();

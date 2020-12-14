@@ -1,97 +1,99 @@
-<!DOCTYPE UI><UI version="3.1" stdsetdef="1">
-<class>transponderDefinitionWidget</class>
-<widget class="QWidget">
-    <property name="name">
-        <cstring>transponderDefinitionWidget</cstring>
-    </property>
-    <property name="geometry">
-        <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>336</width>
-            <height>163</height>
-        </rect>
-    </property>
-    <property name="caption">
-        <string>Form1</string>
-    </property>
-    <grid>
-        <property name="name">
-            <cstring>unnamed</cstring>
-        </property>
-        <widget class="QLabel" row="0" column="0">
-            <property name="name">
-                <cstring>textLabel1</cstring>
-            </property>
-            <property name="text">
-                <string>Satellite:</string>
-            </property>
-        </widget>
-        <widget class="QLabel" row="1" column="0" rowspan="1" colspan="4">
-            <property name="name">
-                <cstring>textLabel2</cstring>
-            </property>
-            <property name="text">
-                <string>Defined Transponders:</string>
-            </property>
-        </widget>
-        <widget class="QComboBox" row="0" column="1">
-            <property name="name">
-                <cstring>satelliteComboBox</cstring>
-            </property>
-        </widget>
-        <spacer row="0" column="2" rowspan="1" colspan="2">
-            <property name="name">
-                <cstring>spacer1</cstring>
-            </property>
-            <property name="orientation">
-                <enum>Horizontal</enum>
-            </property>
-            <property name="sizeType">
-                <enum>Expanding</enum>
-            </property>
-            <property name="sizeHint">
-                <size>
-                    <width>40</width>
-                    <height>20</height>
-                </size>
-            </property>
-        </spacer>
-        <widget class="KPushButton" row="4" column="3">
-            <property name="name">
-                <cstring>editButton</cstring>
-            </property>
-            <property name="text">
-                <string>&amp;Edit</string>
-            </property>
-        </widget>
-        <widget class="KPushButton" row="3" column="3">
-            <property name="name">
-                <cstring>deleteButton</cstring>
-            </property>
-            <property name="text">
-                <string>&amp;Delete</string>
-            </property>
-        </widget>
-        <widget class="KPushButton" row="2" column="3">
-            <property name="name">
-                <cstring>newButton</cstring>
-            </property>
-            <property name="text">
-                <string>&amp;New</string>
-            </property>
-        </widget>
-        <widget class="QListBox" row="2" column="0" rowspan="3" colspan="3">
-            <property name="name">
-                <cstring>transponderListBox</cstring>
-            </property>
-        </widget>
-    </grid>
-</widget>
-<layoutdefaults spacing="6" margin="11"/>
-<includehints>
-    <includehint>kpushbutton.h</includehint>
-    <includehint>kpushbutton.h</includehint>
-    <includehint>kpushbutton.h</includehint>
-</includehints>
-</UI>
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>transponderDefinitionWidget</class>
+ <widget class="QWidget" name="transponderDefinitionWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>336</width>
+    <height>168</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form1</string>
+  </property>
+  <layout class="QGridLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="textLabel1">
+     <property name="text">
+      <string>Satellite:</string>
+     </property>
+     <property name="wordWrap">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="4">
+    <widget class="QLabel" name="textLabel2">
+     <property name="text">
+      <string>Defined Transponders:</string>
+     </property>
+     <property name="wordWrap">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QComboBox" name="satelliteComboBox"/>
+   </item>
+   <item row="0" column="2" colspan="2">
+    <spacer name="spacer1">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Expanding</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="4" column="3">
+    <widget class="QPushButton" name="editButton" native="true">
+     <property name="text" stdset="0">
+      <string>&amp;Edit</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="3">
+    <widget class="QPushButton" name="deleteButton" native="true">
+     <property name="text" stdset="0">
+      <string>&amp;Delete</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="3">
+    <widget class="QPushButton" name="newButton" native="true">
+     <property name="text" stdset="0">
+      <string>&amp;New</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" rowspan="3" colspan="3">
+    <widget class="Q3ListBox" name="transponderListBox"/>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+ <customwidgets>
+  <customwidget>
+   <class>Q3Frame</class>
+   <extends>QFrame</extends>
+   <header>Qt3Support/Q3Frame</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Q3ListBox</class>
+   <extends>Q3Frame</extends>
+   <header>q3listbox.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

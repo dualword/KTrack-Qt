@@ -1,3 +1,4 @@
+/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           squintcalculations.h  -  description
                              -------------------
@@ -18,9 +19,9 @@
 #ifndef SQUINTCALCULATIONS_H
 #define SQUINTCALCULATIONS_H
 
-#include <qwidget.h>
-#include <qptrlist.h>
-#include <squintcalculationsbase.h>
+#include <QWidget>
+#include <Q3PtrList>
+#include <ui_squintcalculationsbase.h>
 
 #include "satellite.h"
 
@@ -28,18 +29,20 @@
   *@author Luc Langehegermann
   */
 
-class squintCalculations : public squintCalculationsBase  {
+class squintCalculations : public QDialog, Ui::squintCalculationsBase  {
    Q_OBJECT
 public: 
-	squintCalculations(QWidget *parent=0, const char *name=0,WFlags fl=WDestructiveClose);
+	squintCalculations(QWidget *parent=0, const char *name=0, Qt::WFlags fl=Qt::WDestructiveClose);
 	~squintCalculations();
   /** No descriptions */
-  void setSatList(QList<satellite> s);
+  void setSatList(QList<satellite*>* s);
+
 private:
-  QList<satellite> satlist;
+  QList<satellite*>* satlist;
   void enableAlonAlat(bool);
   void enableCenter(bool);
   satellite* currentsat;
+
 private slots: // Private slots
   /** No descriptions */
   void slotNewSat(const QString &);
@@ -49,9 +52,11 @@ private slots: // Private slots
   void slotEnable(bool);
   /** save the changed data */
   void slotSave();
+
 public slots: // Public slots
   /** No descriptions */
   void slotAlonAlatChanged(const QString&);
+
 };
 
 #endif

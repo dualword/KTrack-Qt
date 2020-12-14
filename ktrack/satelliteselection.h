@@ -1,3 +1,4 @@
+/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           satelliteselection.h  -  description
                              -------------------
@@ -22,37 +23,33 @@
 #include <qlist.h>
 
 #include "globals.h"
-#include "satelliteSelectionBase.h"
+#include "ui_satelliteSelectionBase.h"
 #include "satellite.h"
 
 /**
   *@author Luc Langehegermann
   */
 
-class satelliteSelection : public satelliteSelectionBase  {
+class satelliteSelection : public QDialog, private Ui::satelliteSelectionBase  {
    Q_OBJECT
 public: 
-	satelliteSelection(QWidget *parent=0, const char *name=0,bool modal=false, WFlags fl=WDestructiveClose );
+	satelliteSelection(QWidget *parent=0, const char *name=0,bool modal=false, Qt::WFlags fl=Qt::WDestructiveClose );
 	~satelliteSelection();
   /** sets the satellite list of the dialog */
-  void setSatList(QList<satellite> s);
+  void setSatList(QList<satellite*>* s);
+
 private:
-  QList<satellite> satlist;
+  QList<satellite*>* satlist;
 private slots: // Private slots
-  /** No descriptions */
   void slotOk();
-private slots: // Private slots
-  /** No descriptions */
   void slotCancel();
-private slots: // Private slots
-  /** No descriptions */
   void slotRemove();
-private slots: // Private slots
-  /** No descriptions */
   void slotAdd();
+
 signals: // Signals
   /** We emit this signal, when the number of polled satellites has changed. Important for satelliteListView */
   void polledChanged();
+
 };
 
 #endif

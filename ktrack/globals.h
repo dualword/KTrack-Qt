@@ -1,3 +1,4 @@
+/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           globals.h  -  description
                              -------------------
@@ -26,12 +27,11 @@
 #define MODE_FM  0x05
 #define MODE_SSB MODE_USB
 
-#include <qlist.h>
-#include <qstring.h>
+#include <QtGui>
 #include <stdio.h>
 #include <time.h>
-#include <hamlib/rig.h>
-#include <hamlib/rotator.h>
+//#include <hamlib/rig.h>
+//#include <hamlib/rotator.h>
 
 /** This class represents the observers QTH */
 
@@ -95,13 +95,13 @@ private:
 /** this structure will held the information for one transceiver */
 
 typedef struct {
-  rig_model_t radio;
+  //rig_model_t radio;
   QString port;
   int speed;
 } s_rigparam;
 
 typedef struct {
-  rot_model_t rotor;
+  //rot_model_t rotor;
   QString port;
   int speed;
 } s_rotparam;

@@ -1,3 +1,4 @@
+/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           groundstationsettings.h  -  description
                              -------------------
@@ -19,7 +20,7 @@
 #define GROUNDSTATIONSETTINGS_H
 
 #include <qwidget.h>
-#include <groundstationsettingsbase.h>
+#include <ui_groundstationsettingsbase.h>
 
 #include "globals.h"
 
@@ -27,10 +28,10 @@
   *@author Luc Langehegermann
   */
 
-class groundstationSettings : public groundstationSettingsBase  {
+class groundstationSettings : public QDialog, private Ui::groundstationSettingsBase  {
    Q_OBJECT
 public: 
-	groundstationSettings(QWidget *parent=0, const char *name=0,bool modal=true, WFlags fl=WDestructiveClose );
+	groundstationSettings(QWidget *parent=0, const char *name=0,bool modal=true, Qt::WFlags fl=Qt::WDestructiveClose );
 	~groundstationSettings();
   /** sets the observer qth */
   void setObsQTH(obsQTH* q);

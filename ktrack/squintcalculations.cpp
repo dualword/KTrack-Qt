@@ -1,3 +1,4 @@
+/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           squintcalculations.cpp  -  description
                              -------------------
@@ -23,7 +24,9 @@
 #include <qcheckbox.h>
 #include <qpushbutton.h>
 
-squintCalculations::squintCalculations(QWidget *parent, const char *name, WFlags fl ) : squintCalculationsBase(parent,name,fl) {
+squintCalculations::squintCalculations(QWidget *parent, const char *name, Qt::WFlags fl ) :
+QDialog(parent,name,fl) {
+	setupUi(this);
   QObject::connect(buttonClose, SIGNAL(clicked()), this, SLOT(close()));
   QObject::connect(buttonSave, SIGNAL(clicked()), this, SLOT(slotSave()));
   QObject::connect(satelliteEdit, SIGNAL(activated(const QString&)), this, SLOT(slotNewSat(const QString&)));
@@ -35,47 +38,46 @@ squintCalculations::squintCalculations(QWidget *parent, const char *name, WFlags
 squintCalculations::~squintCalculations(){
 }
 /** No descriptions */
-void squintCalculations::setSatList(QList<satellite> s){
-  satlist=s;
+void squintCalculations::setSatList(QList<satellite*>* s){
+  satlist = s;
   // fill the combo box
-  satellite* sat;
-  for(sat=satlist.first(); sat!=0; sat=satlist.next()) {
+  for(satellite* sat : *satlist) {
     if (sat->polled())
       satelliteEdit->insertItem(sat->name());
   }
-  currentsat=satlist.first();
+  currentsat=satlist->first();
   slotNewSat(satelliteEdit->currentText());
 }
 /** No descriptions */
 void squintCalculations::slotNewSat(const QString & satname){
-  satellite* sat;
   // search the satellite class
-  for(sat=satlist.first(); sat!=0; sat=satlist.next())
-    if (sat->name() == satname) break;
-  // get the values, and toggle the widgets accordingly 
-  if(sat->squinttype() == 0) {
-    enableCenter(false);
-    enableAlonAlat(false);
-    enableCheckbox->setChecked(false);
-  }
+  for(satellite* sat : *satlist) {
+		if (sat->name() == satname) break;
+	  // get the values, and toggle the widgets accordingly
+	  if(sat->squinttype() == 0) {
+		enableCenter(false);
+		enableAlonAlat(false);
+		enableCheckbox->setChecked(false);
+	  }
 
-  if(sat->squinttype() == 1) {
-    enableCenter(true);
-    enableAlonAlat(false);
-    enableCheckbox->setChecked(true);
-    centerCheckbox->setChecked(true);
-  }
+	  if(sat->squinttype() == 1) {
+		enableCenter(true);
+		enableAlonAlat(false);
+		enableCheckbox->setChecked(true);
+		centerCheckbox->setChecked(true);
+	  }
 
-  if(sat->squinttype() == 2) {
-    enableCenter(true);
-    enableAlonAlat(true);
-    enableCheckbox->setChecked(true);
-    centerCheckbox->setChecked(false);
-    alonEdit->setText(QString::number(sat->ALON(), 'f', 0));
-    alatEdit->setText(QString::number(sat->ALAT(), 'f', 0));
+	  if(sat->squinttype() == 2) {
+		enableCenter(true);
+		enableAlonAlat(true);
+		enableCheckbox->setChecked(true);
+		centerCheckbox->setChecked(false);
+		alonEdit->setText(QString::number(sat->ALON(), 'f', 0));
+		alatEdit->setText(QString::number(sat->ALAT(), 'f', 0));
+	  }
+	  buttonSave->setEnabled(false);
+	  currentsat=sat;
   }
-  buttonSave->setEnabled(false);
-  currentsat=sat;
 }
 
 void squintCalculations::enableCenter(bool i){

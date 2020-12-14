@@ -1,3 +1,4 @@
+/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           predictionlist.cpp  -  description
                              -------------------
@@ -22,39 +23,42 @@
 #include <qpushbutton.h>
 #include <qspinbox.h>
 #include <qlistview.h>
-#include <kapplication.h>
-#include <klocale.h>
+//#include <kapplication.h>
+//#include <klocale.h>
 
 #include "sgp4sdp4/sgp4sdp4.h"
 
-predictionList::predictionList(QWidget *parent, const char *name, WFlags fl ) : predictionListBase(parent,name,fl) {
-  listView->setAllColumnsShowFocus(true);
-  listView->addColumn(i18n("Date"));
-  listView->addColumn(i18n("Longitude"));
-  listView->addColumn(i18n("Latitude"));
-  listView->addColumn(i18n("El"));
-  listView->addColumn(i18n("Az"));
-  listView->addColumn(i18n("Footprint"));
-  listView->addColumn(i18n("Height"));
-  listView->addColumn(i18n("Range"));
-  listView->addColumn(i18n("Velocity"));
-  listView->addColumn(i18n("Orbit Number"));
-  listView->addColumn(i18n("MA"));
-  listView->addColumn(i18n("Squint"));
+predictionList::predictionList(QWidget *parent, const char *name, Qt::WFlags fl ) :
+	QDialog(parent,name,fl) {
 
-  listView->setColumnAlignment(1,AlignRight);
-  listView->setColumnAlignment(2,AlignRight);
-  listView->setColumnAlignment(3,AlignRight);
-  listView->setColumnAlignment(4,AlignRight);
-  listView->setColumnAlignment(5,AlignRight);
-  listView->setColumnAlignment(8,AlignRight);
-  listView->setColumnAlignment(7,AlignRight);
-  listView->setColumnAlignment(6,AlignRight);
-  listView->setColumnAlignment(9,AlignRight);
-  listView->setColumnAlignment(9,AlignRight);
-  listView->setColumnAlignment(10,AlignRight);
-  listView->setColumnAlignment(11,AlignRight);
-  listView->setColumnAlignment(12,AlignRight);  
+	setupUi(this);
+  listView->setAllColumnsShowFocus(true);
+  listView->addColumn(tr("Date"));
+  listView->addColumn(tr("Longitude"));
+  listView->addColumn(tr("Latitude"));
+  listView->addColumn(tr("El"));
+  listView->addColumn(tr("Az"));
+  listView->addColumn(tr("Footprint"));
+  listView->addColumn(tr("Height"));
+  listView->addColumn(tr("Range"));
+  listView->addColumn(tr("Velocity"));
+  listView->addColumn(tr("Orbit Number"));
+  listView->addColumn(tr("MA"));
+  listView->addColumn(tr("Squint"));
+
+  listView->setColumnAlignment(1,Qt::AlignRight);
+  listView->setColumnAlignment(2,Qt::AlignRight);
+  listView->setColumnAlignment(3,Qt::AlignRight);
+  listView->setColumnAlignment(4,Qt::AlignRight);
+  listView->setColumnAlignment(5,Qt::AlignRight);
+  listView->setColumnAlignment(8,Qt::AlignRight);
+  listView->setColumnAlignment(7,Qt::AlignRight);
+  listView->setColumnAlignment(6,Qt::AlignRight);
+  listView->setColumnAlignment(9,Qt::AlignRight);
+  listView->setColumnAlignment(9,Qt::AlignRight);
+  listView->setColumnAlignment(10,Qt::AlignRight);
+  listView->setColumnAlignment(11,Qt::AlignRight);
+  listView->setColumnAlignment(12,Qt::AlignRight);
 
   resultlist.setAutoDelete(true);
   calc = new calculator(this);
@@ -62,20 +66,17 @@ predictionList::predictionList(QWidget *parent, const char *name, WFlags fl ) : 
 predictionList::~predictionList(){
 }
 /** No descriptions */
-void predictionList::setSatList(QList<satellite> s)
+void predictionList::setSatList(QList<satellite*>* s)
 {
-  satlist=s;
+  satlist = s;
   // fill the satellite selection combo box
-  satellite* sat;
-  for(sat=satlist.first(); sat!=0; sat=satlist.next()) {
-    if(sat->polled()) satnameCombo->insertItem(sat->name());
+  for(satellite* sat : *s) {
+    if(sat->polled())
+	  satnameCombo->insertItem(sat->name());
   }
   // default values for the times
   startEdit->setDateTime(QDateTime::currentDateTime());
   stopEdit->setDateTime(QDateTime::currentDateTime().addDays(1));
-
-  // connect the push buttons
-
   QObject::connect(calculateButton, SIGNAL(clicked()), this, SLOT(slotCalculate()));
   QObject::connect(dismissButton, SIGNAL(clicked()), this, SLOT(slotDismiss()));
 }
@@ -102,7 +103,7 @@ void predictionList::slotCalculate(){
     
   // get the sat and make a copy!
 
-  for(s=satlist.first(); s!=0; s=satlist.next()) {
+  for(satellite* sat : *satlist) {
     if (s->name() == satnameCombo->currentText()) {
       break;
     }
@@ -157,9 +158,9 @@ void predictionList::setQTH(obsQTH* qth) {
 /** No descriptions */
 void predictionList::displayResults(){
   satellite* s;
-  QListViewItem* item;
+  Q3ListViewItem* item;
   for(s=resultlist.last(); s!=0; s=resultlist.prev()) {
-    item = new QListViewItem(listView);
+    item = new Q3ListViewItem(listView);
     item->setText(0, s->calculatedDate());
     item->setText(1, QString::number(s->longitude(), 'f', 2)+" ");
     item->setText(2, QString::number(s->latitude(), 'f', 2)+" ");

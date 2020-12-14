@@ -4,6 +4,7 @@
 /.externalToolBuilders
 /.settings
 
+ktrack-qt
 .build
 Makefile
 

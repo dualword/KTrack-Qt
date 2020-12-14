@@ -1,3 +1,4 @@
+/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           satellitelistviewitem.h  -  description
                              -------------------
@@ -22,13 +23,14 @@
 #include "globals.h"
 #include "satellite.h"
 
+#include <Q3ListViewItem>
 /**
   *@author Luc Langehegermann
   */
 
-class satelliteListViewItem : public QListViewItem  {
+class satelliteListViewItem : public Q3ListViewItem  {
 public:
-	satelliteListViewItem(QListView* view, satellite* s);
+	satelliteListViewItem(Q3ListView* view, satellite* s);
 	~satelliteListViewItem();
   /** No descriptions */
   satellite* getSatellite();

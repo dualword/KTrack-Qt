@@ -1,3 +1,4 @@
+/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           ktrack.h  -  description
                              -------------------
@@ -22,22 +23,24 @@
 #include <config.h>
 #endif
 
-#include <kapp.h>
-#include <qwidget.h>
-#include <qsplitter.h>
-#include <kmainwindow.h>
+//#include <kapp.h>
+#include <QWidget>
+#include <QSplitter>
+#include <QMainWindow>
+#include <Q3PopupMenu>
+#include <Q3Action>
 
-#include <hamlib/rig.h>
-#include <hamlib/rotator.h>
+//#include <hamlib/rig.h>
+//#include <hamlib/rotator.h>
 
 #include "calculator.h"
 #include "satellitelistview.h"
-#include "rigctrl.h"
 #include "mapwidget.h"
-#include "trxwidget.h"
+//#include "rigctrl.h"
+//#include "trxwidget.h"
 
 /** Ktrack is the base class of the project */
-class Ktrack : public KMainWindow
+class Ktrack : public QMainWindow
 {
 Q_OBJECT
 public:
@@ -45,6 +48,7 @@ public:
    Ktrack(QWidget* parent=0, const char *name=0);
    /** destructor */
    ~Ktrack();
+
 private slots: // Private slots
 /** This slot is called when we are setup */
    void start();
@@ -66,18 +70,21 @@ private slots: // Private slots
   void slotPredict();
   /** Called to popup the squint calculations config menu */
   void slotSquintCalculations();
+
 private:
   calculator* calc;
   mapWidget* map;
   satelliteListView* satListView;
   satellite* trackingSatellite;   // pointer to the satellite we are tracking
-  s_hardware hardwareParameters;
-  rigctrl* trxctl;
-  trxWidget* trxwidget;
+//  s_hardware hardwareParameters;
+//  rigctrl* trxctl;
+//  trxWidget* trxwidget;
   QSplitter* split;               // splitter where the map and the listview resides
+
 public slots: // Public slots
   /** Opens a window with the satelite Selection */
   void slotSatellites();
+
 private: // Private methods
   /** write the configuration */
   void writeConfig();

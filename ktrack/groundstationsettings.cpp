@@ -1,3 +1,4 @@
+/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           groundstationsettings.cpp  -  description
                              -------------------
@@ -20,8 +21,9 @@
 
 #include "groundstationsettings.h"
 
-groundstationSettings::groundstationSettings(QWidget *parent, const char *name, bool modal, WFlags fl )
-    : groundstationSettingsBase(parent,name,modal,fl) {
+groundstationSettings::groundstationSettings(QWidget *parent, const char *name, bool modal, Qt::WFlags fl )
+    : QDialog(parent,name,modal,fl) {
+	setupUi(this);
 
 }
 groundstationSettings::~groundstationSettings(){

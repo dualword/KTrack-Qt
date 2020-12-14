@@ -1,3 +1,4 @@
+/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           calculator.h  -  description
                              -------------------
@@ -31,20 +32,22 @@
 class calculator : public QObject  {
    friend class predictionList;
    Q_OBJECT
+
 public: 
 	calculator(QObject *parent=0, const char *name=0);
 	~calculator();
   /** initializes the calculator */
   void init();
   /** return the satellite list */
-  QList<satellite> satList();
+  QList<satellite*>* satList();
   /** return the observers QTH */
   obsQTH* getObsQTH();
   /** set the observers QTH */
   void setObsQTH(obsQTH* q);
   satellite* copySatellite(satellite* sat);
+
 private:
-  QList<satellite> satlist; // list of satellites
+  QList<satellite*> satlist; // list of satellites
   obsQTH* qth;  // observers qth
   satellite* trackingSatellite;
   int count;
@@ -57,12 +60,15 @@ private:
   double FindLOS2(double daynum, satellite* sat, bool haslos);
   double NextAOS(double daynum, satellite* sat, bool aoslos);
   QString daynum2String(double daynum);
+
 signals: // Signals
   /** Emitted, when we are finished an life calculation */
   void calculated();
-private slots: // Private slots
+
+ private slots: // Private slots
   /** called when we want to calculate */
   void timeout();
+
 };
 
 #endif

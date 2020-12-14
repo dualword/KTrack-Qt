@@ -1,3 +1,4 @@
+/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           mapwidget.cpp  -  description
                              -------------------
@@ -17,7 +18,7 @@
 
 #include "mapwidget.h"
 
-#include <kstandarddirs.h>
+//#include <kstandarddirs.h>
 #include <qpainter.h>
 #include <qpoint.h>
 #include <qbitmap.h>
@@ -25,11 +26,13 @@
 
 #include "sgp4sdp4/sgp4sdp4.h"
 
-mapWidget::mapWidget(QWidget *parent, const char *name ) : QWidget(parent,name) {
+mapWidget::mapWidget(QWidget *parent, const char *name ) : QWidget(parent,name), buffer(100,100) {
   /* load the original map */
-  dayimage.load(locate("appdata", "earth.jpg"));
-  nightimage.load(locate("appdata", "night.jpg"));
-  setWFlags(Qt::WResizeNoErase|Qt::WRepaintNoErase);
+  //dayimage.load(locate("appdata", "earth.jpg"));
+	dayimage.load("earth.jpg");
+  //nightimage.load(locate("appdata", "night.jpg"));
+	nightimage.load("night.jpg");
+  //setWFlags(Qt::WResizeNoErase|Qt::WRepaintNoErase);
   QTimer* t = new QTimer();
   QObject::connect(t, SIGNAL(timeout()), this, SLOT(updateBackgroundMap()));
   t->start(1000);
@@ -44,9 +47,9 @@ void mapWidget::paintEvent(QPaintEvent*)
 
 void mapWidget::resizeEvent(QResizeEvent*) {
   QImage i;
-  i=dayimage.scale(width(), height());
+  i=dayimage.scaled(width(), height());
   daypixmap.convertFromImage(i);
-  i=nightimage.scale(width(), height());
+  i=nightimage.scaled(width(), height());
   nightpixmap.convertFromImage(i);
   updateBackgroundMap();
 }
@@ -55,25 +58,22 @@ void mapWidget::setObsQth(obsQTH* q) {
   qth=q;
 }
 
-void mapWidget::setSatList(QList<satellite> s) {
-  satlist=s;
+void mapWidget::setSatList(QList<satellite*>* s) {
+  satlist = s;
 }
 
 void mapWidget::processSatList() {
-  satellite* sat;
-  buffer=unpaintedmap;
+  buffer = unpaintedmap;
   paintMarker(qth->callsign(), Qt::green, qth->longitude(), qth->latitude());
-  for(sat=satlist.first(); sat!=0; sat=satlist.next()) {
+  for(satellite* sat: *satlist) {
     if (sat->polled()) {
-      if (sat==trackingSatellite) {
+      if (sat == trackingSatellite) {
          paintMarker(sat->name(), Qt::yellow, sat->longitude(), sat->latitude());
          drawArc(sat, Qt::yellow);
-      }
-      else if (sat->elevation() > 0.03) {
+      }else if (sat->elevation() > 0.03) {
         paintMarker(sat->name(), Qt::cyan, sat->longitude(), sat->latitude());
         drawArc(sat, Qt::cyan);
-      }
-      else {
+      } else {
         paintMarker(sat->name(), Qt::darkGray, sat->longitude(), sat->latitude());
         drawArc(sat, Qt::darkGray);
       }
@@ -114,7 +114,7 @@ void mapWidget::paintMarker(QString str, QColor color, double lon, double lat) {
 }
 
 void mapWidget::setTrackingSatellite(satellite* sat) {
-  trackingSatellite=sat;
+  trackingSatellite = sat;
 }
 
 double arccos(double x, double y) {

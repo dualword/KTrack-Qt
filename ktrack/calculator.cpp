@@ -1,3 +1,4 @@
+/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           calculator.cpp  -  description
                              -------------------
@@ -17,7 +18,8 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <kstandarddirs.h>
+#include <sys/time.h>
+//#include <kstandarddirs.h>
 #include <qfile.h>
 #include <qtimer.h>
 #include <qtextstream.h>
@@ -38,14 +40,15 @@ void calculator::init()
   QString satname, line1, line2;
 
   // open the keppler file
-  QString filename = locate("appdata", "nasa.tle");
-  fprintf(stderr, "Using %s as tle input file!\n", filename.latin1());
+//  QString filename = locate("appdata", "nasa.tle");
+  QString filename =  "nasa.tle";
+//  fprintf(stderr, "Using %s as tle input file!\n", filename.latin1());
   // go through the file and create the list entries
 
   QFile f(filename);
   if ( f.open(IO_ReadOnly) ) {    // file opened successfully
     QTextStream t( &f );        // use a text stream
-    while ( !t.eof() ) {        // until end of file...
+    while ( !t.atEnd() ) {        // until end of file...
       satname=t.readLine().stripWhiteSpace();
       sat = new satellite(satname);
       sat->line1=t.readLine();
@@ -62,8 +65,8 @@ void calculator::init()
   timer->start(1000, false);
 }
 /** return the satellite list */
-QList<satellite> calculator::satList(){
-  return satlist;
+QList<satellite*>* calculator::satList(){
+  return &satlist;
 }
 /** return the observers QTH */
 obsQTH* calculator::getObsQTH(){
@@ -71,10 +74,9 @@ obsQTH* calculator::getObsQTH(){
 }
 /** called when we want to calculate */
 void calculator::timeout(){
-  satellite* sat;
-  for(sat=satlist.first(); sat!=0; sat=satlist.next()) {
-    if (sat->polled()) {
-      calc(sat);
+  for(int i = 0;i < satlist.size(); i++) {
+    if (satlist[i]->polled()) {
+      calc(satlist[i]);
     }
   }
   emit calculated();
