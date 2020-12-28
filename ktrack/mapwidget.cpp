@@ -58,7 +58,7 @@ void mapWidget::setObsQth(obsQTH* q) {
   qth=q;
 }
 
-void mapWidget::setSatList(QList<satellite*>* s) {
+void mapWidget::setSatList(PtrSatList* s) {
   satlist = s;
 }
 

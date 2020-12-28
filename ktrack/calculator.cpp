@@ -30,12 +30,15 @@
 calculator::calculator(QObject *parent, const char *name ) : QObject(parent,name) {
   count=0;  // init the counter
 }
+
 calculator::~calculator(){
+	for(auto sat: satlist) {
+		if(sat) delete sat;
+	}
 }
 
 /** initializes the calculator */
-void calculator::init()
-{
+void calculator::init(){
   satellite* sat;
   QString satname, line1, line2;
 
@@ -65,7 +68,7 @@ void calculator::init()
   timer->start(1000, false);
 }
 /** return the satellite list */
-QList<satellite*>* calculator::satList(){
+PtrSatList* calculator::satList(){
   return &satlist;
 }
 /** return the observers QTH */
@@ -74,9 +77,9 @@ obsQTH* calculator::getObsQTH(){
 }
 /** called when we want to calculate */
 void calculator::timeout(){
-  for(int i = 0;i < satlist.size(); i++) {
-    if (satlist[i]->polled()) {
-      calc(satlist[i]);
+	for(auto sat : satlist) {
+    if (sat->polled()) {
+      calc(sat);
     }
   }
   emit calculated();

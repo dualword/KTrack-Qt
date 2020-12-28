@@ -19,7 +19,6 @@
 #ifndef GROUNDSTATIONSETTINGS_H
 #define GROUNDSTATIONSETTINGS_H
 
-#include <qwidget.h>
 #include <ui_groundstationsettingsbase.h>
 
 #include "globals.h"
@@ -30,19 +29,20 @@
 
 class groundstationSettings : public QDialog, private Ui::groundstationSettingsBase  {
    Q_OBJECT
+
 public: 
 	groundstationSettings(QWidget *parent=0, const char *name=0,bool modal=true, Qt::WFlags fl=Qt::WDestructiveClose );
 	~groundstationSettings();
-  /** sets the observer qth */
-  void setObsQTH(obsQTH* q);
+	/** sets the observer qth */
+	void setObsQTH(obsQTH* q);
+
+private slots: // Private slots
+	void slotCancel();
+	void slotOk();
+
 private:
-  obsQTH* qth;
-private slots: // Private slots
-  /** No descriptions */
-  void slotCancel();
-private slots: // Private slots
-  /** No descriptions */
-  void slotOk();
+	obsQTH* qth;
+
 };
 
 #endif

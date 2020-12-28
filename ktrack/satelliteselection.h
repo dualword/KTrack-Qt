@@ -19,9 +19,6 @@
 #ifndef SATELLITESELECTION_H
 #define SATELLITESELECTION_H
 
-#include <qwidget.h>
-#include <qlist.h>
-
 #include "globals.h"
 #include "ui_satelliteSelectionBase.h"
 #include "satellite.h"
@@ -30,25 +27,27 @@
   *@author Luc Langehegermann
   */
 
-class satelliteSelection : public QDialog, private Ui::satelliteSelectionBase  {
-   Q_OBJECT
+class satelliteSelection : public QDialog, private Ui::satelliteSelectionBase {
+	Q_OBJECT
+
 public: 
 	satelliteSelection(QWidget *parent=0, const char *name=0,bool modal=false, Qt::WFlags fl=Qt::WDestructiveClose );
 	~satelliteSelection();
-  /** sets the satellite list of the dialog */
-  void setSatList(QList<satellite*>* s);
-
-private:
-  QList<satellite*>* satlist;
-private slots: // Private slots
-  void slotOk();
-  void slotCancel();
-  void slotRemove();
-  void slotAdd();
+	/** sets the satellite list of the dialog */
+	void setSatList(PtrSatList* s);
 
 signals: // Signals
-  /** We emit this signal, when the number of polled satellites has changed. Important for satelliteListView */
-  void polledChanged();
+	/** We emit this signal, when the number of polled satellites has changed. Important for satelliteListView */
+	void polledChanged();
+
+private slots: // Private slots
+	void slotOk();
+	void slotCancel();
+	void slotRemove();
+	void slotAdd();
+
+private:
+	PtrSatList* satlist;
 
 };
 

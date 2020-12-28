@@ -30,28 +30,29 @@
   *@author Luc Langehegermann
   */
 
-class satelliteListView : public Q3ListView  {
+class satelliteListView : public Q3ListView {
    Q_OBJECT
-public: 
-	satelliteListView(QWidget *parent=0, const char *name=0); //, const char *name=0
-	~satelliteListView();
-  /** Sets a list we use to display */
-  void setSatList(QList<satellite*>* s);
 
-private:
-  QList<satellite*>* satlist;
+public: 
+	satelliteListView(QWidget *parent=0, const char *name=0);
+	~satelliteListView();
+	/** Sets a list we use to display */
+	void setSatList(PtrSatList* s);
 
 public slots: // Public slots
-  /** updates the listview */
-  void updateListView();
+	/** updates the listview */
+	void updateListView();
 
 signals: // Signals
-  /** Emitted, when the user wants to track an satellirte */
-  void newTrackingSatellite(satellite* sat);
+	/** Emitted, when the user wants to track an satellirte */
+	void newTrackingSatellite(satellite* sat);
 
 private slots: // Private slots
-  /** No descriptions */
-  void newSelection(Q3ListViewItem*);
+	void newSelection(Q3ListViewItem*);
+
+private:
+	PtrSatList* satlist;
+
 };
 
 #endif

@@ -38,10 +38,10 @@ QDialog(parent,name,fl) {
 squintCalculations::~squintCalculations(){
 }
 /** No descriptions */
-void squintCalculations::setSatList(QList<satellite*>* s){
+void squintCalculations::setSatList(PtrSatList* s){
   satlist = s;
   // fill the combo box
-  for(satellite* sat : *satlist) {
+  for(auto sat : *satlist) {
     if (sat->polled())
       satelliteEdit->insertItem(sat->name());
   }

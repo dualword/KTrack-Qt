@@ -19,6 +19,7 @@
 #ifndef SQUINTCALCULATIONS_H
 #define SQUINTCALCULATIONS_H
 
+
 #include <QWidget>
 #include <Q3PtrList>
 #include <ui_squintcalculationsbase.h>
@@ -29,33 +30,30 @@
   *@author Luc Langehegermann
   */
 
-class squintCalculations : public QDialog, Ui::squintCalculationsBase  {
-   Q_OBJECT
+class squintCalculations : public QDialog, Ui::squintCalculationsBase {
+	Q_OBJECT
+
 public: 
 	squintCalculations(QWidget *parent=0, const char *name=0, Qt::WFlags fl=Qt::WDestructiveClose);
 	~squintCalculations();
-  /** No descriptions */
-  void setSatList(QList<satellite*>* s);
-
-private:
-  QList<satellite*>* satlist;
-  void enableAlonAlat(bool);
-  void enableCenter(bool);
-  satellite* currentsat;
-
-private slots: // Private slots
-  /** No descriptions */
-  void slotNewSat(const QString &);
-  /** No descriptions */
-  void slotCenter(bool);
-  /** No descriptions */
-  void slotEnable(bool);
-  /** save the changed data */
-  void slotSave();
+	void setSatList(PtrSatList* s);
 
 public slots: // Public slots
-  /** No descriptions */
-  void slotAlonAlatChanged(const QString&);
+	void slotAlonAlatChanged(const QString&);
+
+private slots: // Private slots
+	void slotNewSat(const QString &);
+	void slotCenter(bool);
+	void slotEnable(bool);
+	/** save the changed data */
+	void slotSave();
+
+private:
+	void enableAlonAlat(bool);
+	void enableCenter(bool);
+
+	satellite* currentsat;
+	PtrSatList* satlist;
 
 };
 

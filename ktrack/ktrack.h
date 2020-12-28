@@ -23,7 +23,6 @@
 #include <config.h>
 #endif
 
-//#include <kapp.h>
 #include <QWidget>
 #include <QSplitter>
 #include <QMainWindow>
@@ -40,56 +39,58 @@
 //#include "trxwidget.h"
 
 /** Ktrack is the base class of the project */
-class Ktrack : public QMainWindow
-{
+class Ktrack : public QMainWindow {
 Q_OBJECT
+
 public:
-   /** construtor */
-   Ktrack(QWidget* parent=0, const char *name=0);
-   /** destructor */
-   ~Ktrack();
-
-private slots: // Private slots
-/** This slot is called when we are setup */
-   void start();
-  /** Updates the list of satellites in the satelliteListView */
-  void slotSatellitesOk();
-  /** called, when we want to track another satellite */
-  void slotNewTrackingSatellite(satellite* sat);
-  /** Called, to display the rigcontrol dialog */
-  void slotRigControl();
-  /** This slot reinitializes the devices we control with this program */
-  void slotInitHardware();
-  /** This slot is called, when we have new data from the server */
-  void processTrackingSatellite();
-  /** calls the transponder definition dialog */
-  void slotTransponderDefinition();
-  /** calls the groundstation configuration dialog */
-  void slotGroundstation();
-  /** Calls prediction window */
-  void slotPredict();
-  /** Called to popup the squint calculations config menu */
-  void slotSquintCalculations();
-
-private:
-  calculator* calc;
-  mapWidget* map;
-  satelliteListView* satListView;
-  satellite* trackingSatellite;   // pointer to the satellite we are tracking
-//  s_hardware hardwareParameters;
-//  rigctrl* trxctl;
-//  trxWidget* trxwidget;
-  QSplitter* split;               // splitter where the map and the listview resides
+	/** construtor */
+	Ktrack(QWidget* parent=0, const char *name=0);
+	/** destructor */
+	~Ktrack();
 
 public slots: // Public slots
-  /** Opens a window with the satelite Selection */
-  void slotSatellites();
+	/** Opens a window with the satelite Selection */
+	void slotSatellites();
+
+private slots: // Private slots
+	/** This slot is called when we are setup */
+	void start();
+	/** Updates the list of satellites in the satelliteListView */
+	void slotSatellitesOk();
+	/** called, when we want to track another satellite */
+	void slotNewTrackingSatellite(satellite* sat);
+	/** Called, to display the rigcontrol dialog */
+	void slotRigControl();
+	/** This slot reinitializes the devices we control with this program */
+	void slotInitHardware();
+	/** This slot is called, when we have new data from the server */
+	void processTrackingSatellite();
+	/** calls the transponder definition dialog */
+	void slotTransponderDefinition();
+	/** calls the groundstation configuration dialog */
+	void slotGroundstation();
+	/** Calls prediction window */
+	void slotPredict();
+	/** Called to popup the squint calculations config menu */
+	void slotSquintCalculations();
+	void slotShowAbout();
 
 private: // Private methods
-  /** write the configuration */
-  void writeConfig();
-  /** Read the configuration file */
-  void readConfig();
+	/** write the configuration */
+	void writeConfig();
+	/** Read the configuration file */
+	void readConfig();
+
+private:
+	calculator* calc;
+	mapWidget* map;
+	satelliteListView* satListView;
+	satellite* trackingSatellite;   // pointer to the satellite we are tracking
+	//  s_hardware hardwareParameters;
+	//  rigctrl* trxctl;
+	//  trxWidget* trxwidget;
+	QSplitter* split;   // splitter where the map and the listview resides
+
 };
 
 #endif

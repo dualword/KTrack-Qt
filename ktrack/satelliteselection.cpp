@@ -35,7 +35,7 @@ satelliteSelection::~satelliteSelection()
 {
 }
 /** sets the satellite list of the dialog */
-void satelliteSelection::setSatList(QList<satellite*>* s){
+void satelliteSelection::setSatList(PtrSatList* s){
   satlist = s;
   // display the satellites in the listboxes
   for(satellite* sat : *s) {

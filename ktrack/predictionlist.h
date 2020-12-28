@@ -23,7 +23,6 @@
 #include <Q3ListViewItem>
 #include <ui_predictionlistbase.h>
 
-
 #include "globals.h"
 #include "satellite.h"
 #include "calculator.h"
@@ -36,23 +35,23 @@ class predictionList : public QDialog, private Ui::predictionListBase  {
   Q_OBJECT
 
 public: 
-  predictionList(QWidget *parent=0, const char *name=0, Qt::WFlags fl=Qt::WDestructiveClose);
-  ~predictionList();
-  void setSatList(QList<satellite*>* s);
-  void setQTH(obsQTH* qth);
+	predictionList(QWidget *parent=0, const char *name=0, Qt::WFlags fl=Qt::WDestructiveClose);
+	~predictionList();
+	void setSatList(PtrSatList* s);
+	void setQTH(obsQTH* qth);
 
 private slots: // Private slots
-  void slotCalculate();
-  void slotDismiss();
+	void slotCalculate();
+	void slotDismiss();
 
 private: // Private methods
-  double qDateTime2daynum(QDateTime date);
-  /** No descriptions */
-  void displayResults();
-  calculator* calc;
-  QList<satellite*>* satlist;
-  Q3PtrList<satellite> resultlist;
-//  QDateTime daynum2QDateTime(double daynum);
+	//  QDateTime daynum2QDateTime(double daynum);
+	double qDateTime2daynum(QDateTime date);
+	void displayResults();
+
+	calculator* calc;
+	PtrSatList* satlist;
+	Q3PtrList<satellite> resultlist;
 
 };
 

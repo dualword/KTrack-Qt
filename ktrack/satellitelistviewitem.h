@@ -19,7 +19,6 @@
 #ifndef SATELLITELISTVIEWITEM_H
 #define SATELLITELISTVIEWITEM_H
 
-#include <qlistview.h>
 #include "globals.h"
 #include "satellite.h"
 
@@ -29,18 +28,19 @@
   */
 
 class satelliteListViewItem : public Q3ListViewItem  {
+
 public:
 	satelliteListViewItem(Q3ListView* view, satellite* s);
 	~satelliteListViewItem();
-  /** No descriptions */
-  satellite* getSatellite();
-  /** No descriptions */
-  void update();
-private:
-  satellite* sat;
+	satellite* getSatellite();
+	void update();
+
 private: // Private methods
-  /** No descriptions */
-  void paintCell ( QPainter * p, const QColorGroup & cg, int column, int width, int align );
+	void paintCell ( QPainter * p, const QColorGroup & cg, int column, int width, int align );
+
+private:
+	satellite* sat;
+
 };
 
 #endif

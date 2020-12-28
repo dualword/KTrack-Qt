@@ -21,14 +21,10 @@
 #include <QLayout>
 #include <QCheckBox>
 #include <QAction>
-//#include <kstdaction.h>
 #include <QLocale>
 #include <QMenuBar>
-//#include <kconfig.h>
 #include <QMessageBox>
-//#include <klineeditdlg.h>
 #include <QApplication>
-//#include <dcopclient.h>
 
 //#include "rigconfig.h"
 #include "satelliteselection.h"
@@ -39,11 +35,10 @@
 #include "squintcalculations.h"
 #include "ktrack.h"
 
-
 Ktrack::Ktrack(QWidget *parent, const char *name) : QMainWindow(parent, name="Mainwindow") {
 	setWindowTitle("KTrack-Qt");
 	QMenu* fileMenu = menuBar()->addMenu(tr("&File"));
-	//act = KStdAction::quit(this, SLOT(close()), actionCollection());
+	fileMenu->addAction(tr("Exit"),this, SLOT(close()));
 	QMenu* optMenu = menuBar()->addMenu(tr("&Options"));
 	//act = new Q3Action(tr("Rig control"),0,this, SLOT(slotRigControl()), actionCollection());
 	optMenu->addAction(tr("Groundstation Data"),this, SLOT(slotGroundstation()));
@@ -53,6 +48,7 @@ Ktrack::Ktrack(QWidget *parent, const char *name) : QMainWindow(parent, name="Ma
 	satMenu->addAction(tr("Transponder definition"),this, SLOT(slotTransponderDefinition()));
 	satMenu->addAction(tr("Squint calculations parameters"),this, SLOT(slotSquintCalculations()));
 	QMenu* helpMenu = menuBar()->addMenu(tr("&Help"));
+	helpMenu->addAction(tr("About"),this, SLOT(slotShowAbout()));
 
 //  KConfig* config;
 //  config=kapp->config();
@@ -71,47 +67,43 @@ Ktrack::~Ktrack()
   writeConfig();
 }
 /** This slot is called when we are setup */
-void Ktrack::start(){
-  QList<satellite*>* list;
-  satellite* sat;
-  QStringList strlist;
-  //KConfig* config;
-  QWidget* w = new QWidget(this);
+void Ktrack::start() {
+	PtrSatList* list;
+	satellite* sat;
+	QStringList strlist;
+	QSettings config;
+	QWidget* w = new QWidget(this);
 
-  QGridLayout* layout = new QGridLayout(w,2,1);
-  //trxwidget = new trxWidget(w);
-  //layout->addWidget(trxwidget,0,0);
+	QGridLayout* layout = new QGridLayout(w,2,1);
+	//trxwidget = new trxWidget(w);
+	//layout->addWidget(trxwidget,0,0);
 
-  split = new QSplitter(Qt::Vertical,w);
-  layout->addWidget(split,0,0);
-//  layout->setRowStretch(0,1);
-//  layout->setRowStretch(1,1);
+	split = new QSplitter(Qt::Vertical,w);
+	layout->addWidget(split,0,0);
+	//  layout->setRowStretch(0,1);
+	//  layout->setRowStretch(1,1);
 
-  map = new mapWidget(split);
+	map = new mapWidget(split);
 
-  satListView=new satelliteListView(split);
+	satListView=new satelliteListView(split);
 
-  split->addWidget(map);
-  split->addWidget(satListView);
-  split->setStretchFactor(0,1);
-  split->setStretchFactor(1,0.5);
-  w->setLayout(layout);
-  setCentralWidget(w);
+	split->addWidget(map);
+	split->addWidget(satListView);
+	split->setStretchFactor(0,1);
+	split->setStretchFactor(1,0.5);
+	w->setLayout(layout);
+	setCentralWidget(w);
 
-  calc = new calculator();
-  calc->init();
-  // create a new observer from the configuration file
-//  config=kapp->config();
-//  config->setGroup("QTH");
-  obsQTH* q = new obsQTH();
-//  q->setCallsign(config->readEntry("Callsign", "LX2GT"));
-//  q->setLongitude(config->readDoubleNumEntry("Longitude", -6.333));
-//  q->setLatitude(config->readDoubleNumEntry("Latitude", 49.45));
-//  q->setHeight(config->readDoubleNumEntry("Height", 300.0));
-    q->setCallsign("LX2GT");
-	q->setLongitude(-6.333);
-	q->setLatitude(49.45);
-	q->setHeight(300.0);
+	calc = new calculator();
+	calc->init();
+	// create a new observer from the configuration file
+	config.beginGroup("QTH");
+	obsQTH* q = new obsQTH();
+	q->setCallsign(config.value("Callsign", "CallSign").toString());
+	q->setLongitude(config.value("Longitude", 0.0).toFloat());
+	q->setLatitude(config.value("Latitude", 0.0).toFloat());
+	q->setHeight(config.value("Height", 0.0).toFloat());
+	config.endGroup();
 	calc->setObsQTH(q);
 
   // connect the calculated() signal from the client connection to the satellite listview, and the map update
@@ -156,7 +148,7 @@ void Ktrack::readConfig(){
   double alon,alat;
   int squinttype;
   QStringList strlist;
-  QList<satellite*>* list;
+  PtrSatList* list;
   satellite* sat;
   transponder* trans;
   int i;
@@ -241,10 +233,12 @@ void Ktrack::writeConfig(){
   QList<transponder> translist;
   transponder* trans;
   int i;
+
+  QSettings config;
 //  KConfig* config=kapp->config();
 //  config->setGroup("Satellite");
   // build a stringlist of all satellites we currently display
-  QList<satellite*>* list = calc->satList();
+  PtrSatList* list = calc->satList();
 //  for(sat=list.first(); sat!=0; sat=list.next())
 //    if(sat->polled()) strlist << sat->name();
 //  config->writeEntry ("poll", strlist);
@@ -302,13 +296,15 @@ void Ktrack::writeConfig(){
 //  }
 //  config->setGroup("General");
 //  config->writeEntry("splitter", split->sizes());
+
   // write the qth
   obsQTH* q = calc->getObsQTH();
-//  config->setGroup("QTH");
-//  config->writeEntry("Callsign", q->callsign());
-//  config->writeEntry("Longitude", q->longitude());
-//  config->writeEntry("Latitude", q->latitude());
-//  config->writeEntry("Height", q->height());
+  config.beginGroup("QTH");
+  config.setValue("Callsign", q->callsign());
+  config.setValue("Longitude", q->longitude());
+  config.setValue("Latitude", q->latitude());
+  config.setValue("Height", q->height());
+  config.endGroup();
 
 }
 
@@ -374,6 +370,7 @@ void Ktrack::slotGroundstation(){
   luc->exec();
   // this makes sure, that the calculater gives the kepcalculater the new qth infos
   calc->setObsQTH(calc->getObsQTH());
+  writeConfig();
 }
 /** Calls prediction window */
 void Ktrack::slotPredict(){
@@ -387,4 +384,16 @@ void Ktrack::slotSquintCalculations(){
   squintCalculations* luc = new squintCalculations();
   luc->setSatList(calc->satList());
   luc->show();
+}
+
+void Ktrack::slotShowAbout(){
+	QString str;
+	str.append("<b>KTrack-Qt</b> - Qt port of <i>KTrack</i>. <br>");
+	str.append("Source code: <a href='http://github.com/dualword/KTrack-Qt/'>KTrack-Qt</a>. License: GNU GPL. <hr/>");
+	str.append("<b>KTrack:</b> <br/>");
+	str.append("License: GNU General Public License. <br/>");
+	str.append("&copy;2002, 2003 Luc Langehegermann (LX2GT), The KDE satellite tracking program, lx2gt@users.sourceforge.net <br/>");
+	str.append("Luc Langehegermann, Main application programmer, lx2gt@users.sourceforge.net <br/>");
+	str.append("Neoklis Kyriazis (5B4AZ), Porting of Fortran SGP4/SDP4 Routines to C <br/>");
+	QMessageBox::about(this, tr("About KTrack-Qt"), str );
 }

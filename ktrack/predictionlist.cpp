@@ -23,8 +23,6 @@
 #include <qpushbutton.h>
 #include <qspinbox.h>
 #include <qlistview.h>
-//#include <kapplication.h>
-//#include <klocale.h>
 
 #include "sgp4sdp4/sgp4sdp4.h"
 
@@ -66,11 +64,11 @@ predictionList::predictionList(QWidget *parent, const char *name, Qt::WFlags fl 
 predictionList::~predictionList(){
 }
 /** No descriptions */
-void predictionList::setSatList(QList<satellite*>* s)
+void predictionList::setSatList(PtrSatList* s)
 {
   satlist = s;
   // fill the satellite selection combo box
-  for(satellite* sat : *s) {
+  for(auto sat : *s) {
     if(sat->polled())
 	  satnameCombo->insertItem(sat->name());
   }
@@ -99,10 +97,8 @@ void predictionList::slotCalculate(){
   double daynum=qDateTime2daynum(startEdit->dateTime());
   double stopdaynum=qDateTime2daynum(stopEdit->dateTime());
   fprintf(stderr, "Start Time: %s\nStop Time: %s\n", calc->daynum2String(daynum).latin1(), calc->daynum2String(stopdaynum).latin1());
-
     
   // get the sat and make a copy!
-
   for(satellite* sat : *satlist) {
     if (s->name() == satnameCombo->currentText()) {
       break;

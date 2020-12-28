@@ -61,7 +61,7 @@ satelliteListView::~satelliteListView()
 {
 }
 /** Sets a list we use to display, and create the List items */
-void satelliteListView::setSatList(QList<satellite*>* s){
+void satelliteListView::setSatList(PtrSatList* s){
   clear();  // remove all items
   satlist = s;
   for(auto sat : *satlist) {

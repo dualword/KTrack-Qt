@@ -19,12 +19,6 @@
 #ifndef MAPWIDGET_H
 #define MAPWIDGET_H
 
-#include <qpixmap.h>
-#include <qimage.h>
-#include <qlist.h>
-#include <qwidget.h>
-#include <qcolor.h>
-                                             
 #include "globals.h"
 #include "satellite.h"
 
@@ -54,38 +48,39 @@ class mapWidget : public QWidget  {
    Q_OBJECT
 
 public:
-  mapWidget(QWidget *parent=0, const char *name=0);
-  ~mapWidget();
-  void setObsQth(obsQTH* q);
-  void setSatList(QList<satellite*>* s);
-  void setTrackingSatellite(satellite* sat);
+	mapWidget(QWidget *parent=0, const char *name=0);
+	~mapWidget();
+	void setObsQth(obsQTH* q);
+	void setSatList(PtrSatList* s);
+	void setTrackingSatellite(satellite* sat);
 
 public slots:
-  void processSatList();
+	void processSatList();
+
+private slots: // Private slots
+	void updateBackgroundMap();
 
 private:
-  QImage dayimage, nightimage;
-  QPixmap unpaintedmap, daypixmap, nightpixmap;
-  QPixmap buffer;
-  obsQTH* qth;
-  satellite* trackingSatellite;
-  QList<satellite*>* satlist;
-
-  void paintEvent(QPaintEvent*);
-  void resizeEvent(QResizeEvent*);
-  void paintMarker(QString str, QColor color, double lon, double lat);
-  int latitude2pixel(double lat);
-  int longitude2pixel(double lat);
-  void drawArc(satellite* sat, QColor color);
-  double jtime(struct tm *t);
-  double kepler(double m, double ecc);
-  void sunpos(double jd, int apparent, double *ra, double *dec, double *rv, double *slong);
-  void projillum(short *wtab, int xdots, int ydots, double dec);
+	void paintEvent(QPaintEvent*);
+	void resizeEvent(QResizeEvent*);
+	void paintMarker(QString str, QColor color, double lon, double lat);
+	int latitude2pixel(double lat);
+	int longitude2pixel(double lat);
+	void drawArc(satellite* sat, QColor color);
+	double jtime(struct tm *t);
+	double kepler(double m, double ecc);
+	void sunpos(double jd, int apparent, double *ra, double *dec, double *rv, double *slong);
+	void projillum(short *wtab, int xdots, int ydots, double dec);
 	long jdate(struct tm *t);
 	double gmst(double jd);
 
-private slots: // Private slots
-  void updateBackgroundMap();
+	QImage dayimage, nightimage;
+	QPixmap unpaintedmap, daypixmap, nightpixmap;
+	QPixmap buffer;
+	obsQTH* qth;
+	satellite* trackingSatellite;
+	PtrSatList* satlist;
+
 };
 
 #endif
