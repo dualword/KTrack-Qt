@@ -1,3 +1,4 @@
+/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           transponderdefinitiondialog.h  -  description
                              -------------------
@@ -18,33 +19,32 @@
 #ifndef TRANSPONDERDEFINITIONDIALOG_H
 #define TRANSPONDERDEFINITIONDIALOG_H
 
-#include <qwidget.h>
-#include <kdialogbase.h>
-
 #include "satellite.h"
 #include "globals.h"
 
-#include "transponderdefinitionwidget.h"
+#include "ui_transponderdefinitionwidget.h"
 /**
   *@author Luc Langehegermann
   */
 
-class transponderDefinitionDialog : public KDialogBase  {
-  Q_OBJECT
+class transponderDefinitionDialog : public QDialog, private Ui_transponderDefinitionWidget {
+	Q_OBJECT
+
 public:
-  transponderDefinitionDialog(QWidget *parent=0, const char *name=0, bool modal=true, const QString &caption=QString::null, int buttonMask=Ok);
-  ~transponderDefinitionDialog();
-  /** No descriptions */
-  void setSatList(QList<satellite>);
-private:
-  transponderDefinitionWidget* mainwidget;
-  QList<satellite> satlist;
-  satellite* currentSat;
+	transponderDefinitionDialog(QWidget *parent=0, const char *name=0, bool modal=true, Qt::WFlags fl=Qt::WDestructiveClose);
+	~transponderDefinitionDialog();
+	void setSatList(PtrSatList*);
+
 private slots:
-  void slotNewSat(const QString&);
-  void slotDeleteTransponder();
-  void slotEditTransponder();
-  void slotNewTransponder();
+	void slotNewSat(const QString&);
+	void slotDeleteTransponder();
+	void slotEditTransponder();
+	void slotNewTransponder();
+
+private:
+	PtrSatList* satlist;
+	satellite* currentSat;
+
 };
 
 #endif

@@ -1,3 +1,4 @@
+/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                  transponderdefinitiondetailsdialog.h  -  description
                              -------------------
@@ -18,25 +19,23 @@
 #ifndef TRANSPONDERDEFINITIONDETAILSDIALOG_H
 #define TRANSPONDERDEFINITIONDETAILSDIALOG_H
 
-#include <qwidget.h>
-#include <kdialogbase.h>
-
 #include "globals.h"
-#include "transponderdefinitiondetailswidget.h"
+#include "ui_transponderdefinitiondetailswidget.h"
 
 /**
   *@author Luc Langehegermann
   */
 
-class transponderDefinitionDetailsDialog : public KDialogBase  {
-  Q_OBJECT
+class transponderDefinitionDetailsDialog : public QDialog, private Ui_transponderDefinitionDetailsWidget {
+	Q_OBJECT
+
 public:
-  transponderDefinitionDetailsDialog(transponder* t=0, QWidget *parent=0, const char *name=0, bool modal=true, const QString &caption=QString::null, int buttonMask=Ok|Cancel);
-  ~transponderDefinitionDetailsDialog();
+	transponderDefinitionDetailsDialog(transponder* t=0, QWidget *parent=0, const char *name=0, bool modal=true, Qt::WFlags fl=Qt::WDestructiveClose);
+	~transponderDefinitionDetailsDialog();
+
 private:
-  void slotOk();
-  transponderDefinitionDetailsWidget* mainwidget;
-  transponder* trans;
+	void slotOk();
+	transponder* trans;
 };
 
 #endif

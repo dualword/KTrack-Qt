@@ -28,7 +28,7 @@
 
 //#include "rigconfig.h"
 #include "satelliteselection.h"
-//#include "transponderdefinitiondialog.h"
+#include "transponderdefinitiondialog.h"
 #include "groundstationsettings.h"
 #include "predictionlist.h"
 #include "globals.h"
@@ -141,8 +141,10 @@ void Ktrack::slotSatellites(){
   luc->setSatList(calc->satList());
   // this will be used, when the user clicks Ok. It makes shure, that the listview is updates properly
   QObject::connect(luc, SIGNAL(polledChanged()), this, SLOT(slotSatellitesOk()));
-  luc->show();
+  luc->exec();
+  delete luc;
 }
+
 /** Read the configuration file */
 void Ktrack::readConfig(){
   double alon,alat;
@@ -308,21 +310,21 @@ void Ktrack::writeConfig(){
 
 }
 
-void Ktrack::slotSatellitesOk()
-{
-  satListView->setSatList(calc->satList());
+void Ktrack::slotSatellitesOk(){
+	satListView->setSatList(calc->satList());
 }
 
 void Ktrack::slotNewTrackingSatellite(satellite* sat)
 {
-//  if (sat) {
+  if (sat) {
     map->setTrackingSatellite(sat);
-//    trackingSatellite=sat;
+    trackingSatellite=sat;
 //    if(trxctl)
 //      trxctl->setSatellite(sat);
 //    trxwidget->setSatellite(sat);
-//  }
+  }
 }
+
 /** Called, to display the rigcontrol dialog */
 void Ktrack::slotRigControl()
 {
@@ -331,6 +333,7 @@ void Ktrack::slotRigControl()
 //  QObject::connect(luc, SIGNAL(newDevices()), this, SLOT(slotInitHardware()));
 //  luc->show();
 }
+
 /** This slot reinitializes the devices we control with this program */
 void Ktrack::slotInitHardware(){
   bool i;
@@ -345,6 +348,7 @@ void Ktrack::slotInitHardware(){
 //  else
 //    trxwidget->setDevice(trxctl);
 }
+
 /** This slot is called, when we have new data from the server */
 void Ktrack::processTrackingSatellite(){
   // update the rotor
@@ -357,38 +361,45 @@ void Ktrack::processTrackingSatellite(){
 
 /** calls the transponder definition dialog */
 void Ktrack::slotTransponderDefinition(){
-//  transponderDefinitionDialog* luc = new transponderDefinitionDialog();
-//  luc->setSatList(calc->satList());
-//  luc->exec();
-//  delete luc;
+	transponderDefinitionDialog* luc = new transponderDefinitionDialog();
+	luc->setSatList(calc->satList());
+	luc->exec();
+	delete luc;
 //  trxwidget->updateTransponderList();
 }
+
 /** calls the groundstation configuration dialog */
 void Ktrack::slotGroundstation(){
-  groundstationSettings* luc = new groundstationSettings(this);
-  luc->setObsQTH(calc->getObsQTH());
-  luc->exec();
-  // this makes sure, that the calculater gives the kepcalculater the new qth infos
-  calc->setObsQTH(calc->getObsQTH());
-  writeConfig();
+	groundstationSettings* luc = new groundstationSettings(this);
+	luc->setObsQTH(calc->getObsQTH());
+	luc->exec();
+	// this makes sure, that the calculater gives the kepcalculater the new qth infos
+	calc->setObsQTH(calc->getObsQTH());
+	writeConfig();
+	delete luc;
 }
+
 /** Calls prediction window */
 void Ktrack::slotPredict(){
-  predictionList* luc = new predictionList();
-  luc->setQTH(calc->getObsQTH());
-  luc->setSatList(calc->satList());
-  luc->show();
+	predictionList* luc = new predictionList();
+	luc->setQTH(calc->getObsQTH());
+	luc->setSatList(calc->satList());
+	luc->setSatList(calc->satList());
+	luc->exec();
+	delete luc;
 }
+
 /** Called to popup the squint calculations config menu */
 void Ktrack::slotSquintCalculations(){
-  squintCalculations* luc = new squintCalculations();
-  luc->setSatList(calc->satList());
-  luc->show();
+	squintCalculations* luc = new squintCalculations();
+	luc->setSatList(calc->satList());
+	luc->exec();
+	delete luc;
 }
 
 void Ktrack::slotShowAbout(){
 	QString str;
-	str.append("<b>KTrack-Qt</b> - Qt port of <i>KTrack</i>. <br>");
+	str.append("<b>KTrack-Qt</b> - satellite tracking program. Qt port of <i>KTrack</i>. <br>");
 	str.append("Source code: <a href='http://github.com/dualword/KTrack-Qt/'>KTrack-Qt</a>. License: GNU GPL. <hr/>");
 	str.append("<b>KTrack:</b> <br/>");
 	str.append("License: GNU General Public License. <br/>");

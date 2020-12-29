@@ -25,8 +25,8 @@ HEADERS += ktrack/calculator.h \
            ktrack/satellitelistviewitem.h \
            ktrack/satelliteselection.h \
            ktrack/squintcalculations.h \
-           #ktrack/transponderdefinitiondetailsdialog.h \
-           #ktrack/transponderdefinitiondialog.h \
+           ktrack/transponderdefinitiondetailsdialog.h \
+           ktrack/transponderdefinitiondialog.h \
            #ktrack/trxwidget.h \
            ktrack/sgp4sdp4/sgp4sdp4.h
                     
@@ -47,8 +47,8 @@ SOURCES += ktrack/main.cpp \
            ktrack/satellitelistviewitem.cpp \
            ktrack/satelliteselection.cpp \
            ktrack/squintcalculations.cpp \
-           #ktrack/transponderdefinitiondetailsdialog.cpp \
-           #ktrack/transponderdefinitiondialog.cpp \
+           ktrack/transponderdefinitiondetailsdialog.cpp \
+           ktrack/transponderdefinitiondialog.cpp \
            #ktrack/trxwidget.cpp \
            ktrack/sgp4sdp4/sgp4sdp4.c \
            ktrack/sgp4sdp4/sgp_in.c \
@@ -60,11 +60,11 @@ SOURCES += ktrack/main.cpp \
 FORMS += ktrack/groundstationsettingsbase.ui \
          ktrack/predictionlistbase.ui \
          ktrack/satelliteSelectionBase.ui \
-         ktrack/squintcalculationsbase.ui
+         ktrack/squintcalculationsbase.ui \
          #ktrack/transponderdefinitionbase.ui
          #ktrack/rigConfigBase.ui \
-         #ktrack/transponderdefinitiondetailswidget.ui \
-         #ktrack/transponderdefinitionwidget.ui \
+         ktrack/transponderdefinitiondetailswidget.ui \
+         ktrack/transponderdefinitionwidget.ui
          #ktrack/trxwidgetbase.ui
            
 OBJECTS_DIR = .build/obj

@@ -1,3 +1,4 @@
+/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           transponderdefinitiondetailsdialog.cpp  -  description
                              -------------------
@@ -15,48 +16,42 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <klocale.h>
-#include <qcombobox.h>
-#include <qlineedit.h>
-#include <qcheckbox.h>
-
 #include "transponderdefinitiondetailsdialog.h"
 
+transponderDefinitionDetailsDialog::transponderDefinitionDetailsDialog(transponder* t, QWidget *parent, const char *name, bool modal,
+		Qt::WFlags fl) : QDialog(parent,name,modal,fl) {
+	setupUi(this);
+	// create the main widget
+	setCaption(tr("Transponder Details"));
+	// fill in values
+	trans = t;
+	uplinkFreqEdit->setText(QString::number(trans->uplink(),'f',0));
+	downlinkFreqEdit->setText(QString::number(trans->downlink(),'f',0));
+	uplinkOffsetEdit->setText(QString::number(trans->updiff(),'f',0));
+	downlinkOffsetEdit->setText(QString::number(trans->downdiff(),'f',0));
+	reverseCheckBox->setChecked(trans->reverse());
+	preampCheckBox->setChecked(trans->preamp());
 
-transponderDefinitionDetailsDialog::transponderDefinitionDetailsDialog(transponder* t, QWidget *parent, const char *name,bool modal, const QString &caption, int buttonMask) : KDialogBase(parent,name,modal,caption,buttonMask) {
-  // create the main widget
-  mainwidget = new transponderDefinitionDetailsWidget(this);
-  setMainWidget(mainwidget);
-  setCaption(i18n("Transponder Details"));
-  enableButtonSeparator(true);
-  // fill in values
-  trans = t;
-  mainwidget->uplinkFreqEdit->setText(QString::number(trans->uplink(),'f',0));
-  mainwidget->downlinkFreqEdit->setText(QString::number(trans->downlink(),'f',0));
-  mainwidget->uplinkOffsetEdit->setText(QString::number(trans->updiff(),'f',0));
-  mainwidget->downlinkOffsetEdit->setText(QString::number(trans->downdiff(),'f',0));
-  mainwidget->reverseCheckBox->setChecked(trans->reverse());
-  mainwidget->preampCheckBox->setChecked(trans->preamp());
-
-  if(trans->mode() == MODE_SSB) mainwidget->modeEdit->setCurrentItem(0);
-  if(trans->mode() == MODE_FM)  mainwidget->modeEdit->setCurrentItem(1);
-  if(trans->mode() == MODE_CW)  mainwidget->modeEdit->setCurrentItem(2);
+	if(trans->mode() == MODE_SSB) modeEdit->setCurrentItem(0);
+	if(trans->mode() == MODE_FM)  modeEdit->setCurrentItem(1);
+	if(trans->mode() == MODE_CW)  modeEdit->setCurrentItem(2);
 }
+
 transponderDefinitionDetailsDialog::~transponderDefinitionDetailsDialog(){
 }
 
-void transponderDefinitionDetailsDialog::slotOk() {
-  trans->setUplink(mainwidget->uplinkFreqEdit->text().toDouble());
-  trans->setDownlink(mainwidget->downlinkFreqEdit->text().toDouble());
-  trans->setUpdiff(mainwidget->uplinkOffsetEdit->text().toDouble());
-  trans->setDowndiff(mainwidget->downlinkOffsetEdit->text().toDouble());
-  trans->setReverse(mainwidget->reverseCheckBox->isChecked());
-  trans->setPreamp(mainwidget->preampCheckBox->isChecked());
+void transponderDefinitionDetailsDialog::slotOk(){
+	trans->setUplink(uplinkFreqEdit->text().toDouble());
+	trans->setDownlink(downlinkFreqEdit->text().toDouble());
+	trans->setUpdiff(uplinkOffsetEdit->text().toDouble());
+	trans->setDowndiff(downlinkOffsetEdit->text().toDouble());
+	trans->setReverse(reverseCheckBox->isChecked());
+	trans->setPreamp(preampCheckBox->isChecked());
 
-  int i = mainwidget->modeEdit->currentItem();
-  if (i==0) trans->setMode(MODE_SSB);
-  if (i==1) trans->setMode(MODE_FM);
-  if (i==2) trans->setMode(MODE_CW);
+	int i = modeEdit->currentItem();
+	if (i==0) trans->setMode(MODE_SSB);
+	if (i==1) trans->setMode(MODE_FM);
+	if (i==2) trans->setMode(MODE_CW);
 
-  KDialogBase::slotOk();
+	//KDialogBase::slotOk();
 }

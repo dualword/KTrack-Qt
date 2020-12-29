@@ -17,13 +17,6 @@
  ***************************************************************************/
 
 #include "predictionlist.h"
-
-#include <qcombobox.h>
-#include <qdatetimeedit.h>
-#include <qpushbutton.h>
-#include <qspinbox.h>
-#include <qlistview.h>
-
 #include "sgp4sdp4/sgp4sdp4.h"
 
 predictionList::predictionList(QWidget *parent, const char *name, Qt::WFlags fl ) :
@@ -61,16 +54,15 @@ predictionList::predictionList(QWidget *parent, const char *name, Qt::WFlags fl 
   resultlist.setAutoDelete(true);
   calc = new calculator(this);
 }
+
 predictionList::~predictionList(){
 }
-/** No descriptions */
-void predictionList::setSatList(PtrSatList* s)
-{
+
+void predictionList::setSatList(PtrSatList* s){
   satlist = s;
   // fill the satellite selection combo box
-  for(auto sat : *s) {
-    if(sat->polled())
-	  satnameCombo->insertItem(sat->name());
+  for(auto sat : *satlist) {
+    if(sat->polled()) satnameCombo->insertItem(sat->name());
   }
   // default values for the times
   startEdit->setDateTime(QDateTime::currentDateTime());
@@ -78,55 +70,55 @@ void predictionList::setSatList(PtrSatList* s)
   QObject::connect(calculateButton, SIGNAL(clicked()), this, SLOT(slotCalculate()));
   QObject::connect(dismissButton, SIGNAL(clicked()), this, SLOT(slotDismiss()));
 }
-/** No descriptions */
+
 void predictionList::slotDismiss(){
   close();
 }
-/** No descriptions */
-void predictionList::slotCalculate(){
-  double lastel=0.0;
-  satellite* s, *sat;
-  struct tm TM;
-  time_t t = time(0);
-  TM=*gmtime(&t);
-  bzero(&TM, sizeof(tm));
-  // clear the list view
-  listView->clear();
-  listView->setSorting(-1); // disable sorting
-  resultlist.clear();
-  double daynum=qDateTime2daynum(startEdit->dateTime());
-  double stopdaynum=qDateTime2daynum(stopEdit->dateTime());
-  fprintf(stderr, "Start Time: %s\nStop Time: %s\n", calc->daynum2String(daynum).latin1(), calc->daynum2String(stopdaynum).latin1());
-    
-  // get the sat and make a copy!
-  for(satellite* sat : *satlist) {
-    if (s->name() == satnameCombo->currentText()) {
-      break;
-    }
-  }
 
-  sat = calc->copySatellite(s);
-  calc->calc(daynum, sat, false);  
-  for(;;) {
-    daynum=calc->FindAOS(daynum, sat, true);
-    while (sat->elevation()>=0 /*&& daynum < stopdaynum*/) {
-      resultlist.append(calc->copySatellite(sat));
-      lastel=sat->elevation();
-      daynum+=cos((sat->elevation()-1.0)*de2ra)*sqrt(sat->altitude())/25000.0;
-      calc->calc(daynum, sat, false);
-    }
-    if (lastel!=0.0) {
-      daynum=calc->FindLOS(daynum, sat, true);
-      calc->calc(daynum, sat, false);
-      resultlist.append(calc->copySatellite(sat));
-    }
-    daynum=calc->NextAOS(daynum, sat, true);
-    if (daynum>stopdaynum) break;
-  }
-  displayResults();
+void predictionList::slotCalculate(){
+	if(satnameCombo->count() <= 0)  return;
+	double lastel=0.0;
+	satellite* s, *sat;
+	struct tm TM;
+	time_t t = time(0);
+	TM=*gmtime(&t);
+	bzero(&TM, sizeof(tm));
+	// clear the list view
+	listView->clear();
+	listView->setSorting(-1); // disable sorting
+	resultlist.clear();
+	double daynum=qDateTime2daynum(startEdit->dateTime());
+	double stopdaynum=qDateTime2daynum(stopEdit->dateTime());
+	fprintf(stderr, "Start Time: %s\nStop Time: %s\n", calc->daynum2String(daynum).latin1(), calc->daynum2String(stopdaynum).latin1());
+
+	// get the sat and make a copy!
+	for(satellite* s : *satlist) {
+		if (s->name() == satnameCombo->currentText()) {
+			sat = calc->copySatellite(s);
+		  break;
+		}
+	}
+
+	calc->calc(daynum, sat, false);
+	for(;;) {
+		daynum=calc->FindAOS(daynum, sat, true);
+		while (sat->elevation()>=0 /*&& daynum < stopdaynum*/) {
+		  resultlist.append(calc->copySatellite(sat));
+		  lastel=sat->elevation();
+		  daynum+=cos((sat->elevation()-1.0)*de2ra)*sqrt(sat->altitude())/25000.0;
+		  calc->calc(daynum, sat, false);
+		}
+		if (lastel!=0.0) {
+		  daynum=calc->FindLOS(daynum, sat, true);
+		  calc->calc(daynum, sat, false);
+		  resultlist.append(calc->copySatellite(sat));
+		}
+		daynum=calc->NextAOS(daynum, sat, true);
+		if (daynum>stopdaynum) break;
+	}
+	displayResults();
 }
 
-/** No descriptions */
 double predictionList::qDateTime2daynum(QDateTime date){
   struct tm TM;
   extern int daylight;
@@ -151,7 +143,7 @@ double predictionList::qDateTime2daynum(QDateTime date){
 void predictionList::setQTH(obsQTH* qth) {
   calc->setObsQTH(qth);
 }
-/** No descriptions */
+
 void predictionList::displayResults(){
   satellite* s;
   Q3ListViewItem* item;
