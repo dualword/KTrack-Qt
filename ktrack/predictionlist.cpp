@@ -1,4 +1,4 @@
-/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
+/* KTrack-Qt (2020-2024) https://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           predictionlist.cpp  -  description
                              -------------------
@@ -19,46 +19,25 @@
 #include "predictionlist.h"
 #include "sgp4sdp4/sgp4sdp4.h"
 
-predictionList::predictionList(QWidget *parent, const char *name, Qt::WFlags fl ) :
-	QDialog(parent,name,fl) {
-
+predictionList::predictionList(QWidget *parent, const char *name, Qt::WFlags fl ) :	QDialog(parent,name,fl) {
 	setupUi(this);
-  listView->setAllColumnsShowFocus(true);
-  listView->addColumn(tr("Date"));
-  listView->addColumn(tr("Longitude"));
-  listView->addColumn(tr("Latitude"));
-  listView->addColumn(tr("El"));
-  listView->addColumn(tr("Az"));
-  listView->addColumn(tr("Footprint"));
-  listView->addColumn(tr("Height"));
-  listView->addColumn(tr("Range"));
-  listView->addColumn(tr("Velocity"));
-  listView->addColumn(tr("Orbit Number"));
-  listView->addColumn(tr("MA"));
-  listView->addColumn(tr("Squint"));
-
-  listView->setColumnAlignment(1,Qt::AlignRight);
-  listView->setColumnAlignment(2,Qt::AlignRight);
-  listView->setColumnAlignment(3,Qt::AlignRight);
-  listView->setColumnAlignment(4,Qt::AlignRight);
-  listView->setColumnAlignment(5,Qt::AlignRight);
-  listView->setColumnAlignment(8,Qt::AlignRight);
-  listView->setColumnAlignment(7,Qt::AlignRight);
-  listView->setColumnAlignment(6,Qt::AlignRight);
-  listView->setColumnAlignment(9,Qt::AlignRight);
-  listView->setColumnAlignment(9,Qt::AlignRight);
-  listView->setColumnAlignment(10,Qt::AlignRight);
-  listView->setColumnAlignment(11,Qt::AlignRight);
-  listView->setColumnAlignment(12,Qt::AlignRight);
-
-  resultlist.setAutoDelete(true);
-  calc = new calculator(this);
+	QStringList list;
+	list << tr("Date") << tr("Longitude") << tr("Latitude") << tr("El") << tr("Az") << tr("Footprint");
+	list << tr("Height") << tr("Range") << tr("Velocity") << tr("Orbit Number") << tr("MA") << tr("Squint");
+	listView->setColumnCount(list.size());
+	listView->setHorizontalHeaderLabels(list);
+	QObject::connect(calculateButton, SIGNAL(clicked()), this, SLOT(slotCalculate()));
+	QObject::connect(dismissButton, SIGNAL(clicked()), this, SLOT(slotDismiss()));
+	calc = new calculator(this);
 }
 
 predictionList::~predictionList(){
+	 while (!resultlist.isEmpty())
+	     delete resultlist.takeFirst();
 }
 
 void predictionList::setSatList(PtrSatList* s){
+	satnameCombo->clear();
   satlist = s;
   // fill the satellite selection combo box
   for(auto sat : *satlist) {
@@ -67,8 +46,6 @@ void predictionList::setSatList(PtrSatList* s){
   // default values for the times
   startEdit->setDateTime(QDateTime::currentDateTime());
   stopEdit->setDateTime(QDateTime::currentDateTime().addDays(1));
-  QObject::connect(calculateButton, SIGNAL(clicked()), this, SLOT(slotCalculate()));
-  QObject::connect(dismissButton, SIGNAL(clicked()), this, SLOT(slotDismiss()));
 }
 
 void predictionList::slotDismiss(){
@@ -85,7 +62,7 @@ void predictionList::slotCalculate(){
 	bzero(&TM, sizeof(tm));
 	// clear the list view
 	listView->clear();
-	listView->setSorting(-1); // disable sorting
+	listView->setSortingEnabled(false); // disable sorting
 	resultlist.clear();
 	double daynum=qDateTime2daynum(startEdit->dateTime());
 	double stopdaynum=qDateTime2daynum(stopEdit->dateTime());
@@ -145,25 +122,45 @@ void predictionList::setQTH(obsQTH* qth) {
 }
 
 void predictionList::displayResults(){
-  satellite* s;
-  Q3ListViewItem* item;
-  for(s=resultlist.last(); s!=0; s=resultlist.prev()) {
-    item = new Q3ListViewItem(listView);
-    item->setText(0, s->calculatedDate());
-    item->setText(1, QString::number(s->longitude(), 'f', 2)+" ");
-    item->setText(2, QString::number(s->latitude(), 'f', 2)+" ");
-    item->setText(3, QString::number(s->elevation(), 'f', 2)+" ");
-    item->setText(4, QString::number(s->azimuth(), 'f', 2)+" ");
-    item->setText(5, QString::number(s->footprint(), 'f', 1)+" ");
-    item->setText(6, QString::number(s->altitude(), 'f', 1)+" ");
-    item->setText(7, QString::number(s->range(), 'f', 1)+" ");
-    item->setText(8, QString::number(s->velocity(), 'f', 3)+" ");
-    item->setText(9, QString::number(s->orbitnum())+" ");
-    item->setText(10, QString::number(s->ma(), 'f', 1)+" ");
-    if (s->squinttype()>0)
-      item->setText(11, QString::number(s->squint(), 'f', 1)+" ");
-    else
-      item->setText(11, "--.- ");
+	if (resultlist.size()<=0) return;
+	listView->clearContents();
+	listView->setRowCount(0);
+	QTableWidgetItem * item;
+
+  //  for(s=resultlist.last(); s!=0; s=resultlist.prev()) {
+  foreach (satellite* s, resultlist) {
+	listView->insertRow(listView->rowCount());
+	int row = listView->rowCount()-1;
+    item = new QTableWidgetItem(s->calculatedDate());
+    listView->setItem(row, 0, item);
+    item = new QTableWidgetItem(QString::number(s->longitude(), 'f', 2)+" ");
+    listView->setItem(row, 1, item);
+    item = new QTableWidgetItem(QString::number(s->latitude(), 'f', 2)+" ");
+    listView->setItem(row, 2, item);
+    item = new QTableWidgetItem(QString::number(s->elevation(), 'f', 2)+" ");
+    listView->setItem(row, 3, item);
+    item = new QTableWidgetItem(QString::number(s->azimuth(), 'f', 2)+" ");
+    listView->setItem(row, 4, item);
+    item = new QTableWidgetItem(QString::number(s->footprint(), 'f', 1)+" ");
+    listView->setItem(row, 5, item);
+    item = new QTableWidgetItem(QString::number(s->altitude(), 'f', 1)+" ");
+    listView->setItem(row, 6, item);
+    item = new QTableWidgetItem(QString::number(s->range(), 'f', 1)+" ");
+    listView->setItem(row, 7, item);
+    item = new QTableWidgetItem(QString::number(s->velocity(), 'f', 3)+" ");
+    listView->setItem(row, 8, item);
+    item = new QTableWidgetItem(QString::number(s->orbitnum())+" ");
+    listView->setItem(row, 9, item);
+    item = new QTableWidgetItem(QString::number(s->ma(), 'f', 1)+" ");
+    listView->setItem(row, 10, item);
+
+    if (s->squinttype()>0) {
+        item = new QTableWidgetItem(QString::number(s->squint(), 'f', 1)+" ");
+    } else{
+      item = new QTableWidgetItem("--.- ");
+    }
+    listView->setItem(row, 11, item);
+
   }
   resultlist.clear();
 }

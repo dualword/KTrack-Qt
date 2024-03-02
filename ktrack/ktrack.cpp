@@ -1,4 +1,4 @@
-/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
+/* KTrack-Qt (2020-2024) https://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           ktrack.cpp  -  description
                              -------------------
@@ -400,7 +400,7 @@ void Ktrack::slotSquintCalculations(){
 void Ktrack::slotShowAbout(){
 	QString str;
 	str.append("<b>KTrack-Qt</b> - satellite tracking program. Qt port of <i>KTrack</i>. <br>");
-	str.append("Source code: <a href='http://github.com/dualword/KTrack-Qt/'>KTrack-Qt</a>. License: GNU GPL. <hr/>");
+	str.append("Source code: <a href='http://github.com/dualword/KTrack-Qt/'>https://github.com/dualword/KTrack-Qt</a><hr/>");
 	str.append("<b>KTrack:</b> <br/>");
 	str.append("License: GNU General Public License. <br/>");
 	str.append("&copy;2002, 2003 Luc Langehegermann (LX2GT), The KDE satellite tracking program, lx2gt@users.sourceforge.net <br/>");

@@ -1,4 +1,4 @@
-/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
+/* KTrack-Qt (2020-2024) https://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           predictionlist.h  -  description
                              -------------------
@@ -6,6 +6,8 @@
     copyright            : (C) 2002 by Luc Langehegermann
     email                : lx2gt@qsl.net
  ***************************************************************************/
+
+
 
 /***************************************************************************
  *                                                                         *
@@ -19,8 +21,8 @@
 #ifndef PREDICTIONLIST_H
 #define PREDICTIONLIST_H
 
-#include <Q3PtrList>
-#include <Q3ListViewItem>
+#include <QList>
+#include <QTableWidgetItem>
 #include <ui_predictionlistbase.h>
 
 #include "globals.h"
@@ -51,8 +53,7 @@ private: // Private methods
 
 	calculator* calc;
 	PtrSatList* satlist;
-	Q3PtrList<satellite> resultlist;
-
+	QList<satellite*> resultlist;
 };
 
 #endif

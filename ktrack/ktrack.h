@@ -1,4 +1,4 @@
-/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
+/* KTrack-Qt (2020-2024) https://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           ktrack.h  -  description
                              -------------------
@@ -26,8 +26,8 @@
 #include <QWidget>
 #include <QSplitter>
 #include <QMainWindow>
-#include <Q3PopupMenu>
-#include <Q3Action>
+//#include <Q3PopupMenu>
+//#include <Q3Action>
 
 //#include <hamlib/rig.h>
 //#include <hamlib/rotator.h>
