@@ -7,4 +7,6 @@ Source code: http://github.com/dualword/KTrack-Qt/
 Third Party Software:
  - Qt 4.8.6 License: LGPL v2.1
  
-![Screenshot](screenshot1.png)
+<p align="middle">
+<img src="screenshot1.png" width="150" alt="Screenshot" title="Screenshot"/>
+</p>
