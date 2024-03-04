@@ -14,9 +14,9 @@ HEADERS += ktrack/calculator.h \
            #ktrack/dcopinterface.h \
            ktrack/globals.h \
            ktrack/groundstationsettings.h \
-           #ktrack/hamlibwrapper.h \
-           #ktrack/rigconfig.h \
-           #ktrack/rigctrl.h \
+           ktrack/hamlibwrapper.h \
+           ktrack/rigconfig.h \
+           ktrack/rigctrl.h \
            ktrack/ktrack.h \
            ktrack/mapwidget.h \
            ktrack/predictionlist.h \
@@ -35,9 +35,9 @@ SOURCES += ktrack/main.cpp \
            ktrack/calculator.cpp \
            ktrack/globals.cpp \
            ktrack/groundstationsettings.cpp \
-           #ktrack/hamlibwrapper.cpp \
-           #ktrack/rigconfig.cpp \
-           #ktrack/rigctrl.cpp \
+           ktrack/hamlibwrapper.cpp \
+           ktrack/rigconfig.cpp \
+           ktrack/rigctrl.cpp \
            #ktrack/ktrack_meta_unload.cpp \
            #ktrack/ktrack_skel.cpp \
            ktrack/mapwidget.cpp \
@@ -62,7 +62,7 @@ FORMS += ktrack/groundstationsettingsbase.ui \
          ktrack/satelliteSelectionBase.ui \
          ktrack/squintcalculationsbase.ui \
          #ktrack/transponderdefinitionbase.ui
-         #ktrack/rigConfigBase.ui \
+         ktrack/rigConfigBase.ui \
          ktrack/transponderdefinitiondetailswidget.ui \
          ktrack/transponderdefinitionwidget.ui \
          ktrack/trxwidgetbase.ui

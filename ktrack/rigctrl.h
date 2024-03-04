@@ -1,3 +1,4 @@
+/* KTrack-Qt (2020-2024) https://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           rigctrl.h  -  description
                              -------------------

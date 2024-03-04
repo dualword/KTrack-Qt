@@ -26,7 +26,7 @@
 #include <QMessageBox>
 #include <QApplication>
 
-//#include "rigconfig.h"
+#include "rigconfig.h"
 #include "satelliteselection.h"
 #include "transponderdefinitiondialog.h"
 #include "groundstationsettings.h"
@@ -40,7 +40,7 @@ Ktrack::Ktrack(QWidget *parent, const char *name) : QMainWindow(parent, name="Ma
 	QMenu* fileMenu = menuBar()->addMenu(tr("&File"));
 	fileMenu->addAction(tr("Exit"),this, SLOT(close()));
 	QMenu* optMenu = menuBar()->addMenu(tr("&Options"));
-	//act = new Q3Action(tr("Rig control"),0,this, SLOT(slotRigControl()), actionCollection());
+	optMenu->addAction(tr("Rig control"),this, SLOT(slotRigControl()));
 	optMenu->addAction(tr("Groundstation Data"),this, SLOT(slotGroundstation()));
 	QMenu* satMenu = menuBar()->addMenu(tr("&Satellite"));
 	satMenu->addAction(tr("Select Satellites"),this, SLOT(slotSatellites()));
@@ -327,10 +327,11 @@ void Ktrack::slotNewTrackingSatellite(satellite* sat)
 /** Called, to display the rigcontrol dialog */
 void Ktrack::slotRigControl()
 {
-//  rigConfig* luc = new rigConfig();
-//  luc->setRig(&hardwareParameters);
-//  QObject::connect(luc, SIGNAL(newDevices()), this, SLOT(slotInitHardware()));
-//  luc->show();
+  rigConfig* luc = new rigConfig();
+  //luc->setRig(&hardwareParameters);
+  //QObject::connect(luc, SIGNAL(newDevices()), this, SLOT(slotInitHardware()));
+  luc->exec();
+  delete luc;
 }
 
 /** This slot reinitializes the devices we control with this program */

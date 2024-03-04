@@ -1,3 +1,4 @@
+/* KTrack-Qt (2020-2024) https://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           rigconfig.cpp  -  description
                              -------------------
@@ -22,34 +23,36 @@
 #include <qlineedit.h>
 #include <stdio.h>
 
-rigConfig::rigConfig(QWidget *parent, const char *name, bool modal, WFlags fl) : rigConfigBase(parent,name,modal,fl) {
-  QObject::connect(buttonOk, SIGNAL(clicked()), this, SLOT(slotOk()));
-  QObject::connect(buttonCancel, SIGNAL(clicked()), this, SLOT(slotCancel()));
-  QObject::connect(downlinkCheckBox, SIGNAL(toggled(bool)), downlinkGroupBox, SLOT(setEnabled(bool)));
+rigConfig::rigConfig(QWidget *parent, const char *name, bool modal, Qt::WFlags fl) :
+	QDialog(parent,name,modal,fl) {
+	setupUi(this);
+//  QObject::connect(buttonOk, SIGNAL(clicked()), this, SLOT(slotOk()));
+//  QObject::connect(buttonCancel, SIGNAL(clicked()), this, SLOT(slotCancel()));
+//  QObject::connect(downlinkCheckBox, SIGNAL(toggled(bool)), downlinkGroupBox, SLOT(setEnabled(bool)));
 }
 
 /** No descriptions */
 int rigConfig::addRigToList(const struct rig_caps* caps, void* data){
 	QString name;
-  rigConfig* r = (rigConfig*)data;
-	name=caps->model_name;
-	if (name == "Dummy")
-		name = "None";
-  r->rigname2rigid[name] = caps->rig_model;
-  r->rigid2rigname[caps->rig_model] = name;
- 	r->strings << name;
+  //rigConfig* r = (rigConfig*)data;
+//	name=caps->model_name;
+//	if (name == "Dummy")
+//		name = "None";
+//  r->rigname2rigid[name] = caps->rig_model;
+//  r->rigid2rigname[caps->rig_model] = name;
+// 	r->strings << name;
   return -1; // not 0 --> we want all rigs
 }
 
 int rigConfig::addRotToList(const struct rot_caps* caps, void* data) {
 	QString name;
   rigConfig* r = (rigConfig*)data;
-	name = caps->model_name;
-	if (name == "Dummy")
-		name = "None";
-  r->rotname2rotid[name] = caps->rot_model;
-  r->rotid2rotname[caps->rot_model] = name;
-  r->strings << name;
+//	name = caps->model_name;
+//	if (name == "Dummy")
+//		name = "None";
+//  r->rotname2rotid[name] = caps->rot_model;
+//  r->rotid2rotname[caps->rot_model] = name;
+//  r->strings << name;
   return -1;
 }
 
@@ -64,9 +67,9 @@ void rigConfig::setRig(s_hardware* r)
 
   // fill the rotor interface boxes
 
-  rot_load_all_backends();
+  //rot_load_all_backends();
 //  rotorInterface->insertItem("none");
-  rot_list_foreach(addRotToList, this);
+  //rot_list_foreach(addRotToList, this);
   strings.sort();
   rotorInterface->insertStringList(strings);
   strings.clear();
@@ -74,9 +77,9 @@ void rigConfig::setRig(s_hardware* r)
 //  rotname2rotid["none"] = ROT_MODEL_DUMMY;
 //  rotid2rotname[ROT_MODEL_DUMMY] = "none";
 
-  rotorInterface->setCurrentText(rotid2rotname[hardwareParameters->rotorinterface.rotor]);
-  rotorPort->setCurrentText(hardwareParameters->rotorinterface.port);
-  rotorSpeed->setCurrentText(QString::number(hardwareParameters->rotorinterface.speed));
+//  rotorInterface->setCurrentText(rotid2rotname[hardwareParameters->rotorinterface.rotor]);
+//  rotorPort->setCurrentText(hardwareParameters->rotorinterface.port);
+//  rotorSpeed->setCurrentText(QString::number(hardwareParameters->rotorinterface.speed));
   
   found=false;
 
@@ -85,10 +88,10 @@ void rigConfig::setRig(s_hardware* r)
 
   // fill the rig combo boxes
 
-  rig_load_all_backends();
+  //rig_load_all_backends();
 //  utrxEdit->insertItem("none");
 //  dtrxEdit->insertItem("none");
-  rig_list_foreach(addRigToList, this);
+  //rig_list_foreach(addRigToList, this);
   strings.sort();
   utrxEdit->insertStringList(strings);
   dtrxEdit->insertStringList(strings);
@@ -97,8 +100,8 @@ void rigConfig::setRig(s_hardware* r)
 //  rigname2rigid["none"] = RIG_MODEL_DUMMY;
 //  rigid2rigname[RIG_MODEL_DUMMY] = "none";
 
-  utrxEdit->setCurrentText(rigid2rigname[hardwareParameters->urig.radio]);
-  dtrxEdit->setCurrentText(rigid2rigname[hardwareParameters->drig.radio]);
+  //utrxEdit->setCurrentText(rigid2rigname[hardwareParameters->urig.radio]);
+  //dtrxEdit->setCurrentText(rigid2rigname[hardwareParameters->drig.radio]);
 
   downlinkCheckBox->setChecked(hardwareParameters->downlinkreceiver);
 
@@ -120,14 +123,14 @@ void rigConfig::slotOk(){
 
   hardwareParameters->rotorinterface.port=rotorPort->currentText();
   hardwareParameters->rotorinterface.speed=rotorSpeed->currentText().toInt();
-  hardwareParameters->rotorinterface.rotor=rotname2rotid[rotorInterface->currentText()];
+  //hardwareParameters->rotorinterface.rotor=rotname2rotid[rotorInterface->currentText()];
 
   hardwareParameters->drig.port=dportEdit->currentText();
-  hardwareParameters->drig.radio=rigname2rigid[dtrxEdit->currentText()];
+  //hardwareParameters->drig.radio=rigname2rigid[dtrxEdit->currentText()];
   hardwareParameters->drig.speed=dspeedEdit->currentText().toInt();
 
   hardwareParameters->urig.port=uportEdit->currentText();
-  hardwareParameters->urig.radio=rigname2rigid[utrxEdit->currentText()];
+  //hardwareParameters->urig.radio=rigname2rigid[utrxEdit->currentText()];
   hardwareParameters->urig.speed=uspeedEdit->currentText().toInt();
 
   hardwareParameters->downlinkreceiver=downlinkCheckBox->isChecked();

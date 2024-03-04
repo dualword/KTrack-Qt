@@ -35,7 +35,7 @@
 #include "calculator.h"
 #include "satellitelistview.h"
 #include "mapwidget.h"
-//#include "rigctrl.h"
+#include "rigctrl.h"
 #include "trxwidget.h"
 
 /** Ktrack is the base class of the project */
@@ -87,7 +87,7 @@ private:
 	satelliteListView* satListView;
 	satellite* trackingSatellite;   // pointer to the satellite we are tracking
 	//  s_hardware hardwareParameters;
-	//  rigctrl* trxctl;
+	rigctrl* trxctl;
 	trxWidget* trxwidget;
 	QSplitter* split;   // splitter where the map and the listview resides
 

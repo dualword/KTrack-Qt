@@ -1,3 +1,4 @@
+/* KTrack-Qt (2020-2024) https://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           rigconfig.h  -  description
                              -------------------
@@ -18,19 +19,19 @@
 #ifndef RIGCONFIG_H
 #define RIGCONFIG_H
 
-#include <qwidget.h>
-#include <qstringlist.h>
-#include "rigConfigBase.h"
+#include <QtGui>
+
+#include "ui_rigConfigBase.h"
 #include "ktrack.h"
 
 /**Configuration dialog for our hardware
   *@author Luc Langehegermann
   */
 
-class rigConfig : public rigConfigBase  {
+class rigConfig : public QDialog, private Ui::rigConfigBase  {
    Q_OBJECT
 public: 
-	rigConfig(QWidget *parent=0, const char *name=0,bool modal=true, WFlags fl=WDestructiveClose);
+	rigConfig(QWidget *parent=0, const char *name=0,bool modal=true, Qt::WFlags fl=Qt::WDestructiveClose);
   /** sets the structure we use to store the configuration */
   void setRig(s_hardware* r);
 	~rigConfig();
@@ -49,10 +50,10 @@ private: // Private methods
   /** No descriptions */
   static int addRigToList(const struct rig_caps* caps, void* data);
   static int addRotToList(const struct rot_caps* caps, void* data);
-  QMap<QString, rig_model_t> rigname2rigid;
-  QMap<rig_model_t, QString> rigid2rigname;
-  QMap<QString, rot_model_t> rotname2rotid;
-  QMap<rot_model_t, QString> rotid2rotname;
+//  QMap<QString, rig_model_t> rigname2rigid;
+//  QMap<rig_model_t, QString> rigid2rigname;
+//  QMap<QString, rot_model_t> rotname2rotid;
+//  QMap<rot_model_t, QString> rotid2rotname;
   QStringList strings;
 };
 
