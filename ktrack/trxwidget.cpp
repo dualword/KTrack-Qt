@@ -1,3 +1,4 @@
+/* KTrack-Qt (2020-2024) https://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           trxwidget.cpp  -  description
                              -------------------
@@ -16,20 +17,13 @@
  ***************************************************************************/
 
 #include <errno.h>
-
-#include <qlcdnumber.h>
-#include <qspinbox.h>
-#include <qcombobox.h>
-#include <qtimer.h>
-#include <qlabel.h>
-#include <kapplication.h>
 #include <stdio.h>
 
-
-#include "globals.h"
 #include "trxwidget.h"
 
-trxWidget::trxWidget(QWidget *parent, const char *name ) : trxWidgetBase(parent,name), DCOPObject("DCOPInterface") {
+//, DCOPObject("DCOPInterface")
+trxWidget::trxWidget(QWidget *parent, const char *name ) : QWidget(parent,name) {
+  setupUi(this);
   uplinkLCD->setSmallDecimalPoint(true);
   downlinkLCD->setSmallDecimalPoint(true);
   QObject::connect(correctionSpinBox, SIGNAL(valueChanged(int)), this, SLOT(newCorrection(int)));
@@ -50,25 +44,25 @@ trxWidget::trxWidget(QWidget *parent, const char *name ) : trxWidgetBase(parent,
   downlinkfrequency=0;
   uplinkfrequency=0;
 
-  QTimer* timer = new QTimer (this);
-  QObject::connect(timer, SIGNAL(timeout()), this, SLOT(sendToXlog()));
-  timer->start(1000);
+//  QTimer* timer = new QTimer (this);
+//  QObject::connect(timer, SIGNAL(timeout()), this, SLOT(sendToXlog()));
+//  timer->start(1000);
 }
 trxWidget::~trxWidget(){
 }
 /** sets the radio control device we should use */
-void trxWidget::setDevice(rigctrl* dev){
-  trxctrl=dev;
-  if (trxctrl) {
-    QObject::connect(trxctrl, SIGNAL(newDownlinkFreq(double)), this,
-      SLOT(slotNewDownlinkFrequency(double)));
-    QObject::connect(trxctrl, SIGNAL(newUplinkFreq(double)), this,
-      SLOT(slotNewUplinkFrequency(double)));
-    QObject::connect(trxctrl->Wrapper(), SIGNAL(newHardwareDownlinkFreq(double)), this,
-      SLOT(slotNewHardwareDownlinkFrequency(double)));
-    QObject::connect(trxctrl->Wrapper(), SIGNAL(newHardwareUplinkFreq(double)), this,
-      SLOT(slotNewHardwareUplinkFrequency(double)));
-  }
+void trxWidget::setDevice(){ //rigctrl* dev
+//  trxctrl=dev;
+//  if (trxctrl) {
+//    QObject::connect(trxctrl, SIGNAL(newDownlinkFreq(double)), this,
+//      SLOT(slotNewDownlinkFrequency(double)));
+//    QObject::connect(trxctrl, SIGNAL(newUplinkFreq(double)), this,
+//      SLOT(slotNewUplinkFrequency(double)));
+//    QObject::connect(trxctrl->Wrapper(), SIGNAL(newHardwareDownlinkFreq(double)), this,
+//      SLOT(slotNewHardwareDownlinkFrequency(double)));
+//    QObject::connect(trxctrl->Wrapper(), SIGNAL(newHardwareUplinkFreq(double)), this,
+//      SLOT(slotNewHardwareUplinkFrequency(double)));
+//  }
 }
 /** No descriptions */
 void trxWidget::slotNewDownlinkFrequency(double freq){
@@ -93,16 +87,16 @@ void trxWidget::slotNewHardwareUplinkFrequency(double freq) {
 void trxWidget::setSatellite(satellite* s) {
   sat=s;
   // fill in the combo
-  QString str;
-  transponder* t;
-  QList<transponder> list=*sat->translist();
-  transponderCombo->clear();
-  for (t=list.first(); t!=0; t=list.next()) {
-    str = QString::number(t->uplink()/1000.0,'f',0) + "/" + QString::number(t->downlink()/1000.0,'f',0);
-    transponderCombo->insertItem(str);
-  }
-  QObject::connect(transponderCombo, SIGNAL(activated(int)), this, SLOT(newTransponder(int)));
-  newTransponder(0);
+//  QString str;
+//  transponder* t;
+//  QList<transponder> list=*sat->translist();
+//  transponderCombo->clear();
+//  for (t=list.first(); t!=0; t=list.next()) {
+//    str = QString::number(t->uplink()/1000.0,'f',0) + "/" + QString::number(t->downlink()/1000.0,'f',0);
+//    transponderCombo->insertItem(str);
+//  }
+//  QObject::connect(transponderCombo, SIGNAL(activated(int)), this, SLOT(newTransponder(int)));
+//  newTransponder(0);
 }
 
 void trxWidget::updateTransponderList() {
@@ -113,29 +107,29 @@ void trxWidget::updateTransponderList() {
 
 /** No descriptions */
 void trxWidget::newTransponder(int id){
-  QList<transponder> list = *sat->translist();
-  currenttransponder=list.at(id);
-  if (!currenttransponder) return;
-  if(trxctrl) {
-    trxctrl->setTransponder(currenttransponder);
-    trxctrl->setCorrection(currenttransponder->getLastOffset());
-  }
-  if (currenttransponder->mode() == MODE_SSB)
-    mode="SSB";
-  if (currenttransponder->mode() == MODE_FM)
-    mode="FM";
-  if (currenttransponder->mode() == MODE_CW)
-    mode="CW";
-//  currenttransponder->setLastOffset(correctionSpinBox->value());
-  correctionSpinBox->setValue(currenttransponder->getLastOffset());
-  satname=sat->name();
+//  QList<transponder> list = *sat->translist();
+//  currenttransponder=list.at(id);
+//  if (!currenttransponder) return;
+//  if(trxctrl) {
+//    trxctrl->setTransponder(currenttransponder);
+//    trxctrl->setCorrection(currenttransponder->getLastOffset());
+//  }
+//  if (currenttransponder->mode() == MODE_SSB)
+//    mode="SSB";
+//  if (currenttransponder->mode() == MODE_FM)
+//    mode="FM";
+//  if (currenttransponder->mode() == MODE_CW)
+//    mode="CW";
+////  currenttransponder->setLastOffset(correctionSpinBox->value());
+//  correctionSpinBox->setValue(currenttransponder->getLastOffset());
+//  satname=sat->name();
 }
 /** No descriptions */
 void trxWidget::newCorrection(int c){
-  if(trxctrl)
-    trxctrl->setCorrection(c);
-  if (currenttransponder)
-    currenttransponder->setLastOffset(c);
+//  if(trxctrl)
+//    trxctrl->setCorrection(c);
+//  if (currenttransponder)
+//    currenttransponder->setLastOffset(c);
 }
 
 double trxWidget::getUplinkFrequency() {

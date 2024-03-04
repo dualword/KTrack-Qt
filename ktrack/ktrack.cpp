@@ -75,13 +75,12 @@ void Ktrack::start() {
 	QWidget* w = new QWidget(this);
 
 	QGridLayout* layout = new QGridLayout(w,2,1);
-	//trxwidget = new trxWidget(w);
-	//layout->addWidget(trxwidget,0,0);
+	trxwidget = new trxWidget(w);
+	layout->addWidget(trxwidget,0,0);
 
 	split = new QSplitter(Qt::Vertical,w);
-	layout->addWidget(split,0,0);
-	//  layout->setRowStretch(0,1);
-	//  layout->setRowStretch(1,1);
+	layout->addWidget(split,1,0);
+	//layout->setRowStretch(1,1);
 
 	map = new mapWidget(split);
 

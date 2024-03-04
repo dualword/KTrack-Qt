@@ -36,7 +36,7 @@
 #include "satellitelistview.h"
 #include "mapwidget.h"
 //#include "rigctrl.h"
-//#include "trxwidget.h"
+#include "trxwidget.h"
 
 /** Ktrack is the base class of the project */
 class Ktrack : public QMainWindow {
@@ -88,7 +88,7 @@ private:
 	satellite* trackingSatellite;   // pointer to the satellite we are tracking
 	//  s_hardware hardwareParameters;
 	//  rigctrl* trxctl;
-	//  trxWidget* trxwidget;
+	trxWidget* trxwidget;
 	QSplitter* split;   // splitter where the map and the listview resides
 
 };

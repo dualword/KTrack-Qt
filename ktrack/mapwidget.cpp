@@ -1,4 +1,4 @@
-/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
+/* KTrack-Qt (2020-2024) https://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           mapwidget.cpp  -  description
                              -------------------
@@ -213,7 +213,8 @@ void mapWidget::updateBackgroundMap(){
   int sec = tmp->tm_hour*60*60 + tmp->tm_min*60 + tmp->tm_sec;
   int gmt_position = width() * sec / 86400; // note: greenwich is in the middle!
   wtab = new short[height()];
-  projillum(wtab,width(),height(),sundec);
+  //TODO
+  //projillum(wtab,width(),height(),sundec);
   illuMask.fill(Qt::black);
   QPainter p;
   p.begin(&illuMask);

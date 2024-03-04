@@ -1,3 +1,4 @@
+/* KTrack-Qt (2020-2024) https://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           trxwidget.h  -  description
                              -------------------
@@ -21,11 +22,12 @@
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/msg.h>
-#include <qwidget.h>
-#include "trxwidgetbase.h"
-#include "rigctrl.h"
-#include "dcopinterface.h"
-
+#include <QtGui>
+#include "ui_trxwidgetbase.h"
+//#include "rigctrl.h"
+//#include "dcopinterface.h"
+#include "globals.h"
+#include "satellite.h"
 
 /**Transceiver widget - displays frequencies and let you chose the transponder
   *@author Luc Langehegermann
@@ -37,15 +39,15 @@ typedef struct
   char mtext[1024];             /* mtext holds the message */
 } msgtype;
 
-class trxWidget : public trxWidgetBase, virtual public DCOPInterface {
+class trxWidget : public QWidget, private Ui::trxWidgetBase { //, virtual public DCOPInterface
    Q_OBJECT
 public: 
 	trxWidget(QWidget *parent=0, const char *name=0);
 	~trxWidget();
   /** sets the radio control device we should use */
-  void setDevice(rigctrl* dev);
+  void setDevice(); //rigctrl* dev
 private:
-  rigctrl* trxctrl;
+  //rigctrl* trxctrl;
   satellite* sat;
   // these values are available for the DCOP interface
   double uplinkfrequency, downlinkfrequency;
