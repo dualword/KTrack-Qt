@@ -109,9 +109,9 @@
       </spacer>
      </item>
      <item row="1" column="0" rowspan="5">
-      <widget class="Q3ListBox" name="availableListBox">
+      <widget class="QListWidget" name="availableListBox">
        <property name="selectionMode">
-        <enum>Q3ListBox::Multi</enum>
+        <enum>QAbstractItemView::MultiSelection</enum>
        </property>
       </widget>
      </item>
@@ -162,9 +162,9 @@
       </spacer>
      </item>
      <item row="1" column="2" rowspan="5">
-      <widget class="Q3ListBox" name="selectedListBox">
+      <widget class="QListWidget" name="selectedListBox">
        <property name="selectionMode">
-        <enum>Q3ListBox::Multi</enum>
+        <enum>QAbstractItemView::MultiSelection</enum>
        </property>
       </widget>
      </item>
@@ -243,20 +243,18 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>Q3Frame</class>
+   <class>QFrame</class>
    <extends>QFrame</extends>
-   <header>Qt3Support/Q3Frame</header>
+   <header>QFrame</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>Q3ListBox</class>
-   <extends>Q3Frame</extends>
-   <header>q3listbox.h</header>
+   <class>QListWidget</class>
+   <header>QListWidget</header>
   </customwidget>
  </customwidgets>
  <includes>
-  <include location="local">q3listbox.h</include>
-  <include location="local">q3listbox.h</include>
+  <include location="local">QListWidget</include>
  </includes>
  <resources/>
  <connections/>

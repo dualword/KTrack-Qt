@@ -1,4 +1,4 @@
-/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
+/* KTrack-Qt (2020-2024) https://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           transponderdefinitiondialog.cpp  -  description
                              -------------------
@@ -69,13 +69,14 @@ void transponderDefinitionDialog::slotNewSat(const QString& str) {
     \fn transponderDefinitionDialog::slotDeleteTransponder()
  */
 void transponderDefinitionDialog::slotDeleteTransponder(){
-	int position = transponderListBox->currentItem();
+	int position = transponderListBox->currentRow();
 	fprintf(stderr, "Position %i\n", position);
-	transponderListBox->removeItem(position);
-//	if (position >= 0) {
-//		currentSat->translist()->remove(position);
-//		transponderListBox->removeItem(position);
-//	}
+	QListWidgetItem * item = transponderListBox->takeItem(position);
+    delete item;
+	if (position >= 0) {
+		//currentSat->translist()->remove(position);
+		//transponderListBox->removeItem(position);
+	}
 }
 
 /*!
@@ -84,7 +85,7 @@ void transponderDefinitionDialog::slotDeleteTransponder(){
 void transponderDefinitionDialog::slotEditTransponder()
 {
 	transponder* tr;
-	int position = transponderListBox->currentItem();
+	int position = transponderListBox->currentRow();
 	if (position >= 0) {
 		//tr=currentSat->translist()->at(position);
 		transponderDefinitionDetailsDialog* luc = new transponderDefinitionDetailsDialog(tr, this);
@@ -102,5 +103,5 @@ void transponderDefinitionDialog::slotNewTransponder()
 	luc->exec();
 	//currentSat->translist()->append(newtransponder);
 	QString s = QString::number(newtransponder->uplink()/1000.0,'f',0) + "/" + QString::number(newtransponder->downlink()/1000.0,'f',0);
-	transponderListBox->insertItem(s);
+	transponderListBox->addItem(s);
 }

@@ -1,4 +1,4 @@
-/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
+/* KTrack-Qt (2020-2024) https://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           satelliteselection.cpp  -  description
                              -------------------
@@ -38,11 +38,11 @@ satelliteSelection::~satelliteSelection()
 void satelliteSelection::setSatList(PtrSatList* s){
   satlist = s;
   // display the satellites in the listboxes
-  for(satellite* sat : *s) {
-    if (sat->polled())
-      selectedListBox->insertItem(sat->name());
+  for (int i=0; i<s->size(); i++){
+    if (s->at(i)->polled())
+      selectedListBox->insertItem(i,s->at(i)->name());
     else
-      availableListBox->insertItem(sat->name());
+      availableListBox->insertItem(i,s->at(i)->name());
   }
 }
 /** No descriptions */
@@ -51,10 +51,11 @@ void satelliteSelection::slotAdd(){
   unsigned int i;
   QString str;
   for(i=0; i<availableListBox->count(); ++i) {
-    if(availableListBox->isSelected(i)) {
-      str=availableListBox->text(i);
-      selectedListBox->insertItem(str);
-      availableListBox->removeItem(i);
+    if(availableListBox->item(i)->isSelected()) {
+      str=availableListBox->item(i)->text();
+      selectedListBox->addItem(str);
+      QListWidgetItem * item = availableListBox->takeItem(i);
+      delete item;
       i--;
     }
   }
@@ -65,10 +66,11 @@ void satelliteSelection::slotRemove(){
   unsigned int i;
   QString str;
   for(i=0; i<selectedListBox->count(); ++i) {
-    if(selectedListBox->isSelected(i)) {
-      str=selectedListBox->text(i);
-      availableListBox->insertItem(str);
-      selectedListBox->removeItem(i);
+    if(selectedListBox->item(i)->isSelected()) {
+      str=selectedListBox->item(i)->text();
+      availableListBox->addItem(str);
+      QListWidgetItem * item = selectedListBox->takeItem(i);
+      delete item;
       i--;
     }
   }
@@ -89,7 +91,7 @@ void satelliteSelection::slotOk(){
   }
 
   for(i=0; i<selectedListBox->count(); ++i) {
-    str = selectedListBox->text(i);
+    str = selectedListBox->item(i)->text();
 
     for(satellite* sat: *satlist){
         if(sat->name() == str)

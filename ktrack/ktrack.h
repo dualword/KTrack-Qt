@@ -26,12 +26,9 @@
 #include <QWidget>
 #include <QSplitter>
 #include <QMainWindow>
-//#include <Q3PopupMenu>
-//#include <Q3Action>
 
 //#include <hamlib/rig.h>
 //#include <hamlib/rotator.h>
-
 #include "calculator.h"
 #include "satellitelistview.h"
 #include "mapwidget.h"

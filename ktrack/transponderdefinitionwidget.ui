@@ -75,7 +75,7 @@
     </widget>
    </item>
    <item row="2" column="0" rowspan="3" colspan="3">
-    <widget class="Q3ListBox" name="transponderListBox"/>
+    <widget class="QListWidget" name="transponderListBox"/>
    </item>
   </layout>
  </widget>
@@ -83,15 +83,13 @@
  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
  <customwidgets>
   <customwidget>
-   <class>Q3Frame</class>
-   <extends>QFrame</extends>
-   <header>Qt3Support/Q3Frame</header>
+   <class>QFrame</class>
+   <header>QFrame</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>Q3ListBox</class>
-   <extends>Q3Frame</extends>
-   <header>q3listbox.h</header>
+   <class>QListWidget</class>
+   <header>QListWidget</header>
   </customwidget>
  </customwidgets>
  <resources/>
