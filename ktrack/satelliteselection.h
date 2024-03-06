@@ -31,7 +31,7 @@ class satelliteSelection : public QDialog, private Ui::satelliteSelectionBase {
 	Q_OBJECT
 
 public: 
-	satelliteSelection(QWidget *parent=0, const char *name=0,bool modal=false, Qt::WFlags fl=Qt::WDestructiveClose );
+	satelliteSelection(QWidget *p, Qt::WindowFlags f = 0 );
 	~satelliteSelection();
 	/** sets the satellite list of the dialog */
 	void setSatList(PtrSatList* s);

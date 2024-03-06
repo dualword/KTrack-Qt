@@ -30,7 +30,7 @@ class transponderDefinitionDetailsDialog : public QDialog, private Ui_transponde
 	Q_OBJECT
 
 public:
-	transponderDefinitionDetailsDialog(transponder* t=0, QWidget *parent=0, const char *name=0, bool modal=true, Qt::WFlags fl=Qt::WDestructiveClose);
+	transponderDefinitionDetailsDialog(transponder* t=0, QWidget *p=0,  Qt::WindowFlags fl =0);
 	~transponderDefinitionDetailsDialog();
 
 private:

@@ -2,7 +2,6 @@ TEMPLATE = app
 TARGET = ktrack-qt
 
 CONFIG += qt thread debug
-QT += qt3support
 
 DEPENDPATH += . ktrack ktrack/sgp4sdp4
 INCLUDEPATH += . ktrack/sgp4sdp4 ktrack
@@ -13,6 +12,8 @@ LIBS +=
 HEADERS += ktrack/calculator.h \
            #ktrack/dcopinterface.h \
            ktrack/globals.h \
+           ktrack/satellitelistview.h \
+           #ktrack/satellitelistviewitem.h \
            ktrack/groundstationsettings.h \
            ktrack/hamlibwrapper.h \
            ktrack/rigconfig.h \
@@ -21,8 +22,6 @@ HEADERS += ktrack/calculator.h \
            ktrack/mapwidget.h \
            ktrack/predictionlist.h \
            ktrack/satellite.h \
-           ktrack/satellitelistview.h \
-           ktrack/satellitelistviewitem.h \
            ktrack/satelliteselection.h \
            ktrack/squintcalculations.h \
            ktrack/transponderdefinitiondetailsdialog.h \
@@ -34,6 +33,8 @@ SOURCES += ktrack/main.cpp \
            ktrack/ktrack.cpp \
            ktrack/calculator.cpp \
            ktrack/globals.cpp \
+           ktrack/satellitelistview.cpp \
+           #ktrack/satellitelistviewitem.cpp \
            ktrack/groundstationsettings.cpp \
            ktrack/hamlibwrapper.cpp \
            ktrack/rigconfig.cpp \
@@ -43,8 +44,6 @@ SOURCES += ktrack/main.cpp \
            ktrack/mapwidget.cpp \
            ktrack/predictionlist.cpp \
            ktrack/satellite.cpp \
-           ktrack/satellitelistview.cpp \
-           ktrack/satellitelistviewitem.cpp \
            ktrack/satelliteselection.cpp \
            ktrack/squintcalculations.cpp \
            ktrack/transponderdefinitiondetailsdialog.cpp \

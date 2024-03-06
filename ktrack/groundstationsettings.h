@@ -31,7 +31,7 @@ class groundstationSettings : public QDialog, private Ui::groundstationSettingsB
    Q_OBJECT
 
 public: 
-	groundstationSettings(QWidget *parent=0, const char *name=0,bool modal=true, Qt::WFlags fl=Qt::WDestructiveClose );
+	groundstationSettings(QWidget *p=0,  Qt::WindowFlags f = 0);
 	~groundstationSettings();
 	/** sets the observer qth */
 	void setObsQTH(obsQTH* q);

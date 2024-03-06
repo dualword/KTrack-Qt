@@ -17,14 +17,6 @@
  ***************************************************************************/
 
 #include <stdio.h>
-#include <QTimer>
-#include <QLayout>
-#include <QCheckBox>
-#include <QAction>
-#include <QLocale>
-#include <QMenuBar>
-#include <QMessageBox>
-#include <QApplication>
 
 #include "rigconfig.h"
 #include "satelliteselection.h"
@@ -35,7 +27,7 @@
 #include "squintcalculations.h"
 #include "ktrack.h"
 
-Ktrack::Ktrack(QWidget *parent, const char *name) : QMainWindow(parent, name="Mainwindow") {
+Ktrack::Ktrack(QWidget *parent, Qt::WindowFlags fl) : QMainWindow(parent, fl) {
 	setWindowTitle("KTrack-Qt");
 	QMenu* fileMenu = menuBar()->addMenu(tr("&File"));
 	fileMenu->addAction(tr("Exit"),this, SLOT(close()));
@@ -74,7 +66,7 @@ void Ktrack::start() {
 	QSettings config;
 	QWidget* w = new QWidget(this);
 
-	QGridLayout* layout = new QGridLayout(w,2,1);
+	QGridLayout* layout = new QGridLayout(w);
 	trxwidget = new trxWidget(w);
 	layout->addWidget(trxwidget,0,0);
 

@@ -23,10 +23,6 @@
 #include <config.h>
 #endif
 
-#include <QWidget>
-#include <QSplitter>
-#include <QMainWindow>
-
 //#include <hamlib/rig.h>
 //#include <hamlib/rotator.h>
 #include "calculator.h"
@@ -41,7 +37,7 @@ Q_OBJECT
 
 public:
 	/** construtor */
-	Ktrack(QWidget* parent=0, const char *name=0);
+	Ktrack(QWidget* parent=0, Qt::WindowFlags f = 0);
 	/** destructor */
 	~Ktrack();
 

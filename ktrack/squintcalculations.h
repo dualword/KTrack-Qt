@@ -33,7 +33,7 @@ class squintCalculations : public QDialog, Ui::squintCalculationsBase {
 	Q_OBJECT
 
 public: 
-	squintCalculations(QWidget *parent=0, const char *name=0, Qt::WFlags fl=Qt::WDestructiveClose);
+	squintCalculations(QWidget *p = 0, Qt::WindowFlags f = 0);
 	~squintCalculations();
 	void setSatList(PtrSatList* s);
 

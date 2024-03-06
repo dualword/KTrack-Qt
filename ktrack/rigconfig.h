@@ -19,8 +19,6 @@
 #ifndef RIGCONFIG_H
 #define RIGCONFIG_H
 
-#include <QtGui>
-
 #include "ui_rigConfigBase.h"
 #include "ktrack.h"
 
@@ -31,7 +29,7 @@
 class rigConfig : public QDialog, private Ui::rigConfigBase  {
    Q_OBJECT
 public: 
-	rigConfig(QWidget *parent=0, const char *name=0,bool modal=true, Qt::WFlags fl=Qt::WDestructiveClose);
+	rigConfig(QWidget *p = 0, Qt::WindowFlags f = 0);
   /** sets the structure we use to store the configuration */
   void setRig(s_hardware* r);
 	~rigConfig();

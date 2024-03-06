@@ -1,4 +1,4 @@
-/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
+/* KTrack-Qt (2020-2024) https://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           calculator.cpp  -  description
                              -------------------
@@ -19,15 +19,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/time.h>
-//#include <kstandarddirs.h>
-#include <qfile.h>
-#include <qtimer.h>
-#include <qtextstream.h>
+
 #include "sgp4sdp4/sgp4sdp4.h"
 
 #include "calculator.h"
 
-calculator::calculator(QObject *parent, const char *name ) : QObject(parent,name) {
+calculator::calculator(QObject *p) : QObject(p) {
   count=0;  // init the counter
 }
 
@@ -49,10 +46,10 @@ void calculator::init(){
   // go through the file and create the list entries
 
   QFile f(filename);
-  if ( f.open(IO_ReadOnly) ) {    // file opened successfully
+  if ( f.open(QIODevice::ReadOnly) ) {    // file opened successfully
     QTextStream t( &f );        // use a text stream
     while ( !t.atEnd() ) {        // until end of file...
-      satname=t.readLine().stripWhiteSpace();
+      satname=t.readLine(); //.stripWhiteSpace();
       sat = new satellite(satname);
       sat->line1=t.readLine();
       sat->line2=t.readLine();
@@ -65,7 +62,7 @@ void calculator::init(){
 
   QTimer *timer = new QTimer(this);
   QObject::connect (timer, SIGNAL(timeout()), this, SLOT(timeout()));
-  timer->start(1000, false);
+  timer->start(1000);
 }
 /** return the satellite list */
 PtrSatList* calculator::satList(){
@@ -114,8 +111,8 @@ void calculator::calc(double daynum, satellite* sat, bool doaoslos) {
   obs_geodetic.theta=0;
 
   strcpy(tle_lines[0], "DUMMY");
-  strcpy(tle_lines[1], sat->line1);
-  strcpy(tle_lines[2], sat->line2);
+  strcpy(tle_lines[1], sat->line1.toStdString().c_str());
+  strcpy(tle_lines[2], sat->line2.toStdString().c_str());
 
   ClearFlag(ALL_FLAGS);
   Get_Next_Tle_Set(tle_lines, &tle);

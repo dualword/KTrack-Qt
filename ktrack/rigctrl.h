@@ -32,7 +32,7 @@
 class rigctrl : public QObject  {
    Q_OBJECT
 public: 
-	rigctrl(QObject *parent=0, const char *name=0);
+	rigctrl(QObject *p);
 	~rigctrl();
   /** No descriptions */
   int open(s_hardware* hardware);

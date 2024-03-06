@@ -22,7 +22,7 @@
 #include "trxwidget.h"
 
 //, DCOPObject("DCOPInterface")
-trxWidget::trxWidget(QWidget *parent, const char *name ) : QWidget(parent,name) {
+trxWidget::trxWidget(QWidget *p ) : QWidget(p) {
   setupUi(this);
   uplinkLCD->setSmallDecimalPoint(true);
   downlinkLCD->setSmallDecimalPoint(true);
@@ -159,7 +159,7 @@ void trxWidget::sendToXlog(){
   xlogstr+="\1free1:" + satname; 
   xlogstr+="\1free2:" + QString::number(uplinkfrequency/1000.0, 'f', 3);
   xlogstr+="\1mode:" + mode + "\1";
-  strcpy (msgbuf.mtext, xlogstr.latin1());
+  strcpy (msgbuf.mtext, xlogstr.toLatin1());
   msgsnd (msgid, (void *) &msgbuf, 1024, IPC_NOWAIT);
   lastmsg = xlogstr;
 }

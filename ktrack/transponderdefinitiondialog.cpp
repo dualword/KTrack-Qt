@@ -19,10 +19,9 @@
 #include "transponderdefinitiondialog.h"
 #include "transponderdefinitiondetailsdialog.h"
 
-transponderDefinitionDialog::transponderDefinitionDialog(QWidget *parent, const char *name,
-		bool modal, Qt::WFlags fl) : QDialog(parent,name,modal,fl) {
+transponderDefinitionDialog::transponderDefinitionDialog(QWidget *p, Qt::WindowFlags f) : QDialog(p,f) {
 	setupUi(this);
-  setCaption(tr("Transponder Definition"));
+  setWindowTitle(tr("Transponder Definition"));
   QObject::connect(satelliteComboBox, SIGNAL(activated(const QString&)), this,SLOT(slotNewSat(const QString&)));
   QObject::connect(deleteButton, SIGNAL(clicked()), this, SLOT(slotDeleteTransponder()));
   QObject::connect(newButton, SIGNAL(clicked()), this, SLOT(slotNewTransponder()));
@@ -36,9 +35,9 @@ void transponderDefinitionDialog::setSatList(PtrSatList* s){
   satlist = s;
   // fill the combo box
   satellite* sat;
-  for(auto sat : *satlist) {
-    if (sat->polled())
-      satelliteComboBox->insertItem(sat->name());
+  for (int i=0;i<satlist->size();i++){
+    if (satlist->at(i)->polled())
+      satelliteComboBox->insertItem(i, satlist->at(i)->name());
   }
   slotNewSat(satelliteComboBox->currentText());
 }

@@ -37,7 +37,7 @@ class predictionList : public QDialog, private Ui::predictionListBase  {
   Q_OBJECT
 
 public: 
-	predictionList(QWidget *parent=0, const char *name=0, Qt::WFlags fl=Qt::WDestructiveClose);
+	predictionList(QWidget *p = 0, Qt::WindowFlags f = 0);
 	~predictionList();
 	void setSatList(PtrSatList* s);
 	void setQTH(obsQTH* qth);

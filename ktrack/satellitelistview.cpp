@@ -21,70 +21,83 @@
 #include <time.h>
 
 #include "satellitelistview.h"
-#include "satellitelistviewitem.h"
+//#include "satellitelistviewitem.h"
 #include "satellite.h"
 
-satelliteListView::satelliteListView(QWidget *parent, const char *name) :
-	Q3ListView(parent, name) {
-  setAllColumnsShowFocus(true);
-  addColumn(tr("Satellite"));
-  addColumn(tr("Longitude"));
-  addColumn(tr("Latitude"));
-  addColumn(tr("El"));
-  addColumn(tr("Az"));
-  addColumn(tr("Next AOS/LOS (UTC)"));
-  addColumn(tr("Footprint"));
-  addColumn(tr("Height"));
-  addColumn(tr("Range"));
-  addColumn(tr("Velocity"));
-  addColumn(tr("Orbit Number"));
-  addColumn(tr("MA"));
-  addColumn(tr("Squint"));
-  setColumnAlignment(1,Qt::AlignRight);
-  setColumnAlignment(2,Qt::AlignRight);
-  setColumnAlignment(3,Qt::AlignRight);
-  setColumnAlignment(4,Qt::AlignRight);
-  setColumnAlignment(6,Qt::AlignRight);
-  setColumnAlignment(5,Qt::AlignRight);
-  setColumnAlignment(8,Qt::AlignRight);
-  setColumnAlignment(7,Qt::AlignRight);
-  setColumnAlignment(9,Qt::AlignRight);
-  setColumnAlignment(10, Qt::AlignRight);
-  setColumnAlignment(11, Qt::AlignRight);
-  setColumnAlignment(12, Qt::AlignRight);
+satelliteListView::satelliteListView(QWidget *p) : QTableWidget(p) {
 
-  QObject::connect (this, SIGNAL(selectionChanged( Q3ListViewItem*)), this, SLOT (newSelection( Q3ListViewItem*)));
+	QStringList list;
+	list << tr("Satellite") << tr("Longitude") << tr("Latitude") << tr("El") << tr("Az") << tr("Next AOS/LOS (UTC)") << tr("Footprint");
+	list << tr("Height") << tr("Range") << tr("Velocity") << tr("Orbit Number") << tr("MA") << tr("Squint");
+
+  QObject::connect (this, SIGNAL(itemChanged( QTableWidgetItem*)), this, SLOT (newSelection( QTableWidgetItem*)));
   setMinimumHeight(0);
 }
 
 satelliteListView::~satelliteListView()
 {
 }
+
+//TODO
 /** Sets a list we use to display, and create the List items */
 void satelliteListView::setSatList(PtrSatList* s){
   clear();  // remove all items
   satlist = s;
+  auto listView = this;
+  QTableWidgetItem * item;
   for(auto sat : *satlist) {
     if(sat->polled()) {
-      new satelliteListViewItem(this, sat);
+    	insertRow(rowCount());
+    	int row = rowCount()-1;
+        item = new QTableWidgetItem(sat->calculatedDate());
+        listView->setItem(row, 0, item);
+        item = new QTableWidgetItem(QString::number(sat->longitude(), 'f', 2)+" ");
+        listView->setItem(row, 1, item);
+        item = new QTableWidgetItem(QString::number(sat->latitude(), 'f', 2)+" ");
+        listView->setItem(row, 2, item);
+        item = new QTableWidgetItem(QString::number(sat->elevation(), 'f', 2)+" ");
+        listView->setItem(row, 3, item);
+        item = new QTableWidgetItem(QString::number(sat->azimuth(), 'f', 2)+" ");
+        listView->setItem(row, 4, item);
+        item = new QTableWidgetItem(QString::number(sat->footprint(), 'f', 1)+" ");
+        listView->setItem(row, 5, item);
+        item = new QTableWidgetItem(QString::number(sat->altitude(), 'f', 1)+" ");
+        listView->setItem(row, 6, item);
+        item = new QTableWidgetItem(QString::number(sat->range(), 'f', 1)+" ");
+        listView->setItem(row, 7, item);
+        item = new QTableWidgetItem(QString::number(sat->velocity(), 'f', 3)+" ");
+        listView->setItem(row, 8, item);
+        item = new QTableWidgetItem(QString::number(sat->orbitnum())+" ");
+        listView->setItem(row, 9, item);
+        item = new QTableWidgetItem(QString::number(sat->ma(), 'f', 1)+" ");
+        listView->setItem(row, 10, item);
+
+        if (sat->squinttype()>0) {
+            item = new QTableWidgetItem(QString::number(sat->squint(), 'f', 1)+" ");
+        } else{
+          item = new QTableWidgetItem("--.- ");
+        }
+        listView->setItem(row, 11, item);
     }
   }
 }
+
+//TODO
 /** updates the listview */
 void satelliteListView::updateListView()
 {
-  Q3ListViewItemIterator it;
-  satelliteListViewItem* item;
-  it=Q3ListViewItemIterator(this);
-  for(; it.current(); ++it) {
-    item=(satelliteListViewItem*)it.current();
-    item->update();
-  }
+//  Q3ListViewItemIterator it;
+//  satelliteListViewItem* item;
+//  it=Q3ListViewItemIterator(this);
+//  for(; it.current(); ++it) {
+//    item=(satelliteListViewItem*)it.current();
+//    item->update();
+//  }
 }
 
-void satelliteListView::newSelection(Q3ListViewItem* i)
+void satelliteListView::newSelection(QTableWidgetItem* i)
 {
   if (!i) return;
-  satelliteListViewItem* item = (satelliteListViewItem*)i;
-  emit (newTrackingSatellite(item->getSatellite()));
+//  satelliteListViewItem* item = (satelliteListViewItem*)i; //TODO
+//  emit (newTrackingSatellite(item->getSatellite()));
 }

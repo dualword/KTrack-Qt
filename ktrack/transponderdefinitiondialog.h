@@ -31,7 +31,7 @@ class transponderDefinitionDialog : public QDialog, private Ui_transponderDefini
 	Q_OBJECT
 
 public:
-	transponderDefinitionDialog(QWidget *parent=0, const char *name=0, bool modal=true, Qt::WFlags fl=Qt::WDestructiveClose);
+	transponderDefinitionDialog(QWidget *parent=0, Qt::WindowFlags f = 0);
 	~transponderDefinitionDialog();
 	void setSatList(PtrSatList*);
 

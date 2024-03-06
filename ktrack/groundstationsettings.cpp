@@ -16,13 +16,9 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <qlineedit.h>
-#include <qpushbutton.h>
-
 #include "groundstationsettings.h"
 
-groundstationSettings::groundstationSettings(QWidget *parent, const char *name, bool modal, Qt::WFlags fl )
-    : QDialog(parent,name,modal,fl) {
+groundstationSettings::groundstationSettings(QWidget *p, Qt::WindowFlags fl) : QDialog(p,fl) {
 	setupUi(this);
 
 }

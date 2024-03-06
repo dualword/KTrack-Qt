@@ -26,8 +26,8 @@ Calculate_User_PosVel(double _time,
   double c,sq,achcp;
 
   geodetic->theta = FMod2p(ThetaG_JD(_time) + geodetic->lon);/*LMST*/
-  c = 1/sqrt(1 + __f*(__f - 2)*Sqr(sin(geodetic->lat)));
-  sq = Sqr(1 - __f)*c;
+  c = 1/sqrt(1 + __ff*(__ff - 2)*Sqr(sin(geodetic->lat)));
+  sq = Sqr(1 - __ff)*c;
   achcp = (xkmper*c + geodetic->alt)*cos(geodetic->lat);
   obs_pos->x = achcp*cos(geodetic->theta);/*kilometers*/
   obs_pos->y = achcp*sin(geodetic->theta);
@@ -56,7 +56,7 @@ Calculate_LatLonAlt(double _time, vector_t *pos,  geodetic_t *geodetic)
   geodetic->theta = AcTan(pos->y,pos->x);/*radians*/
   geodetic->lon = FMod2p(geodetic->theta - ThetaG_JD(_time));/*radians*/
   r = sqrt(Sqr(pos->x) + Sqr(pos->y));
-  e2 = __f*(2 - __f);
+  e2 = __ff*(2 - __ff);
   geodetic->lat = AcTan(pos->z,r);/*radians*/
 
   do

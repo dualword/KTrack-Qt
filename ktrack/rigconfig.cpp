@@ -17,14 +17,9 @@
  ***************************************************************************/
 
 #include "rigconfig.h"
-#include <qpushbutton.h>
-#include <qgroupbox.h>
-#include <qcheckbox.h>
-#include <qlineedit.h>
 #include <stdio.h>
 
-rigConfig::rigConfig(QWidget *parent, const char *name, bool modal, Qt::WFlags fl) :
-	QDialog(parent,name,modal,fl) {
+rigConfig::rigConfig(QWidget *p, Qt::WindowFlags fl) : QDialog(p,fl) {
 	setupUi(this);
 //  QObject::connect(buttonOk, SIGNAL(clicked()), this, SLOT(slotOk()));
 //  QObject::connect(buttonCancel, SIGNAL(clicked()), this, SLOT(slotCancel()));
@@ -70,8 +65,11 @@ void rigConfig::setRig(s_hardware* r)
   //rot_load_all_backends();
 //  rotorInterface->insertItem("none");
   //rot_list_foreach(addRotToList, this);
+
   strings.sort();
-  rotorInterface->insertStringList(strings);
+
+  for(int i=0;i<strings.size();i++)
+  	  rotorInterface->insertItem(i,strings[i]);
   strings.clear();
     
 //  rotname2rotid["none"] = ROT_MODEL_DUMMY;
@@ -93,8 +91,8 @@ void rigConfig::setRig(s_hardware* r)
 //  dtrxEdit->insertItem("none");
   //rig_list_foreach(addRigToList, this);
   strings.sort();
-  utrxEdit->insertStringList(strings);
-  dtrxEdit->insertStringList(strings);
+  //utrxEdit->insertStringList(strings);
+  //dtrxEdit->insertStringList(strings);
   strings.clear();
   
 //  rigname2rigid["none"] = RIG_MODEL_DUMMY;
@@ -105,11 +103,11 @@ void rigConfig::setRig(s_hardware* r)
 
   downlinkCheckBox->setChecked(hardwareParameters->downlinkreceiver);
 
-  uportEdit->setCurrentText(hardwareParameters->urig.port);
-  dportEdit->setCurrentText(hardwareParameters->drig.port);
-
-  uspeedEdit->setCurrentText(QString::number(hardwareParameters->urig.speed));
-  dspeedEdit->setCurrentText(QString::number(hardwareParameters->drig.speed));
+//  uportEdit->setCurrentText(hardwareParameters->urig.port);
+//  dportEdit->setCurrentText(hardwareParameters->drig.port);
+//
+//  uspeedEdit->setCurrentText(QString::number(hardwareParameters->urig.speed));
+//  dspeedEdit->setCurrentText(QString::number(hardwareParameters->drig.speed));
 
   rotorCheckBox->setChecked(hardwareParameters->rotor450);
 }

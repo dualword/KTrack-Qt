@@ -1,4 +1,4 @@
-/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
+/* KTrack-Qt (2020-2024) https://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           calculator.h  -  description
                              -------------------
@@ -33,7 +33,7 @@ class calculator : public QObject  {
    Q_OBJECT
 
 public: 
-	calculator(QObject *parent=0, const char *name=0);
+	calculator(QObject *p=0);
 	~calculator();
 	/** initializes the calculator */
 	void init();

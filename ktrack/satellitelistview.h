@@ -22,19 +22,17 @@
 #include "globals.h"
 #include "satellite.h"
 
-#include <Q3ListView>
-#include <Q3ListViewItem>
-#include <Q3ListViewItemIterator>
+#include <QtGui>
 
 /**This widget displays a list of all polled widgets
   *@author Luc Langehegermann
   */
 
-class satelliteListView : public Q3ListView {
+class satelliteListView : public QTableWidget {
    Q_OBJECT
 
 public: 
-	satelliteListView(QWidget *parent=0, const char *name=0);
+	satelliteListView(QWidget *p);
 	~satelliteListView();
 	/** Sets a list we use to display */
 	void setSatList(PtrSatList* s);
@@ -48,7 +46,7 @@ signals: // Signals
 	void newTrackingSatellite(satellite* sat);
 
 private slots: // Private slots
-	void newSelection(Q3ListViewItem*);
+	void newSelection(QTableWidgetItem*);
 
 private:
 	PtrSatList* satlist;

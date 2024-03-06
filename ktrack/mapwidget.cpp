@@ -18,15 +18,9 @@
 
 #include "mapwidget.h"
 
-//#include <kstandarddirs.h>
-#include <qpainter.h>
-#include <qpoint.h>
-#include <qbitmap.h>
-#include <qtimer.h>
-
 #include "sgp4sdp4/sgp4sdp4.h"
 
-mapWidget::mapWidget(QWidget *parent, const char *name ) : QWidget(parent,name), buffer(100,100) {
+mapWidget::mapWidget(QWidget *p) : QWidget(p), buffer(100,100) {
   /* load the original map */
   //dayimage.load(locate("appdata", "earth.jpg"));
 	dayimage.load("earth.jpg");
@@ -42,7 +36,8 @@ mapWidget::~mapWidget(){
 
 void mapWidget::paintEvent(QPaintEvent*)
 {
-  bitBlt(this, 0, 0, &buffer);
+  //bitBlt(this, 0, 0, &buffer);
+	updateBackgroundMap();
 }
 
 void mapWidget::resizeEvent(QResizeEvent*) {
@@ -79,7 +74,8 @@ void mapWidget::processSatList() {
       }
     }
   }
-  repaint(false);
+  //repaint(false);
+  update();
 }
 
 int mapWidget::longitude2pixel(double lon) {

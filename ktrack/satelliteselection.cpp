@@ -22,8 +22,7 @@
 #include "satelliteselection.h"
 
 
-satelliteSelection::satelliteSelection(QWidget *parent, const char *name, bool modal,
-		Qt::WFlags fl ) : QDialog(parent,name,modal,fl)
+satelliteSelection::satelliteSelection(QWidget *p, Qt::WindowFlags fl ) : QDialog(p,fl)
 {
 	setupUi(this);
   QObject::connect(buttonAdd, SIGNAL(clicked()), this, SLOT(slotAdd()));

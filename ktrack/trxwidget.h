@@ -42,7 +42,7 @@ typedef struct
 class trxWidget : public QWidget, private Ui::trxWidgetBase { //, virtual public DCOPInterface
    Q_OBJECT
 public: 
-	trxWidget(QWidget *parent=0, const char *name=0);
+	trxWidget(QWidget *p=0);
 	~trxWidget();
   /** sets the radio control device we should use */
   void setDevice(); //rigctrl* dev

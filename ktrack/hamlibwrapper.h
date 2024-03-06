@@ -31,7 +31,7 @@
 class hamlibWrapper : public QObject{ //, QThread
   Q_OBJECT
 public: 
-	hamlibWrapper(QWidget *parent=0, const char *name=0);
+	hamlibWrapper(QWidget *p = 0);
 	~hamlibWrapper();
   /** No descriptions */
   //int init (rig_model_t drig, const char* dport, int dspeed, rig_model_t urig=0, const char* uport=NULL, int uspeed=0);

@@ -20,7 +20,7 @@
 
 #include <qtimer.h>
 
-rigctrl::rigctrl(QObject *parent, const char *name ) : QObject(parent,name) {
+rigctrl::rigctrl(QObject *p) : QObject(p) {
   azcorrection=0;
   elcorrection=0;
   correction=0;

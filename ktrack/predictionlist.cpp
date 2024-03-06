@@ -19,7 +19,7 @@
 #include "predictionlist.h"
 #include "sgp4sdp4/sgp4sdp4.h"
 
-predictionList::predictionList(QWidget *parent, const char *name, Qt::WFlags fl ) :	QDialog(parent,name,fl) {
+predictionList::predictionList(QWidget *p, Qt::WindowFlags fl ) :	QDialog(p,fl) {
 	setupUi(this);
 	QStringList list;
 	list << tr("Date") << tr("Longitude") << tr("Latitude") << tr("El") << tr("Az") << tr("Footprint");
@@ -40,12 +40,12 @@ void predictionList::setSatList(PtrSatList* s){
 	satnameCombo->clear();
   satlist = s;
   // fill the satellite selection combo box
-  for(auto sat : *satlist) {
-    if(sat->polled()) satnameCombo->insertItem(sat->name());
+  for(int i=0;i<satlist->size();i++){
+    if(satlist->at(i)->polled()) satnameCombo->insertItem(i, satlist->at(i)->name());
   }
   // default values for the times
-  startEdit->setDateTime(QDateTime::currentDateTime());
-  stopEdit->setDateTime(QDateTime::currentDateTime().addDays(1));
+//  startEdit->setDateTime(QDateTime::currentDateTime());
+//  stopEdit->setDateTime(QDateTime::currentDateTime().addDays(1));
 }
 
 void predictionList::slotDismiss(){
@@ -66,7 +66,7 @@ void predictionList::slotCalculate(){
 	resultlist.clear();
 	double daynum=qDateTime2daynum(startEdit->dateTime());
 	double stopdaynum=qDateTime2daynum(stopEdit->dateTime());
-	fprintf(stderr, "Start Time: %s\nStop Time: %s\n", calc->daynum2String(daynum).latin1(), calc->daynum2String(stopdaynum).latin1());
+	//fprintf(stderr, "Start Time: %s\nStop Time: %s\n", calc->daynum2String(daynum).latin1(), calc->daynum2String(stopdaynum).latin1());
 
 	// get the sat and make a copy!
 	for(satellite* s : *satlist) {

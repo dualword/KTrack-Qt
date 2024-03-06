@@ -1,5 +1,5 @@
 /* KTrack-Qt (2020-2024) https://github.com/dualword/KTrack-Qt License:GNU GPL*/
-/***************************************************************************
+/**************************************************************************
                           squintcalculations.cpp  -  description
                              -------------------
     begin                : Thu Aug 29 2002
@@ -18,14 +18,7 @@
 
 #include "squintcalculations.h"
 
-#include <qcombobox.h>
-#include <qlabel.h>
-#include <qlineedit.h>
-#include <qcheckbox.h>
-#include <qpushbutton.h>
-
-squintCalculations::squintCalculations(QWidget *parent, const char *name, Qt::WFlags fl ) :
-QDialog(parent,name,fl) {
+squintCalculations::squintCalculations(QWidget *p, Qt::WindowFlags fl ) : QDialog(p,fl) {
 	setupUi(this);
   QObject::connect(buttonClose, SIGNAL(clicked()), this, SLOT(close()));
   QObject::connect(buttonSave, SIGNAL(clicked()), this, SLOT(slotSave()));
@@ -41,11 +34,11 @@ squintCalculations::~squintCalculations(){
 void squintCalculations::setSatList(PtrSatList* s){
   satlist = s;
   // fill the combo box
-  for(auto sat : *satlist) {
-    if (sat->polled())
-      satelliteEdit->insertItem(sat->name());
+ for(int i =0;i<satlist->size();i++){
+    if (satlist->at(i)->polled())
+      satelliteEdit->insertItem(i,satlist->at(i)->name());
   }
-  currentsat=satlist->first();
+  currentsat = satlist->first();
   slotNewSat(satelliteEdit->currentText());
 }
 /** No descriptions */

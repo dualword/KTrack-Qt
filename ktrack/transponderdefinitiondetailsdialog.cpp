@@ -18,11 +18,11 @@
 
 #include "transponderdefinitiondetailsdialog.h"
 
-transponderDefinitionDetailsDialog::transponderDefinitionDetailsDialog(transponder* t, QWidget *parent, const char *name, bool modal,
-		Qt::WFlags fl) : QDialog(parent,name,modal,fl) {
+transponderDefinitionDetailsDialog::transponderDefinitionDetailsDialog(transponder* t, QWidget *p,
+		Qt::WindowFlags fl) : QDialog(p,fl) {
 	setupUi(this);
 	// create the main widget
-	setCaption(tr("Transponder Details"));
+	setWindowTitle(tr("Transponder Details"));
 	// fill in values
 	trans = t;
 	uplinkFreqEdit->setText(QString::number(trans->uplink(),'f',0));
@@ -32,9 +32,9 @@ transponderDefinitionDetailsDialog::transponderDefinitionDetailsDialog(transpond
 	reverseCheckBox->setChecked(trans->reverse());
 	preampCheckBox->setChecked(trans->preamp());
 
-	if(trans->mode() == MODE_SSB) modeEdit->setCurrentItem(0);
-	if(trans->mode() == MODE_FM)  modeEdit->setCurrentItem(1);
-	if(trans->mode() == MODE_CW)  modeEdit->setCurrentItem(2);
+	if(trans->mode() == MODE_SSB) modeEdit->setCurrentIndex(0);
+	if(trans->mode() == MODE_FM)  modeEdit->setCurrentIndex(1);
+	if(trans->mode() == MODE_CW)  modeEdit->setCurrentIndex(2);
 }
 
 transponderDefinitionDetailsDialog::~transponderDefinitionDetailsDialog(){
@@ -48,7 +48,7 @@ void transponderDefinitionDetailsDialog::slotOk(){
 	trans->setReverse(reverseCheckBox->isChecked());
 	trans->setPreamp(preampCheckBox->isChecked());
 
-	int i = modeEdit->currentItem();
+	int i = modeEdit->currentIndex();
 	if (i==0) trans->setMode(MODE_SSB);
 	if (i==1) trans->setMode(MODE_FM);
 	if (i==2) trans->setMode(MODE_CW);

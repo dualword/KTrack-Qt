@@ -91,7 +91,7 @@ typedef struct
 #define ae       1.0
 #define ck2      5.413079E-4
 #define ck4      6.209887E-7
-#define __f      3.352779E-3
+#define __ff      3.352779E-3
 #define ge       3.986008E5 
 #define __s__    1.012229
 #define qoms2t   1.880279E-09
