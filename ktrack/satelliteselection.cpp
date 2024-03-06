@@ -17,10 +17,8 @@
  ***************************************************************************/
 
 #include <stdio.h>
-#include <qpushbutton.h>
 
 #include "satelliteselection.h"
-
 
 satelliteSelection::satelliteSelection(QWidget *p, Qt::WindowFlags fl ) : QDialog(p,fl)
 {
@@ -93,8 +91,9 @@ void satelliteSelection::slotOk(){
     str = selectedListBox->item(i)->text();
 
     for(satellite* sat: *satlist){
-        if(sat->name() == str)
-          sat->setPolled(true);
+        if(sat->name() == str){
+            sat->setPolled(true);
+        }
     }
   }
   emit polledChanged();

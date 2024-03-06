@@ -36,8 +36,8 @@ mapWidget::~mapWidget(){
 
 void mapWidget::paintEvent(QPaintEvent*)
 {
-  //bitBlt(this, 0, 0, &buffer);
-	updateBackgroundMap();
+	QPainter p(this);
+	p.drawPixmap(0,0,buffer);
 }
 
 void mapWidget::resizeEvent(QResizeEvent*) {
@@ -74,7 +74,6 @@ void mapWidget::processSatList() {
       }
     }
   }
-  //repaint(false);
   update();
 }
 

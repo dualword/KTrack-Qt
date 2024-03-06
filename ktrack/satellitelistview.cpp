@@ -1,4 +1,4 @@
-/* KTrack-Qt (2020) http://github.com/dualword/KTrack-Qt License:GNU GPL*/
+/* KTrack-Qt (2020-2024) https://github.com/dualword/KTrack-Qt License:GNU GPL*/
 /***************************************************************************
                           satellitelistview.cpp  -  description
                              -------------------
@@ -16,7 +16,6 @@
  *                                                                         *
  ***************************************************************************/
 
-//#include <klocale.h>
 #include <stdio.h>
 #include <time.h>
 
@@ -25,59 +24,62 @@
 #include "satellite.h"
 
 satelliteListView::satelliteListView(QWidget *p) : QTableWidget(p) {
-
 	QStringList list;
 	list << tr("Satellite") << tr("Longitude") << tr("Latitude") << tr("El") << tr("Az") << tr("Next AOS/LOS (UTC)") << tr("Footprint");
 	list << tr("Height") << tr("Range") << tr("Velocity") << tr("Orbit Number") << tr("MA") << tr("Squint");
+	setColumnCount(list.size());
+	setHorizontalHeaderLabels(list);
+	QObject::connect (this, SIGNAL(itemChanged( QTableWidgetItem*)), this, SLOT (newSelection( QTableWidgetItem*)));
+	QObject::connect (this, SIGNAL(itemClicked( QTableWidgetItem*)), this, SLOT (newSelection( QTableWidgetItem*)));
 
-  QObject::connect (this, SIGNAL(itemChanged( QTableWidgetItem*)), this, SLOT (newSelection( QTableWidgetItem*)));
-  setMinimumHeight(0);
+	setMinimumHeight(0);
 }
 
 satelliteListView::~satelliteListView()
 {
 }
 
-//TODO
 /** Sets a list we use to display, and create the List items */
 void satelliteListView::setSatList(PtrSatList* s){
-  clear();  // remove all items
-  satlist = s;
-  auto listView = this;
-  QTableWidgetItem * item;
+	clearContents();
+	setRowCount(0);
+	satlist = s;
+	QTableWidgetItem * item;
   for(auto sat : *satlist) {
     if(sat->polled()) {
     	insertRow(rowCount());
     	int row = rowCount()-1;
-        item = new QTableWidgetItem(sat->calculatedDate());
-        listView->setItem(row, 0, item);
+        item = new QTableWidgetItem(sat->name());
+        setItem(row, 0, item);
         item = new QTableWidgetItem(QString::number(sat->longitude(), 'f', 2)+" ");
-        listView->setItem(row, 1, item);
+        setItem(row, 1, item);
         item = new QTableWidgetItem(QString::number(sat->latitude(), 'f', 2)+" ");
-        listView->setItem(row, 2, item);
+        setItem(row, 2, item);
         item = new QTableWidgetItem(QString::number(sat->elevation(), 'f', 2)+" ");
-        listView->setItem(row, 3, item);
+        setItem(row, 3, item);
         item = new QTableWidgetItem(QString::number(sat->azimuth(), 'f', 2)+" ");
-        listView->setItem(row, 4, item);
-        item = new QTableWidgetItem(QString::number(sat->footprint(), 'f', 1)+" ");
-        listView->setItem(row, 5, item);
-        item = new QTableWidgetItem(QString::number(sat->altitude(), 'f', 1)+" ");
-        listView->setItem(row, 6, item);
-        item = new QTableWidgetItem(QString::number(sat->range(), 'f', 1)+" ");
-        listView->setItem(row, 7, item);
-        item = new QTableWidgetItem(QString::number(sat->velocity(), 'f', 3)+" ");
-        listView->setItem(row, 8, item);
+        setItem(row, 4, item);
+        item = new QTableWidgetItem(sat->nextAosLos());
+        setItem(row, 5, item);
+        item = new QTableWidgetItem(QString::number(sat->footprint(), 'f', 1)+" km ");
+        setItem(row, 6, item);
+        item = new QTableWidgetItem(QString::number(sat->altitude(), 'f', 1)+" km ");
+        setItem(row, 7, item);
+        item = new QTableWidgetItem(QString::number(sat->range(), 'f', 1)+" km ");
+        setItem(row, 8, item);
+        item = new QTableWidgetItem(QString::number(sat->velocity(), 'f', 3)+" km/s ");
+        setItem(row, 9, item);
         item = new QTableWidgetItem(QString::number(sat->orbitnum())+" ");
-        listView->setItem(row, 9, item);
+        setItem(row, 10, item);
         item = new QTableWidgetItem(QString::number(sat->ma(), 'f', 1)+" ");
-        listView->setItem(row, 10, item);
+        setItem(row, 11, item);
 
         if (sat->squinttype()>0) {
             item = new QTableWidgetItem(QString::number(sat->squint(), 'f', 1)+" ");
         } else{
           item = new QTableWidgetItem("--.- ");
         }
-        listView->setItem(row, 11, item);
+        setItem(row, 12, item);
     }
   }
 }
