@@ -1,7 +1,13 @@
+lessThan(QT_VERSION, 5.0) {
+	error('Qt 5.0+ required...')
+}
+
 TEMPLATE = app
 TARGET = ktrack-qt
+message(Building: = $${TARGET})
 
-CONFIG += qt thread debug
+CONFIG += c++11 thread debug
+QT += widgets
 
 DEPENDPATH += . ktrack ktrack/sgp4sdp4
 INCLUDEPATH += . ktrack/sgp4sdp4 ktrack

@@ -205,7 +205,7 @@ void mapWidget::updateBackgroundMap(){
   t = time(NULL);
   tmp = gmtime(&t);
   jt = jtime(tmp);
-  sunpos(jt,FALSE, &sunra, &sundec, &sunrv, &sunlong);
+  sunpos(jt,0, &sunra, &sundec, &sunrv, &sunlong);  //FALSE
   int sec = tmp->tm_hour*60*60 + tmp->tm_min*60 + tmp->tm_sec;
   int gmt_position = width() * sec / 86400; // note: greenwich is in the middle!
   wtab = new short[height()];

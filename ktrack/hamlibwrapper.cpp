@@ -22,7 +22,7 @@
 
 #include "hamlibwrapper.h"
 
-hamlibWrapper::hamlibWrapper(QWidget *p) : QObject (p) {
+hamlibWrapper::hamlibWrapper(QObject *p) : QObject (p) {
   //uplinkRig=NULL;
   //downlinkRig=NULL;
   //rotor=NULL;

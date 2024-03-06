@@ -840,8 +840,8 @@ Deep(int ientry, tle_t *tle, deep_arg_t *deep_arg)
       if (deep_arg->xinc < 0)
 	{
 	  deep_arg->xinc = -deep_arg->xinc;
-	  deep_arg->xnode = deep_arg->xnode + pi;
-	  deep_arg->omgadf = deep_arg->omgadf-pi;
+	  deep_arg->xnode = deep_arg->xnode + pi1;
+	  deep_arg->omgadf = deep_arg->omgadf-pi1;
 	}
       if( isFlagClear(RESONANCE_FLAG) ) return;
 
@@ -1020,7 +1020,7 @@ Deep(int ientry, tle_t *tle, deep_arg_t *deep_arg)
 
           /* This is a patch to Lyddane modification */
           /* suggested by Rob Matson. */
-	  if(fabs(xnoh-deep_arg->xnode) > pi)
+	  if(fabs(xnoh-deep_arg->xnode) > pi1)
 	    {
 	      if(deep_arg->xnode < xnoh)
 		deep_arg->xnode +=twopi;

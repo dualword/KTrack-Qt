@@ -22,7 +22,6 @@
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/msg.h>
-#include <QtGui>
 #include "ui_trxwidgetbase.h"
 //#include "rigctrl.h"
 //#include "dcopinterface.h"

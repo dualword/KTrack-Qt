@@ -7,4 +7,4 @@
 ktrack-qt
 .build
 Makefile
-
+.qmake.stash

@@ -27,7 +27,7 @@
 #define MODE_FM  0x05
 #define MODE_SSB MODE_USB
 
-#include <QtGui>
+#include <QtWidgets>
 #include <stdio.h>
 #include <time.h>
 //#include <hamlib/rig.h>

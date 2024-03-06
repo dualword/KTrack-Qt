@@ -133,7 +133,7 @@ Calculate_Obs(double _time,
          + sin_lat*range.z;
   azim = atan(-top_e/top_s); /*Azimuth*/
   if( top_s > 0 ) 
-    azim = azim + pi;
+    azim = azim + pi1;
   if( azim < 0 )
     azim = azim + twopi;
   el = ArcSin(top_z/range.w);

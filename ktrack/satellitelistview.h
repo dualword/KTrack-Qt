@@ -22,8 +22,6 @@
 #include "globals.h"
 #include "satellite.h"
 
-#include <QtGui>
-
 /**This widget displays a list of all polled widgets
   *@author Luc Langehegermann
   */
