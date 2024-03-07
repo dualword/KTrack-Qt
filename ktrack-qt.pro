@@ -2,17 +2,19 @@ lessThan(QT_VERSION, 5.0) {
 	error('Qt 5.0+ required...')
 }
 
+#DEFINES *= USE_HAMLIB
+
 TEMPLATE = app
 TARGET = ktrack-qt
 message(Building: = $${TARGET})
 
-CONFIG += c++11 thread debug
+CONFIG += thread debug
 QT += widgets
 
 DEPENDPATH += . ktrack ktrack/sgp4sdp4
 INCLUDEPATH += . ktrack/sgp4sdp4 ktrack
 
-QMAKE_CXXFLAGS += -std=c++11
+QMAKE_CXXFLAGS += -std=c++11 -fpermissive
 LIBS += 
 
 HEADERS += ktrack/calculator.h \
@@ -21,7 +23,6 @@ HEADERS += ktrack/calculator.h \
            ktrack/satellitelistview.h \
            #ktrack/satellitelistviewitem.h \
            ktrack/groundstationsettings.h \
-           ktrack/hamlibwrapper.h \
            ktrack/rigconfig.h \
            ktrack/rigctrl.h \
            ktrack/ktrack.h \
@@ -42,7 +43,6 @@ SOURCES += ktrack/main.cpp \
            ktrack/satellitelistview.cpp \
            #ktrack/satellitelistviewitem.cpp \
            ktrack/groundstationsettings.cpp \
-           ktrack/hamlibwrapper.cpp \
            ktrack/rigconfig.cpp \
            ktrack/rigctrl.cpp \
            #ktrack/ktrack_meta_unload.cpp \
@@ -72,6 +72,19 @@ FORMS += ktrack/groundstationsettingsbase.ui \
          ktrack/transponderdefinitionwidget.ui \
          ktrack/trxwidgetbase.ui
            
+           
+contains(DEFINES,USE_HAMLIB){
+	message(Using: hamlib)
+	HEADERS += \
+           ktrack/hamlibwrapper.h
+           
+    SOURCES += \
+           ktrack/hamlibwrapper.cpp         
+         
+	LIBS += -lhamlib
+
+}
+
 OBJECTS_DIR = .build/obj
 MOC_DIR     = .build/moc
 RCC_DIR     = .build/rcc

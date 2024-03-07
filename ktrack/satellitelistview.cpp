@@ -29,6 +29,9 @@ satelliteListView::satelliteListView(QWidget *p) : QTableWidget(p) {
 	list << tr("Height") << tr("Range") << tr("Velocity") << tr("Orbit Number") << tr("MA") << tr("Squint");
 	setColumnCount(list.size());
 	setHorizontalHeaderLabels(list);
+	setSelectionBehavior(QAbstractItemView::SelectRows);
+	setSelectionMode(QAbstractItemView::SingleSelection);
+	setEditTriggers(QAbstractItemView::NoEditTriggers);
 	QObject::connect (this, SIGNAL(itemChanged( QTableWidgetItem*)), this, SLOT (newSelection( QTableWidgetItem*)));
 	QObject::connect (this, SIGNAL(itemClicked( QTableWidgetItem*)), this, SLOT (newSelection( QTableWidgetItem*)));
 
@@ -47,6 +50,7 @@ void satelliteListView::setSatList(PtrSatList* s){
 	QTableWidgetItem * item;
   for(auto sat : *satlist) {
     if(sat->polled()) {
+    	this->sat = sat;
     	insertRow(rowCount());
     	int row = rowCount()-1;
         item = new QTableWidgetItem(sat->name());
@@ -99,7 +103,12 @@ void satelliteListView::updateListView()
 
 void satelliteListView::newSelection(QTableWidgetItem* i)
 {
-  if (!i) return;
-//  satelliteListViewItem* item = (satelliteListViewItem*)i; //TODO
-//  emit (newTrackingSatellite(item->getSatellite()));
+  if (!i || !sat || !satlist || !item(currentRow(),0)) return;
+  for(auto sat : *satlist) {
+    if(sat->name() == item(currentRow(),0)->text()) {
+    	this->sat = sat;
+		emit (newTrackingSatellite(this->sat));
+		break;
+    }
+  }
 }

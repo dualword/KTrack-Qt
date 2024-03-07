@@ -48,7 +48,7 @@ private slots: // Private slots
 
 private:
 	PtrSatList* satlist;
-
+	satellite* sat;
 };
 
 #endif

@@ -141,7 +141,7 @@ void mapWidget::drawArc(satellite* sat, QColor color) {
   int pointsx[360];
   int pointsy[360];
   QPainter p;
-    
+
   beta = (0.5*sat->footprint())/xkmper;
   ssplat=sat->latitude()*de2ra;
   ssplong=sat->longitude()*de2ra;
@@ -208,8 +208,7 @@ void mapWidget::updateBackgroundMap(){
   int sec = tmp->tm_hour*60*60 + tmp->tm_min*60 + tmp->tm_sec;
   int gmt_position = width() * sec / 86400; // note: greenwich is in the middle!
   wtab = new short[height()];
-  //TODO
-  //projillum(wtab,width(),height(),sundec);
+  projillum(wtab,width(),height(),sundec);
   illuMask.fill(Qt::black);
   QPainter p;
   p.begin(&illuMask);

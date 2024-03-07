@@ -19,11 +19,9 @@
 #ifndef RIGCTRL_H
 #define RIGCTRL_H
 
-#include <qobject.h>
-
 #include "globals.h"
 #include "satellite.h"
-#include "hamlibwrapper.h"
+//#include "hamlibwrapper.h"
 
 /**
   *@author Luc Langehegermann
@@ -44,9 +42,9 @@ public:
   void setCorrection(int corr);
   /** No descriptions */
   void setDirection(float el, float az);
-  hamlibWrapper* Wrapper() {return wrapper;};
+  //hamlibWrapper* Wrapper() {return wrapper;};
 private:
-  hamlibWrapper* wrapper;
+  //hamlibWrapper* wrapper;
   transponder* currentTransponder;
   satellite* currentSatellite;
   int currentCorrection;
