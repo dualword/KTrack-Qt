@@ -14,7 +14,7 @@ QT += widgets
 DEPENDPATH += . ktrack ktrack/sgp4sdp4
 INCLUDEPATH += . ktrack/sgp4sdp4 ktrack
 
-QMAKE_CXXFLAGS += -std=c++11 -fpermissive
+QMAKE_CXXFLAGS += -std=c++11
 LIBS += 
 
 HEADERS += ktrack/calculator.h \

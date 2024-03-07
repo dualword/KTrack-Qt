@@ -34,7 +34,6 @@ satelliteListView::satelliteListView(QWidget *p) : QTableWidget(p) {
 	setEditTriggers(QAbstractItemView::NoEditTriggers);
 	QObject::connect (this, SIGNAL(itemChanged( QTableWidgetItem*)), this, SLOT (newSelection( QTableWidgetItem*)));
 	QObject::connect (this, SIGNAL(itemClicked( QTableWidgetItem*)), this, SLOT (newSelection( QTableWidgetItem*)));
-
 	setMinimumHeight(0);
 }
 
@@ -88,17 +87,32 @@ void satelliteListView::setSatList(PtrSatList* s){
   }
 }
 
-//TODO
 /** updates the listview */
 void satelliteListView::updateListView()
 {
-//  Q3ListViewItemIterator it;
-//  satelliteListViewItem* item;
-//  it=Q3ListViewItemIterator(this);
-//  for(; it.current(); ++it) {
-//    item=(satelliteListViewItem*)it.current();
-//    item->update();
-//  }
+	int i=0;
+	for(auto sat : *satlist) {
+	    if(sat->polled()) {
+		item(i, 0)->setText(sat->name());
+		item(i, 1)->setText(QString::number(sat->longitude(), 'f', 2)+" ");
+		item(i, 2)->setText(QString::number(sat->latitude(), 'f', 2)+" ");
+		item(i, 3)->setText(QString::number(sat->elevation(), 'f', 2)+" ");
+		item(i, 4)->setText(QString::number(sat->azimuth(), 'f', 2)+" ");
+		if (sat->nextAosLos() != "") item(i, 5)->setText(sat->nextAosLos());
+		item(i, 6)->setText(QString::number(sat->footprint(), 'f', 1)+" km ");
+		item(i, 7)->setText(QString::number(sat->altitude(), 'f', 1)+" km ");
+		item(i, 8)->setText(QString::number(sat->range(), 'f', 1)+" km ");
+		item(i, 9)->setText(QString::number(sat->velocity(), 'f', 3)+" km/s ");
+		item(i, 10)->setText(QString::number(sat->orbitnum())+" ");
+		item(i, 11)->setText(QString::number(sat->ma(), 'f', 1)+" ");
+		if (sat->squinttype()>0) {
+			item(i, 12)->setText(QString::number(sat->squint(), 'f', 1)+" ");
+		} else{
+		  item(i, 12)->setText("--.- ");
+		}
+	    i++;
+	  }
+   }
 }
 
 void satelliteListView::newSelection(QTableWidgetItem* i)
