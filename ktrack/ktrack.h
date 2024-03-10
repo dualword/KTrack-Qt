@@ -23,8 +23,8 @@
 #include <config.h>
 #endif
 
-//#include <hamlib/rig.h>
-//#include <hamlib/rotator.h>
+#include <hamlib/rig.h>
+#include <hamlib/rotator.h>
 #include "calculator.h"
 #include "satellitelistview.h"
 #include "mapwidget.h"
@@ -79,7 +79,7 @@ private:
 	mapWidget* map;
 	satelliteListView* satListView;
 	satellite* trackingSatellite;   // pointer to the satellite we are tracking
-	//  s_hardware hardwareParameters;
+	s_hardware hardwareParameters;
 	rigctrl* trxctl;
 	trxWidget* trxwidget;
 	QSplitter* split;   // splitter where the map and the listview resides

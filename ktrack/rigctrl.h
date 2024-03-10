@@ -21,7 +21,7 @@
 
 #include "globals.h"
 #include "satellite.h"
-//#include "hamlibwrapper.h"
+#include "hamlibwrapper.h"
 
 /**
   *@author Luc Langehegermann
@@ -30,7 +30,7 @@
 class rigctrl : public QObject  {
    Q_OBJECT
 public: 
-	rigctrl(QObject *p);
+	rigctrl(QObject *p = 0);
 	~rigctrl();
   /** No descriptions */
   int open(s_hardware* hardware);
@@ -42,9 +42,9 @@ public:
   void setCorrection(int corr);
   /** No descriptions */
   void setDirection(float el, float az);
-  //hamlibWrapper* Wrapper() {return wrapper;};
+  hamlibWrapper* Wrapper() {return wrapper;};
 private:
-  //hamlibWrapper* wrapper;
+  hamlibWrapper* wrapper;
   transponder* currentTransponder;
   satellite* currentSatellite;
   int currentCorrection;

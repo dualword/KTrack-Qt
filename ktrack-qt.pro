@@ -2,7 +2,7 @@ lessThan(QT_VERSION, 5.0) {
 	error('Qt 5.0+ required...')
 }
 
-#DEFINES *= USE_HAMLIB
+DEFINES *= USE_HAMLIB #hamlib-1.2.3
 
 TEMPLATE = app
 TARGET = ktrack-qt
@@ -14,7 +14,7 @@ QT += widgets
 DEPENDPATH += . ktrack ktrack/sgp4sdp4
 INCLUDEPATH += . ktrack/sgp4sdp4 ktrack
 
-QMAKE_CXXFLAGS += -std=c++11
+QMAKE_CXXFLAGS += -std=c++11 -fpermissive
 LIBS += 
 
 HEADERS += ktrack/calculator.h \

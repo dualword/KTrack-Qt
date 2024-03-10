@@ -18,13 +18,11 @@
 
 #include "rigctrl.h"
 
-#include <qtimer.h>
-
 rigctrl::rigctrl(QObject *p) : QObject(p) {
   azcorrection=0;
   elcorrection=0;
   correction=0;
-  //wrapper = new hamlibWrapper();
+  wrapper = new hamlibWrapper();
   currentSatellite=NULL;
   currentTransponder=NULL;
   currentCorrection=0;
@@ -38,7 +36,7 @@ rigctrl::rigctrl(QObject *p) : QObject(p) {
   timer->start(1);
 }
 rigctrl::~rigctrl(){
-  //delete wrapper;
+  delete wrapper;
 }
 /** No descriptions */
 int rigctrl::open(s_hardware* hardware){
@@ -46,15 +44,15 @@ int rigctrl::open(s_hardware* hardware){
   elcorrection=hardware->elevationCorrection;
   int r=0, retval=0;
 
-//  if (hardware->downlinkreceiver)
-//    r = wrapper->init(hardware->drig.radio, hardware->drig.port, hardware->drig.speed,
-//                           hardware->urig.radio, hardware->urig.port, hardware->urig.speed);
-//  else
-//    r = wrapper->init(hardware->urig.radio, hardware->urig.port, hardware->urig.speed);
+  if (hardware->downlinkreceiver)
+    r = wrapper->init(hardware->drig.radio, hardware->drig.port, hardware->drig.speed,
+                           hardware->urig.radio, hardware->urig.port, hardware->urig.speed);
+  else
+    r = wrapper->init(hardware->urig.radio, hardware->urig.port, hardware->urig.speed);
 
 	if (r) retval--;
 
-  //r=wrapper->initRotor(hardware->rotorinterface.rotor, hardware->rotorinterface.port, hardware->rotorinterface.speed, hardware->rotor450);
+  r=wrapper->initRotor(hardware->rotorinterface.rotor, hardware->rotorinterface.port, hardware->rotorinterface.speed, hardware->rotor450);
 	if (r) retval--;
 	fprintf(stderr, "Errorcode while trying to init Hardware: %i\n", retval);
 	return retval;
@@ -65,32 +63,32 @@ void rigctrl::setSatellite(satellite* s){
 }
 /** No descriptions */
 void rigctrl::setTransponder(transponder* t){
-//  rmode_t hamlibumode, hamlibdmode;
-//  hamlibumode=RIG_MODE_USB;
-//  hamlibdmode=RIG_MODE_USB;
+  rmode_t hamlibumode, hamlibdmode;
+  hamlibumode=RIG_MODE_USB;
+  hamlibdmode=RIG_MODE_USB;
 
   currentTransponder=t;
-  //wrapper->setPreamp(t->preamp());
+  wrapper->setPreamp(t->preamp());
   currentUplinkFreq=t->uplink();
   currentDownlinkFreq=t->downlink();
-//  if (t->reverse() && t->mode() == MODE_SSB) {
-//    hamlibumode=RIG_MODE_USB;
-//    hamlibdmode=RIG_MODE_LSB;
-//  }
-//  if (!t->reverse() && t->mode() == MODE_SSB) {
-//    hamlibumode=RIG_MODE_USB;
-//    hamlibdmode=RIG_MODE_USB;
-//  }
-//  if (t->mode() == MODE_FM) {
-//    hamlibumode=RIG_MODE_FM;
-//    hamlibdmode=RIG_MODE_FM;
-//  }
-//  if (t->mode() == MODE_CW) {
-//    hamlibumode=RIG_MODE_CW;
-//    hamlibdmode=RIG_MODE_CW;
-//  }
-//  setFreqs(true);
-//  wrapper->setModes(hamlibdmode, hamlibumode);
+  if (t->reverse() && t->mode() == MODE_SSB) {
+    hamlibumode=RIG_MODE_USB;
+    hamlibdmode=RIG_MODE_LSB;
+  }
+  if (!t->reverse() && t->mode() == MODE_SSB) {
+    hamlibumode=RIG_MODE_USB;
+    hamlibdmode=RIG_MODE_USB;
+  }
+  if (t->mode() == MODE_FM) {
+    hamlibumode=RIG_MODE_FM;
+    hamlibdmode=RIG_MODE_FM;
+  }
+  if (t->mode() == MODE_CW) {
+    hamlibumode=RIG_MODE_CW;
+    hamlibdmode=RIG_MODE_CW;
+  }
+  setFreqs(true);
+  wrapper->setModes(hamlibdmode, hamlibumode);
 }
 /** No descriptions */
 void rigctrl::setCorrection(int corr){
@@ -102,14 +100,14 @@ void rigctrl::slotTimeout(){
 //  if (currentSatellite) currentSatellite->propagator->calc();
   if (!currentTransponder) return;
   double freq;
-  //freq = wrapper->getDownlinkFrequency();
+  freq = wrapper->getDownlinkFrequency();
   // find out if we have a new trx frequency
 
-//  if (!wrapper->userChangedFreq()/* || !downlinkDisabled*/) {
-//    freq = freq + currentTransponder->downdiff();
-//    // remove doppler
-//    currentDownlinkFreq = freq - currentSatellite->doppler(freq);
-//  }
+  if (!wrapper->userChangedFreq()/* || !downlinkDisabled*/) {
+    freq = freq + currentTransponder->downdiff();
+    // remove doppler
+    currentDownlinkFreq = freq - currentSatellite->doppler(freq);
+  }
   setFreqs(false);
   emit (newDownlinkFreq(currentDownlinkFreq));
 
@@ -136,12 +134,12 @@ void rigctrl::setFreqs(bool now){
   dtrxfreq = dtrxfreq - currentTransponder->downdiff();
   if (currentTransponder->uplink() == 0) utrxfreq=0;
 
-  //wrapper->setFreqs(dtrxfreq, utrxfreq, now);
+  wrapper->setFreqs(dtrxfreq, utrxfreq, now);
   oldtrxfreq=dtrxfreq;
 }
 /** No descriptions */
 void rigctrl::slotSetPause(bool p){
-  //wrapper->setPause(p);
+  wrapper->setPause(p);
 }
 /** No descriptions */
 void rigctrl::setDirection(float el, float az){
@@ -155,5 +153,5 @@ void rigctrl::setDirection(float el, float az){
   if (azimuth >= 360.0) azimuth = azimuth - 360.0;
   if (azimuth < 0.0) azimuth = azimuth + 360.0;
   
-  //wrapper->setDirection(azimuth, elevation);
+  wrapper->setDirection(azimuth, elevation);
 }

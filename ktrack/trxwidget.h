@@ -23,7 +23,7 @@
 #include <sys/ipc.h>
 #include <sys/msg.h>
 #include "ui_trxwidgetbase.h"
-//#include "rigctrl.h"
+#include "rigctrl.h"
 //#include "dcopinterface.h"
 #include "globals.h"
 #include "satellite.h"
@@ -44,9 +44,9 @@ public:
 	trxWidget(QWidget *p=0);
 	~trxWidget();
   /** sets the radio control device we should use */
-  void setDevice(); //rigctrl* dev
+  void setDevice(rigctrl* dev);
 private:
-  //rigctrl* trxctrl;
+  rigctrl* trxctrl;
   satellite* sat;
   // these values are available for the DCOP interface
   double uplinkfrequency, downlinkfrequency;

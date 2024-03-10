@@ -48,10 +48,10 @@ private: // Private methods
   /** No descriptions */
   static int addRigToList(const struct rig_caps* caps, void* data);
   static int addRotToList(const struct rot_caps* caps, void* data);
-//  QMap<QString, rig_model_t> rigname2rigid;
-//  QMap<rig_model_t, QString> rigid2rigname;
-//  QMap<QString, rot_model_t> rotname2rotid;
-//  QMap<rot_model_t, QString> rotid2rotname;
+  QMap<QString, rig_model_t> rigname2rigid;
+  QMap<rig_model_t, QString> rigid2rigname;
+  QMap<QString, rot_model_t> rotname2rotid;
+  QMap<rot_model_t, QString> rotid2rotname;
   QStringList strings;
 };
 

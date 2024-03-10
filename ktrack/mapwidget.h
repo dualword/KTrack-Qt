@@ -48,7 +48,7 @@ class mapWidget : public QWidget  {
    Q_OBJECT
 
 public:
-	mapWidget(QWidget *p);
+	mapWidget(QWidget *p = 0);
 	~mapWidget();
 	void setObsQth(obsQTH* q);
 	void setSatList(PtrSatList* s);

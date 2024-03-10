@@ -42,7 +42,7 @@ Ktrack::Ktrack(QWidget *parent, Qt::WindowFlags fl) : QMainWindow(parent, fl) {
 	QMenu* helpMenu = menuBar()->addMenu(tr("&Help"));
 	helpMenu->addAction(tr("About"),this, SLOT(slotShowAbout()));
 
-//  KConfig* config;
+//  KConfig* config; //TODO
 //  config=kapp->config();
 //  config->setGroup("General");
 //  int width=config->readNumEntry("Width", 800);
@@ -55,7 +55,7 @@ Ktrack::Ktrack(QWidget *parent, Qt::WindowFlags fl) : QMainWindow(parent, fl) {
 
 Ktrack::~Ktrack()
 {
-//  if(trxctl) delete trxctl;
+  if(trxctl) delete trxctl;
   writeConfig();
 }
 /** This slot is called when we are setup */
@@ -329,16 +329,16 @@ void Ktrack::slotRigControl()
 /** This slot reinitializes the devices we control with this program */
 void Ktrack::slotInitHardware(){
   bool i;
-//  if (!trxctl) trxctl=new rigctrl();
+  if (!trxctl) trxctl=new rigctrl();
 
   // connect the trxwidgets pause button to the icom910 interface
   //QObject::connect(trxwidget->buttonPause, SIGNAL(toggled(bool)), trxctl, SLOT(slotSetPause(bool)));
 
-  //i = trxctl->open(&hardwareParameters);
-//  if (i)
-//    KMessageBox::error(this, tr ("Unable to Initialize rig control!"));
-//  else
-//    trxwidget->setDevice(trxctl);
+  i = trxctl->open(&hardwareParameters);
+  if (i)
+	  QMessageBox::critical(map, "", tr ("Unable to Initialize rig control!"));
+  else
+    trxwidget->setDevice(trxctl);
 }
 
 /** This slot is called, when we have new data from the server */
@@ -357,7 +357,7 @@ void Ktrack::slotTransponderDefinition(){
 	luc->setSatList(calc->satList());
 	luc->exec();
 	delete luc;
-//  trxwidget->updateTransponderList();
+  trxwidget->updateTransponderList();
 }
 
 /** calls the groundstation configuration dialog */

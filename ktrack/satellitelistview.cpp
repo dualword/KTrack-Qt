@@ -46,37 +46,25 @@ void satelliteListView::setSatList(PtrSatList* s){
 	clearContents();
 	setRowCount(0);
 	satlist = s;
-	QTableWidgetItem * item;
   for(auto sat : *satlist) {
     if(sat->polled()) {
     	this->sat = sat;
     	insertRow(rowCount());
     	int row = rowCount()-1;
-        item = new QTableWidgetItem(sat->name());
-        setItem(row, 0, item);
-        item = new QTableWidgetItem(QString::number(sat->longitude(), 'f', 2)+" ");
-        setItem(row, 1, item);
-        item = new QTableWidgetItem(QString::number(sat->latitude(), 'f', 2)+" ");
-        setItem(row, 2, item);
-        item = new QTableWidgetItem(QString::number(sat->elevation(), 'f', 2)+" ");
-        setItem(row, 3, item);
-        item = new QTableWidgetItem(QString::number(sat->azimuth(), 'f', 2)+" ");
-        setItem(row, 4, item);
-        item = new QTableWidgetItem(sat->nextAosLos());
-        setItem(row, 5, item);
-        item = new QTableWidgetItem(QString::number(sat->footprint(), 'f', 1)+" km ");
-        setItem(row, 6, item);
-        item = new QTableWidgetItem(QString::number(sat->altitude(), 'f', 1)+" km ");
-        setItem(row, 7, item);
-        item = new QTableWidgetItem(QString::number(sat->range(), 'f', 1)+" km ");
-        setItem(row, 8, item);
-        item = new QTableWidgetItem(QString::number(sat->velocity(), 'f', 3)+" km/s ");
-        setItem(row, 9, item);
-        item = new QTableWidgetItem(QString::number(sat->orbitnum())+" ");
-        setItem(row, 10, item);
-        item = new QTableWidgetItem(QString::number(sat->ma(), 'f', 1)+" ");
-        setItem(row, 11, item);
+        setItem(row, 0, new QTableWidgetItem(sat->name()));
+        setItem(row, 1, new QTableWidgetItem(QString::number(sat->longitude(), 'f', 2)+" "));
+        setItem(row, 2, new QTableWidgetItem(QString::number(sat->latitude(), 'f', 2)+" "));
+        setItem(row, 3, new QTableWidgetItem(QString::number(sat->elevation(), 'f', 2)+" "));
+        setItem(row, 4, new QTableWidgetItem(QString::number(sat->azimuth(), 'f', 2)+" "));
+        setItem(row, 5, new QTableWidgetItem(sat->nextAosLos()));
+        setItem(row, 6, new QTableWidgetItem(QString::number(sat->footprint(), 'f', 1)+" km "));
+        setItem(row, 7, new QTableWidgetItem(QString::number(sat->altitude(), 'f', 1)+" km "));
+        setItem(row, 8, new QTableWidgetItem(QString::number(sat->range(), 'f', 1)+" km "));
+        setItem(row, 9, new QTableWidgetItem(QString::number(sat->velocity(), 'f', 3)+" km/s "));
+        setItem(row, 10, new QTableWidgetItem(QString::number(sat->orbitnum())+" "));
+        setItem(row, 11, new QTableWidgetItem(QString::number(sat->ma(), 'f', 1)+" "));
 
+        QTableWidgetItem * item;
         if (sat->squinttype()>0) {
             item = new QTableWidgetItem(QString::number(sat->squint(), 'f', 1)+" ");
         } else{
